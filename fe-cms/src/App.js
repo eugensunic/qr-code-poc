@@ -6,7 +6,8 @@ function App() {
   const [obj, setData] = useState({
     imageName: null,
     imageDescription: null,
-    imageFiles: null
+    imageFiles: null,
+    qrCode: null
   });
 
   const uploadContent = () => {
@@ -25,7 +26,9 @@ function App() {
     fetch('/image-content', {
       method: 'POST',
       body: form
-    });
+    })
+      .then(res => res.json())
+      .then(x => setData({ ...obj, qrCode: x }));
   };
   return (
     <div>
@@ -76,6 +79,9 @@ function App() {
         >
           Submit
         </button>
+        <div id="preview-mode" className="row text-center">
+          {obj.qrCode && <img src={obj.qrCode} />}
+        </div>
       </div>
       <Footer />
     </div>

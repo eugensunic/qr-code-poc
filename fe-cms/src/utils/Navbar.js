@@ -20,8 +20,8 @@ function Navbar() {
       <div className="collapse navbar-collapse" id="navbarNav">
         <ul className="navbar-nav">
           <li className="nav-item active">Home</li>
-          <li className="nav-item"></li>
-          <li className="nav-item protected-route"></li>
+          <li className="nav-item">Add new content</li>
+          <li className="nav-item protected-route">Edit existing content</li>
           <li className="nav-item protected-route"></li>
           <li className="nav-item"></li>
         </ul>
