@@ -6,27 +6,25 @@ function App() {
   const [obj, setData] = useState({
     imageName: null,
     imageDescription: null,
-    imageFile: null
+    imageFiles: null
   });
 
   const uploadContent = () => {
-    if (
-      !this.state.imageName.length ||
-      !this.state.imageDescription.length ||
-      !this.state.imageFile.length
-    ) {
+    console.log('obj here', obj);
+    if (!obj.imageName || !obj.imageDescription || !obj.imageFiles.length) {
       // trigger validation
       return;
     }
-    const data = new FormData();
+    const form = new FormData();
 
-    data.append('imageName', obj.imageName);
-    data.append('imageDescription', obj.imageDescription);
-    data.append('imageFile', obj.imageFile);
+    form.append('file', obj.imageName);
+    form.append('file', obj.imageDescription);
+    form.append('file', obj.imageFiles[0]);
 
+    console.log(form.getAll('file'));
     fetch('/image-content', {
       method: 'POST',
-      body: data
+      body: form
     });
   };
   return (
@@ -67,7 +65,7 @@ function App() {
             type="file"
             accept="image/*"
             onChange={e => {
-              setData({ ...obj, imageFile: e.target.files[0] });
+              setData({ ...obj, imageFiles: e.target.files });
             }}
           />
         </div>
