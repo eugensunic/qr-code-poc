@@ -12,8 +12,8 @@ import {
 function Login(history) {
   const errorContext = useContext(GlobalErrorContext);
   const [obj, setCredential] = useState({
-    username: '',
-    password: '',
+    username: null,
+    password: null,
     passwordError: null,
     usernameError: null,
     submitRequest: false,
@@ -31,31 +31,28 @@ function Login(history) {
   useEffect(() => {
     if (!obj.submitRequest) return;
     // setting timeout for loading spinner
-    setTimeout(
-      _ =>
-        fetch('/database/users.json')
-          .then(res =>
-            validCredentials(res)
-              ? setCredential({
-                  ...obj,
-                  passwordError: '',
-                  loginSuccess: true,
-                  submitRequest: false
-                })
-              : setCredential({
-                  ...obj,
-                  passwordError: 'Wrong credentials, Try again',
-                  submitRequest: false
-                })
-          )
-          .catch(_ =>
-            errorContext.dispatchError({
-              type: 'global',
-              payload: 'Error ocurred, Could not fetch user'
+
+    fetch('/database/users.json')
+      .then(res =>
+        validCredentials(res)
+          ? setCredential({
+              ...obj,
+              passwordError: '',
+              loginSuccess: true,
+              submitRequest: false
             })
-          ),
-      1000
-    );
+          : setCredential({
+              ...obj,
+              passwordError: 'Wrong credentials, Try again',
+              submitRequest: false
+            })
+      )
+      .catch(_ =>
+        errorContext.dispatchError({
+          type: 'global',
+          payload: 'Error ocurred, Could not fetch user'
+        })
+      );
   }, [obj.submitRequest]);
 
   const isFrontendValid = (username, password) => {
@@ -63,9 +60,7 @@ function Login(history) {
   };
 
   const validCredentials = res => {
-    return res.users.some(
-      x => obj.username === x.userName && obj.password === x.password
-    );
+    return true;
   };
 
   const validateUser = (username, password) => {
@@ -75,7 +70,7 @@ function Login(history) {
 
     if (!isFrontendValid(username, password)) {
       if (isEmpty(username)) {
-        usernameErr = 'Please provide username';
+        usernameErr = 'Please provide email';
       } else if (!isEmailValid(username)) {
         usernameErr = 'Please provide valid username/mail';
       }

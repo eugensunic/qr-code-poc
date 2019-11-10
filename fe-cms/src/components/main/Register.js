@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { withRouter } from 'react-router-dom';
-import { isLoggedIn } from '../../helpers';
+import { isLoggedIn, getCurrentDateTimeString } from '../../helpers';
 import { GlobalErrorContext } from '../../App';
 
 import {
@@ -10,11 +10,11 @@ import {
   passwordsMatch
 } from '../../services/login.service';
 
-function Register(history) {
+function Register() {
   const errorContext = useContext(GlobalErrorContext);
   const [obj, setCredential] = useState({
-    email: '',
-    password: '',
+    email: null,
+    password: null,
     repeatPassword: null,
     firstName: null,
     lastName: null,
@@ -26,42 +26,48 @@ function Register(history) {
     loginSuccess: false
   });
 
-  // successful login hook
-  useEffect(() => {
-    if (!obj.loginSuccess) return;
-    localStorage.setItem('user', 'exists');
-    history.push('/profile');
-  }, [obj.loginSuccess, history]);
-
   // BE validation hook
   useEffect(() => {
     if (!obj.submitRequest) return;
-    // setting timeout for loading spinner
-    setTimeout(
-      _ =>
-        fetch('/database/users.json')
-          .then(res =>
-            validCredentials(res)
-              ? setCredential({
-                  ...obj,
-                  passwordError: '',
-                  loginSuccess: true,
-                  submitRequest: false
-                })
-              : setCredential({
-                  ...obj,
-                  passwordError: 'Wrong credentials, Try again',
-                  submitRequest: false
-                })
-          )
-          .catch(_ =>
-            errorContext.dispatchError({
-              type: 'global',
-              payload: 'Error ocurred, Could not fetch user'
-            })
-          ),
-      1000
-    );
+  console.log('fetch')
+    fetch('/api/register', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        firstName: obj.firstName,
+        lastName: obj.lastName,
+        email: obj.email,
+        password: obj.password,
+        registrationTime: getCurrentDateTimeString()
+      })
+    })
+      .then(res => res.json())
+      .then(res => {
+        console.log(res);
+        if (res.hasOwnProperty('isAlreadyRegistered')) {
+          setCredential({
+            ...obj,
+            passwordError: 'User with given mail already exists',
+            submitRequest: false
+          });
+          return;
+        }
+        setCredential({
+          ...obj,
+          passwordError: '',
+          submitRequest: false
+        });
+      })
+
+      .catch(_ =>
+        errorContext.dispatchError({
+          type: 'global',
+          payload: 'Error ocurred, Could not fetch user'
+        })
+      );
   }, [obj.submitRequest]);
 
   const isFrontendValid = () => {
@@ -74,9 +80,7 @@ function Register(history) {
   };
 
   const validCredentials = res => {
-    return res.users.some(
-      x => obj.username === x.userName && obj.password === x.password
-    );
+    return true;
   };
 
   const validateUser = () => {
@@ -93,10 +97,14 @@ function Register(history) {
       if (isEmpty(obj.lastName)) {
         lastNameErr = 'Please provide last name';
       }
-      if (!isEmailValid(obj.email)) {
+      if (isEmpty(obj.email)) {
+        emailErr = 'Please provide an email address';
+      } else if (!isEmailValid(obj.email)) {
         emailErr = 'Please provide valid mail address';
       }
-      if (isPasswordLessThan5(obj.password)) {
+      if (isEmpty(obj.password)) {
+        passwordErr = 'Please provide a password';
+      } else if (isPasswordLessThan5(obj.password)) {
         passwordErr = 'Password too short';
       } else if (!passwordsMatch(obj.password, obj.repeatPassword)) {
         passwordErr = 'Passwords do not match';
@@ -229,7 +237,7 @@ function Register(history) {
             {obj.submitRequest && <div className="loader"></div>}
             <button
               className="btn btn-lg btn-primary btn-block text-uppercase"
-              disabled={isLoggedIn()}
+              disabled={isLoggedIn() || obj.submitRequest}
               type="submit"
               onClick={() => validateUser()}
             >
