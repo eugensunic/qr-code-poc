@@ -23,13 +23,32 @@ function Register() {
     passwordError: null,
     emailError: null,
     submitRequest: false,
-    loginSuccess: false
+    registrationSuccess: false
   });
+
+  const resetState = () => {
+    setCredential({
+      ...obj,
+      password: null,
+      repeatPassword: null,
+      firstName: null,
+      lastName: null,
+      firstNameError: null,
+      lastNameError: null,
+      passwordError: null,
+      emailError: null,
+      submitRequest: false
+    });
+  };
+
+  useEffect(() => {
+    if (!obj.registrationSuccess) return;
+    resetState();
+  }, [obj.registrationSuccess]);
 
   // BE validation hook
   useEffect(() => {
     if (!obj.submitRequest) return;
-  console.log('fetch')
     fetch('/api/register', {
       method: 'POST',
       headers: {
@@ -46,7 +65,6 @@ function Register() {
     })
       .then(res => res.json())
       .then(res => {
-        console.log(res);
         if (res.hasOwnProperty('isAlreadyRegistered')) {
           setCredential({
             ...obj,
@@ -58,7 +76,8 @@ function Register() {
         setCredential({
           ...obj,
           passwordError: '',
-          submitRequest: false
+          submitRequest: false,
+          registrationSuccess: true
         });
       })
 
@@ -77,10 +96,6 @@ function Register() {
       !isEmpty(obj.lastName) &&
       passwordsMatch(obj.password, obj.repeatPassword)
     );
-  };
-
-  const validCredentials = res => {
-    return true;
   };
 
   const validateUser = () => {
@@ -126,12 +141,12 @@ function Register() {
   };
   return (
     <div className="container">
-      <div
-        className="card card-signin my-5 center"
-        style={{ opacity: isLoggedIn() ? 0.4 : 1 }}
-      >
+      <div className="card card-signin my-5 center">
         <div className="card-body">
           <h5 className="card-title text-center">Register</h5>
+          {obj.registrationSuccess && (
+            <h4 className="success-container">Successful registration!</h4>
+          )}
           <div className="form-signin">
             <div className="form-label-group">
               <input
@@ -237,7 +252,7 @@ function Register() {
             {obj.submitRequest && <div className="loader"></div>}
             <button
               className="btn btn-lg btn-primary btn-block text-uppercase"
-              disabled={isLoggedIn() || obj.submitRequest}
+              disabled={obj.submitRequest}
               type="submit"
               onClick={() => validateUser()}
             >

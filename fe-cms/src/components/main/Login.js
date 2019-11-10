@@ -12,10 +12,10 @@ import {
 function Login(history) {
   const errorContext = useContext(GlobalErrorContext);
   const [obj, setCredential] = useState({
-    username: null,
+    email: null,
     password: null,
     passwordError: null,
-    usernameError: null,
+    emailError: null,
     submitRequest: false,
     loginSuccess: false
   });
@@ -32,9 +32,19 @@ function Login(history) {
     if (!obj.submitRequest) return;
     // setting timeout for loading spinner
 
-    fetch('/database/users.json')
+    fetch('/api/login', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email: obj.email,
+        password: obj.password
+      })
+    })
       .then(res =>
-        validCredentials(res)
+        res.something
           ? setCredential({
               ...obj,
               passwordError: '',
@@ -55,33 +65,30 @@ function Login(history) {
       );
   }, [obj.submitRequest]);
 
-  const isFrontendValid = (username, password) => {
-    return isEmailValid(username) && !isPasswordLessThan5(password);
+  const isFrontendValid = (email, password) => {
+    return isEmailValid(email) && !!password && !isPasswordLessThan5(password);
   };
 
-  const validCredentials = res => {
-    return true;
-  };
-
-  const validateUser = (username, password) => {
+  const validateUser = (email, password) => {
     // FE validation
-    let usernameErr = '';
+    let emailErr = '';
     let passwordErr = '';
 
-    if (!isFrontendValid(username, password)) {
-      if (isEmpty(username)) {
-        usernameErr = 'Please provide email';
-      } else if (!isEmailValid(username)) {
-        usernameErr = 'Please provide valid username/mail';
+    if (!isFrontendValid(email, password)) {
+      if (isEmpty(email)) {
+        emailErr = 'Please provide email';
+      } else if (!isEmailValid(email)) {
+        emailErr = 'Please provide valid username/mail';
       }
       if (isEmpty(password)) {
         passwordErr = 'Please provide password';
       } else if (isPasswordLessThan5(password)) {
         passwordErr = 'Password too short';
       }
+
       setCredential({
         ...obj,
-        usernameError: usernameErr,
+        emailError: emailErr,
         passwordError: passwordErr
       });
       return;
@@ -104,23 +111,23 @@ function Login(history) {
             <div className="form-label-group">
               <input
                 type="email"
-                id="username"
+                id="email"
                 className="form-control"
                 placeholder="Username/mail"
                 required
                 onChange={e =>
                   setCredential({
                     ...obj,
-                    username: e.target.value,
-                    usernameError: ''
+                    email: e.target.value,
+                    emailError: ''
                   })
                 }
               />
               <label htmlFor="inputEmail">Email address</label>
             </div>
 
-            {obj.usernameError && (
-              <div className="error-container">{obj.usernameError}</div>
+            {obj.emailError && (
+              <div className="error-container">{obj.emailError}</div>
             )}
 
             <div className="form-label-group">
@@ -148,7 +155,7 @@ function Login(history) {
               className="btn btn-lg btn-primary btn-block text-uppercase"
               disabled={isLoggedIn()}
               type="submit"
-              onClick={() => validateUser(obj.username, obj.password)}
+              onClick={() => validateUser(obj.email, obj.password)}
             >
               Log in
             </button>

@@ -1,4 +1,5 @@
 export * from './history';
+
 export const isLoggedIn = () => !!localStorage.getItem('user');
 
 export const getCurrentDateTimeString = () => {
