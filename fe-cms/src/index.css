@@ -41,3 +41,253 @@ textarea:focus {
   background: #f7737f;
   width: 100%;
 }
+
+#qr-code {
+  width: 200px;
+  height: 200px;
+}
+
+#register-password-container {
+  margin-top: 30px;
+  border: 1px solid #efefef;
+  padding: 10px;
+  border-radius: 3px;
+}
+
+/* taken from prevoius project github */
+
+#error-page-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  font-size: 35px;
+  color: #4e4d4d;
+  margin-top: -10px;
+}
+
+.center {
+  margin: auto;
+  width: 50%;
+  border: 3px solid green;
+  padding: 10px;
+}
+
+.error-container {
+  padding: 3px;
+  background: #fbb1b1;
+  position: relative;
+  top: -10px;
+  margin: 0px 20px;
+  text-align: center;
+  border-radius: 3px;
+  box-shadow: 1px 1px 1px #c8c8c8;
+  color: #363535;
+}
+
+.navbar {
+  background: #efce6b !important;
+}
+
+.protected-route {
+  color: #dc3545;
+}
+
+.protected-route:hover {
+  color: #a50716;
+}
+
+.unprotected-route {
+  color: #3444ff;
+}
+
+.unprotected-route:hover {
+  color: #3444ff;
+}
+
+#logout {
+  border: 1px solid #535050;
+  padding: 3px;
+  cursor: pointer;
+  color: #474545;
+}
+
+#logout:hover {
+  opacity: 0.7;
+}
+
+.footer {
+  width: 100%;
+  background: #f1f1f1;
+  position: absolute;
+  bottom: 0;
+}
+
+.card-signin {
+  border: 0;
+  border-radius: 1rem;
+  box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+}
+
+.card-signin .card-title {
+  margin-bottom: 2rem;
+  font-weight: 300;
+  font-size: 1.5rem;
+}
+
+.card-signin .card-body {
+  padding: 2rem;
+}
+
+.form-signin {
+  width: 100%;
+}
+
+.form-signin .btn {
+  font-size: 80%;
+  border-radius: 5rem;
+  letter-spacing: 0.1rem;
+  font-weight: bold;
+  padding: 1rem;
+  transition: all 0.2s;
+  margin-top: 30px;
+}
+
+.form-label-group {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.form-label-group input {
+  height: 45px;
+  border-radius: 2rem;
+}
+
+.form-label-group > label {
+  position: absolute;
+  top: 1px;
+  left: 10px;
+  display: block;
+  margin-bottom: 0;
+  line-height: 1.5;
+  color: #495057;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+  transition: all 0.1s ease-in-out;
+  left: 13px;
+  font-size: 14px;
+}
+
+.form-label-group input::-webkit-input-placeholder {
+  color: transparent;
+}
+
+.form-label-group input:-ms-input-placeholder {
+  color: transparent;
+}
+
+.form-label-group input::-ms-input-placeholder {
+  color: transparent;
+}
+
+.form-label-group input::-moz-placeholder {
+  color: transparent;
+}
+
+.form-label-group input::placeholder {
+  color: transparent;
+}
+
+.form-label-group input:not(:placeholder-shown) {
+  padding-top: calc(var(--input-padding-y) + var(--input-padding-y) * (2 / 3));
+  padding-bottom: calc(var(--input-padding-y) / 3);
+}
+
+.form-label-group input:not(:placeholder-shown) ~ label {
+  padding-top: calc(var(--input-padding-y) / 3);
+  padding-bottom: calc(var(--input-padding-y) / 3);
+  font-size: 11px;
+  color: #777;
+}
+
+/* Spinner  */
+
+.loader {
+  font-size: 10px;
+  margin: 50px auto;
+  text-indent: -9999em;
+  width: 11em;
+  height: 11em;
+  border-radius: 50%;
+  background: #3444ff;
+  background: -moz-linear-gradient(left, #3444ff 10%, rgba(52, 68, 255, 0) 42%);
+  background: -webkit-linear-gradient(
+    left,
+    #3444ff 10%,
+    rgba(52, 68, 255, 0) 42%
+  );
+  background: -o-linear-gradient(left, #3444ff 10%, rgba(52, 68, 255, 0) 42%);
+  background: -ms-linear-gradient(left, #3444ff 10%, rgba(52, 68, 255, 0) 42%);
+  background: linear-gradient(to right, #3444ff 10%, rgba(52, 68, 255, 0) 42%);
+  position: relative;
+  -webkit-animation: load3 1.4s infinite linear;
+  animation: load3 1.4s infinite linear;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+}
+.loader:before {
+  width: 50%;
+  height: 50%;
+  background: #3444ff;
+  border-radius: 100% 0 0 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: '';
+}
+.loader:after {
+  background: white;
+  width: 75%;
+  height: 75%;
+  border-radius: 50%;
+  content: '';
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+@-webkit-keyframes load3 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes load3 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+.navbar-nav > li {
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+@media (min-width: 992px) {
+  .navbar li {
+    margin-left: 1em;
+    margin-right: 1em;
+  }
+}
