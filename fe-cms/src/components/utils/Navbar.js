@@ -30,7 +30,7 @@ function Navbar(history) {
             <Link to={'/create'}> Create new content</Link>
           </li>
           <li className="nav-item">
-            <Link to={'/edit'}> Edit existing content</Link>
+            <Link to={'/overview'}> Edit existing content</Link>
           </li>
           <li className="nav-item">
             <Link to={'/about'}> About</Link>

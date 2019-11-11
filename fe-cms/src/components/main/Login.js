@@ -23,9 +23,9 @@ function Login(history) {
   // successful login hook
   useEffect(() => {
     if (!obj.loginSuccess) return;
-    localStorage.setItem('user', 'exists');
-    history.push('/profile');
-  }, [obj.loginSuccess, history]);
+    console.log(history.push);
+    window.location.href='/create'
+  }, [obj.loginSuccess]);
 
   // BE validation hook
   useEffect(() => {
@@ -43,8 +43,8 @@ function Login(history) {
         password: obj.password
       })
     })
-      .then(res =>
-        res.something
+      .then(_ =>
+        isLoggedIn()
           ? setCredential({
               ...obj,
               passwordError: '',

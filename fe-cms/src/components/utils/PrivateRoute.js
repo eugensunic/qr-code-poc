@@ -1,9 +1,10 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
+import { isLoggedIn } from '../../helpers/index';
 
 const PrivateRoute = ({ component, ...rest }) => {
   const routeComponent = props =>
-    localStorage.getItem('user') ? (
+    isLoggedIn() ? (
       React.createElement(component, props)
     ) : (
       <Redirect to={{ pathname: '/login' }} />

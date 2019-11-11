@@ -23,12 +23,13 @@ function CreateContent() {
     console.log(form.getAll('file'));
     fetch('/image-content', {
       method: 'POST',
-      body: form
+      body: form,
+      credentials: 'include'
     })
       .then(res => res.json())
       .then(x => setData({ ...obj, qrCode: x }));
   };
-  
+
   return (
     <div className="container">
       <div className="row">

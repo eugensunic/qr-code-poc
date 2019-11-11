@@ -1,9 +1,13 @@
-const bodyParser = require('body-parser');
 const express = require('express');
-
 const localMiddleware = require('./login/middleware');
 
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+
 module.exports.init = (app, passport) => {
+  // cookie parser
+  app.use(cookieParser());
+
   // JSON body post requests
   app.use(bodyParser.json());
   app.use(
@@ -11,6 +15,7 @@ module.exports.init = (app, passport) => {
       extended: true
     })
   );
+
   // file upload
   app.use(express.static('uploads'));
 

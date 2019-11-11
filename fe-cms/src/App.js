@@ -8,7 +8,7 @@ import NoMatch from './components/utils/NoMatch';
 import ErrorContainer from './components/utils/ErrorContainer';
 
 import CreateContent from './components/main/CreateContent';
-import EditContent from './components/main/EditContent';
+import OverviewContent from './components/main/OverviewContent';
 import About from './components/main/About';
 
 import { Router, Route, Switch } from 'react-router-dom';
@@ -40,7 +40,7 @@ function App() {
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
           <PrivateRoute path="/create" component={CreateContent} />
-          <PrivateRoute path="/edit" component={EditContent} />
+          <PrivateRoute path="/overview" component={OverviewContent} />
           <Route path="/about" component={About} />
           <Route component={NoMatch} />
         </Switch>
