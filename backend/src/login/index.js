@@ -1,10 +1,10 @@
 const jwt = require('jsonwebtoken');
-const jwtKey = 'my_secret_key';
+const jwtKey = require('../config').jwtKey;
 const jwtExpirySeconds = 3600; // one hour expiry time
 
 module.exports = {
   init: (app, passport) => {
-    app.post('/api/login', function(req, res, next) {
+    app.post('/login', function(req, res, next) {
       passport.authenticate('local', function(err, user, info) {
         if (err || info) {
           return res.status(401).end();

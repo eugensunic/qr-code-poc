@@ -1,9 +1,10 @@
 const jwt = require('jsonwebtoken');
+const jwtKey = require('../config').jwtKey;
 
 const tokenValid = (req, res, next) => {
   // We can obtain the session token from the requests cookies, which come with every request
   const token = req.cookies.token;
-  console.log('token value in tokevald func', token);
+  console.log('Token cookie value:', token);
 
   // if the cookie is not set, return an unauthorized error
   if (!token) {
@@ -17,9 +18,9 @@ const tokenValid = (req, res, next) => {
     // if the token is invalid (if it has expired according to the expiry time we set on sign in),
     // or if the signature does not match
 
-    payload = jwt.verify(token, 'my_secret_key');
+    payload = jwt.verify(token, jwtKey);
     if (typeof payload1 !== 'undefined') {
-      console.log('payload here', payload);
+      console.log('Jwt payload valid', payload);
       next();
     }
   } catch (e) {
