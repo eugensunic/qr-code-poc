@@ -29,7 +29,9 @@ const reducer = (state = { message: '' }, action) => {
 export const GlobalErrorContext = React.createContext({});
 
 function App() {
+
   const [error, dispatch] = useReducer(reducer, { message: '' });
+  console.log(error)
   return (
     <GlobalErrorContext.Provider value={{ dispatchError: dispatch }}>
       <Router history={history}>

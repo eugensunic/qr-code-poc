@@ -49,7 +49,7 @@ function Register() {
   // BE validation hook
   useEffect(() => {
     if (!obj.submitRequest) return;
-    fetch('/api/register', {
+    fetch('/register', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -81,12 +81,16 @@ function Register() {
         });
       })
 
-      .catch(_ =>
+      .catch(_ => {
+        setCredential({
+          ...obj,
+          submitRequest: false
+        });
         errorContext.dispatchError({
           type: 'global',
-          payload: 'Error ocurred, Could not fetch user'
-        })
-      );
+          payload: 'Server error ocurred 1'
+        });
+      });
   }, [obj.submitRequest]);
 
   const isFrontendValid = () => {

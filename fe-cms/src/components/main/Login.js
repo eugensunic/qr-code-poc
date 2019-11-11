@@ -19,12 +19,19 @@ function Login(history) {
     submitRequest: false,
     loginSuccess: false
   });
+  
+  // if logged in don't show the login page
+  useEffect(() => {
+    if (!isLoggedIn()) return;
+    console.log(history.push);
+    window.location.href = '/overview';
+  }, [isLoggedIn()]);
 
   // successful login hook
   useEffect(() => {
     if (!obj.loginSuccess) return;
     console.log(history.push);
-    window.location.href='/create'
+    window.location.href = '/create';
   }, [obj.loginSuccess]);
 
   // BE validation hook
@@ -32,7 +39,7 @@ function Login(history) {
     if (!obj.submitRequest) return;
     // setting timeout for loading spinner
 
-    fetch('/api/login', {
+    fetch('/login', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -43,8 +50,15 @@ function Login(history) {
         password: obj.password
       })
     })
-      .then(_ =>
-        isLoggedIn()
+      .then(res => {
+        if (res.ok || res.status === 401) {
+          return res.json();
+        }
+        throw new Error();
+      })
+      .then(res => {
+        console.log(res);
+        return res.success
           ? setCredential({
               ...obj,
               passwordError: '',
@@ -55,14 +69,19 @@ function Login(history) {
               ...obj,
               passwordError: 'Wrong credentials, Try again',
               submitRequest: false
-            })
-      )
-      .catch(_ =>
+            });
+      })
+
+      .catch(err => {
+        setCredential({
+          ...obj,
+          submitRequest: false
+        });
         errorContext.dispatchError({
           type: 'global',
-          payload: 'Error ocurred, Could not fetch user'
-        })
-      );
+          payload: 'Server error ocurred'
+        });
+      });
   }, [obj.submitRequest]);
 
   const isFrontendValid = (email, password) => {

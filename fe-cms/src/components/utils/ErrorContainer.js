@@ -1,7 +1,7 @@
 import React from 'react';
 
-function ErrorContainer(message) {
-  if (!message) return <div></div>;
+function ErrorContainer(obj) {
+  if (!obj.message) return <div></div>;
   return (
     <div
       className="error-container"
@@ -12,7 +12,9 @@ function ErrorContainer(message) {
         paddingTop: 10,
         paddingBottom: 10
       }}
-    ></div>
+    >
+    {obj.message}
+    </div>
   );
 }
 
