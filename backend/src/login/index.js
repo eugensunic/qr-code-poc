@@ -1,11 +1,13 @@
 module.exports = {
   init: (app, passport) => {
-    console.log('reached login route')
-    app.post('/api/login', passport.authenticate('local'), (req, res, next) => {
-      console.log('here')
-      res.json({ druck: 'druck' });
+    app.post('/api/login', function(req, res, next) {
+      passport.authenticate('local', function(err, user, info) {
+        if (err || info.error) {
+          return res.status(401).end();
+        }
 
-      return;
+        res.json({ successLogin: true });
+      })(req, res, next);
     });
   }
 };

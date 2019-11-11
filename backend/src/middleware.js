@@ -26,4 +26,12 @@ module.exports.init = (app, passport) => {
   });
 
   localMiddleware.localStrategyMiddleware(passport);
+
+  // app.use(function(err, req, res, next) {
+  //   console.log('WENT TO MIDDLEWARE AFTER DONE!!!')
+  //   if (err) {
+  //     res.status(403).json({ error: 'wrong credentials' });
+  //     return;
+  //   }
+  // });
 };

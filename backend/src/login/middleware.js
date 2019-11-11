@@ -11,19 +11,29 @@ module.exports = {
 
     passport.use(
       new LocalStrategy(localOptions, (username, password, done) => {
-        console.log('deep inside');
-        User.findOne({ email: username }, function(err, user) {
-          if (err) {
-            return done(err);
+        User.findOne({ email: username }, function(err1, user) {
+          if (err1) {
+            return done(err1);
           }
           if (!user) {
-            return done(null, false, { message: 'Incorrect username.' });
+            return done(null, false, {
+              message: 'Incorrect username.',
+              error: true
+            });
           }
-          bcrypt.compare(password, user.password, (err, match) => {
-            if (match) {
-              return done(null, user);
+          // done won't go into middleware it will propagate to the called route
+          // and contain the transferred arguments
+          bcrypt.compare(password, user.password, (err2, match) => {
+            if (err2) {
+              return done(err2);
             }
-            return done(null, err);
+            if (!match) {
+              return done(null, false, {
+                message: 'Incorrect password.',
+                error: true
+              });
+            }
+            return done(null, user);
           });
         });
       })
