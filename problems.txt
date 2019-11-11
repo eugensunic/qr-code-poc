@@ -1,0 +1,9 @@
+- see why history.push doesn't work in throws an error saying that push is undefined.
+- re-evaluate JWT token (test combinations with it)
+
+
+TODO
+- typescript FE+BE
+- refactoring folder structure
+- rename variables
+- see if import works instead of require
