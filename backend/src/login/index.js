@@ -6,8 +6,13 @@ module.exports = {
   init: (app, passport) => {
     app.post('/login', function(req, res, next) {
       passport.authenticate('local', function(err, user, info) {
-        if (err || info) {
-          return res.status(401).end();
+        if (err) {
+          // server error
+          return res.status(500).end();
+        }
+        if (info && info.error) {
+          // wrong credentials
+          return res.status(401).json({ unauthorized: true });
         }
         const token = jwt.sign(
           {
@@ -26,7 +31,7 @@ module.exports = {
         // set the cookie as the token string, with a similar max age as the token
         // here, the max age is in milliseconds, so we multiply by 1000
         res.cookie('token', token, { maxAge: jwtExpirySeconds * 1000 });
-        res.end();
+        res.json({ success: true });
       })(req, res, next);
     });
   }

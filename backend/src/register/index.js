@@ -5,7 +5,8 @@ module.exports.init = app => {
   app.route('/register').post((req, res, next) => {
     User.find({ email: req.body.email }, (err, mongoResponse) => {
       if (err) {
-        return next(err);
+        return res.status(500).end();
+        // return next(err);
       }
       if (mongoResponse.length > 0) {
         res.json({
@@ -37,7 +38,8 @@ function saveUserToDatabase(
 ) {
   bcrypt.hash(password, 10, (err, hash) => {
     if (err) {
-      return next(err);
+       res.status(500).end()
+      // return next(err);
     }
     const user = new User({
       firstName: firstName,
@@ -54,6 +56,6 @@ function saveUserToDatabase(
         });
         console.log('saved to database');
       })
-      .catch(() => next(err));
+      .catch(() => res.status(500).end());
   });
 }
