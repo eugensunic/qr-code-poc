@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { GlobalErrorContext } from '../../App';
 
 function CreateContent() {
+  const errorContext = useContext(GlobalErrorContext);
   const [obj, setData] = useState({
     imageName: null,
     imageNameError: false,
     imageDescription: null,
     imageDescriptionError: false,
-    imageFiles: null,
+    imageFiles: [],
     imageFilesError: false,
     qrCode: null
   });
@@ -71,7 +73,14 @@ function CreateContent() {
           name="image-name"
           type="text"
           placeholder="Image name"
-          onChange={e => setData({ ...obj, imageName: e.target.value })}
+          className={obj.imageNameError ? 'error-input-container' : ''}
+          onChange={e =>
+            setData({
+              ...obj,
+              imageName: e.target.value,
+              imageNameError: false
+            })
+          }
         />
       </div>
       <div className="row">
@@ -84,7 +93,14 @@ function CreateContent() {
           className="ui-autocomplete-input"
           autoComplete="off"
           role="textbox"
-          onChange={e => setData({ ...obj, imageDescription: e.target.value })}
+          className={obj.imageDescriptionError ? 'error-input-container' : ''}
+          onChange={e =>
+            setData({
+              ...obj,
+              imageDescription: e.target.value,
+              imageDescriptionError: false
+            })
+          }
         ></textarea>
       </div>
       <div className="row">
@@ -93,8 +109,13 @@ function CreateContent() {
           name="image-file"
           type="file"
           accept="image/*"
+          className={obj.imageFilesError ? 'error-input-container' : ''}
           onChange={e => {
-            setData({ ...obj, imageFiles: e.target.files });
+            setData({
+              ...obj,
+              imageFiles: e.target.files,
+              imageFilesError: false
+            });
           }}
         />
       </div>
@@ -110,7 +131,7 @@ function CreateContent() {
           <h3 className="qr-code-message">
             Your QR code was successfully stored to the database!
           </h3>
-          <img id="qr-code" src={obj.qrCode} />
+          <img id="qr-code" src={obj.qrCode} className="mx-auto d-block" />
         </div>
       )}
     </div>

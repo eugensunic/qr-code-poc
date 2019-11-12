@@ -4,7 +4,7 @@ module.exports = function(app) {
   const proxyRoutes = [
     '/overview-content',
     '/create-content',
-    '/register',
+    '/user-registration',
     '/auth',
     '/logout'
   ];

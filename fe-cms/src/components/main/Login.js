@@ -38,7 +38,7 @@ function Login(history) {
   useEffect(() => {
     if (!obj.submitRequest) return;
 
-    fetch('/login', {
+    fetch('/auth', {
       method: 'POST',
       headers: {
         Accept: 'application/json',

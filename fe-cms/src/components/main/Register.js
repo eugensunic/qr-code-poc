@@ -49,7 +49,7 @@ function Register() {
   // BE validation hook
   useEffect(() => {
     if (!obj.submitRequest) return;
-    fetch('/register', {
+    fetch('/user-registration', {
       method: 'POST',
       headers: {
         Accept: 'application/json',

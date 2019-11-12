@@ -53,6 +53,12 @@ textarea:focus {
   padding: 0px 50px;
 }
 
+.error-input-container {
+  border: 1px solid #dd6565;
+  background: #ffcece;
+  border-radius: 1px;
+}
+
 #footer {
   position: absolute;
   bottom: 0;
