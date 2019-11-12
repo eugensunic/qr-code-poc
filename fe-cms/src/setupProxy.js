@@ -1,8 +1,15 @@
 const proxy = require('http-proxy-middleware');
 
 module.exports = function(app) {
+  const proxyRoutes = [
+    '/overview-content',
+    '/create-content',
+    '/register',
+    '/auth',
+    '/logout'
+  ];
   app.use(
-    ['/api/overview-content', '/api/create-content', '/register', '/login'],
+    proxyRoutes,
     proxy({
       target: 'http://localhost:5000',
       secure: false,

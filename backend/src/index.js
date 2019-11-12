@@ -5,8 +5,7 @@ const qrGenerator = require('./qr-generator');
 const middleware = require('./middleware');
 const mongo = require('./mongo/utils');
 
-const register = require('./register');
-const login = require('./login');
+const userAccess = require('./user-access');
 
 const dbName = 'zagreb_museum';
 const connectionString =
@@ -22,9 +21,7 @@ mongo
       console.log('app running on port 5000');
 
       middleware.init(app, passport);
-
-      register.init(app);
-      login.init(app, passport);
+      userAccess.init(app, passport);
 
       qrGenerator.init(app);
     });

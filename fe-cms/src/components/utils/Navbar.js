@@ -1,7 +1,14 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
+import { isLoggedIn } from '../../helpers';
 
 function Navbar(history) {
+  const logout = () => {
+    fetch('/logout', { method: 'POST' }).then(
+      _ => (window.location.href = '/')
+    );
+  };
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <a className="navbar-brand" href="/#">
@@ -27,16 +34,21 @@ function Navbar(history) {
             <Link to={'/login'}> Login</Link>
           </li>
           <li className="nav-item">
-            <Link to={'/create'}> Create new content</Link>
+            <Link to={'/create'}> Create content</Link>
           </li>
           <li className="nav-item">
-            <Link to={'/overview'}> Edit existing content</Link>
+            <Link to={'/overview'}> Overview</Link>
           </li>
           <li className="nav-item">
             <Link to={'/about'}> About</Link>
           </li>
         </ul>
       </div>
+      {isLoggedIn() && (
+        <button type="button" className="btn btn-danger" onClick={logout}>
+          Logout
+        </button>
+      )}
     </nav>
   );
 }

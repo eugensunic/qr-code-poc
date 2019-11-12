@@ -19,7 +19,8 @@ const tokenValid = (req, res, next) => {
     // or if the signature does not match
 
     payload = jwt.verify(token, jwtKey);
-    if (typeof payload1 !== 'undefined') {
+    console.log('payload value', payload)
+    if (typeof payload !== 'undefined') {
       console.log('Jwt payload valid', payload);
       next();
     }

@@ -3,7 +3,6 @@ import { GlobalErrorContext } from '../../App';
 
 let timeId = null;
 function ErrorContainer(obj) {
-  console.log('here');
   const errorContext = useContext(GlobalErrorContext);
   if (obj.message) {
     clearInterval(timeId);

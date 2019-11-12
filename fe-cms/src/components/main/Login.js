@@ -19,7 +19,7 @@ function Login(history) {
     submitRequest: false,
     loginSuccess: false
   });
-  
+
   // if logged in don't show the login page
   useEffect(() => {
     if (!isLoggedIn()) return;
@@ -37,7 +37,6 @@ function Login(history) {
   // BE validation hook
   useEffect(() => {
     if (!obj.submitRequest) return;
-    // setting timeout for loading spinner
 
     fetch('/login', {
       method: 'POST',
@@ -72,7 +71,7 @@ function Login(history) {
             });
       })
 
-      .catch(err => {
+      .catch(_ => {
         setCredential({
           ...obj,
           submitRequest: false
@@ -97,7 +96,7 @@ function Login(history) {
       if (isEmpty(email)) {
         emailErr = 'Please provide email';
       } else if (!isEmailValid(email)) {
-        emailErr = 'Please provide valid username/mail';
+        emailErr = 'Please provide valid mail';
       }
       if (isEmpty(password)) {
         passwordErr = 'Please provide password';

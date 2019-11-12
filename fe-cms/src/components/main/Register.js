@@ -155,9 +155,9 @@ function Register() {
             <div className="form-label-group">
               <input
                 type="text"
-                id="username"
+                id="first-name"
                 className="form-control"
-                placeholder="Username/mail"
+                placeholder="First name"
                 required
                 onChange={e =>
                   setCredential({
@@ -175,9 +175,9 @@ function Register() {
             <div className="form-label-group">
               <input
                 type="text"
-                id="username"
+                id="last-name"
                 className="form-control"
-                placeholder="Username/mail"
+                placeholder="last name"
                 required
                 onChange={e =>
                   setCredential({
@@ -195,9 +195,9 @@ function Register() {
             <div className="form-label-group">
               <input
                 type="email"
-                id="username"
+                id="email"
                 className="form-control"
-                placeholder="Username/mail"
+                placeholder="E-mail"
                 required
                 onChange={e =>
                   setCredential({
@@ -234,7 +234,7 @@ function Register() {
               <div className="form-label-group">
                 <input
                   type="password"
-                  id="password"
+                  id="repeat-password"
                   className="form-control"
                   placeholder="Password"
                   onChange={e =>

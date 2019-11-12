@@ -1,5 +1,5 @@
 const LocalStrategy = require('passport-local').Strategy;
-const User = require('../mongo/model/user');
+const User = require('../../mongo/model/user');
 const bcrypt = require('bcrypt');
 
 module.exports = {

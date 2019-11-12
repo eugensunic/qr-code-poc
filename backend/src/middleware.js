@@ -1,5 +1,5 @@
 const express = require('express');
-const localMiddleware = require('./login/middleware');
+const localMiddleware = require('./user-access/login/middleware');
 
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');

@@ -3,15 +3,39 @@ import React, { useState } from 'react';
 function CreateContent() {
   const [obj, setData] = useState({
     imageName: null,
+    imageNameError: false,
     imageDescription: null,
+    imageDescriptionError: false,
     imageFiles: null,
+    imageFilesError: false,
     qrCode: null
   });
 
+  const isFrontendValid = () => {
+    return obj.imageName && obj.imageDescription && obj.imageFiles.length;
+  };
+
   const uploadContent = () => {
-    console.log('obj here', obj);
-    if (!obj.imageName || !obj.imageDescription || !obj.imageFiles.length) {
-      // trigger validation
+    let imageNameErr = false;
+    let imageDescriptionErr = false;
+    let imageFilesErr = false;
+
+    if (!isFrontendValid()) {
+      if (!obj.imageName) {
+        imageNameErr = true;
+      }
+      if (!obj.imageDescription) {
+        imageDescriptionErr = true;
+      }
+      if (!obj.imageFiles.length) {
+        imageFilesErr = true;
+      }
+      setData({
+        ...obj,
+        imageNameError: imageNameErr,
+        imageDescriptionError: imageDescriptionErr,
+        imageFilesError: imageFilesErr
+      });
       return;
     }
     const form = new FormData();
@@ -21,17 +45,23 @@ function CreateContent() {
     form.append('file', obj.imageFiles[0]);
 
     console.log(form.getAll('file'));
-    fetch('/image-content', {
+    fetch('/create-content', {
       method: 'POST',
       body: form,
       credentials: 'include'
     })
       .then(res => res.json())
-      .then(x => setData({ ...obj, qrCode: x }));
+      .then(x => setData({ ...obj, qrCode: x }))
+      .catch(_ =>
+        errorContext.dispatchError({
+          type: 'global',
+          payload: 'Server error ocurred'
+        })
+      );
   };
 
   return (
-    <div className="container">
+    <div className="container main-wrapper">
       <div className="row">
         <h2></h2>
       </div>
@@ -76,8 +106,10 @@ function CreateContent() {
         Submit
       </button>
       {obj.qrCode && (
-        <div id="preview-mode" className="row text-center">
-          <h3>Your QR code was successfully stored to the database!</h3>
+        <div id="preview-mode">
+          <h3 className="qr-code-message">
+            Your QR code was successfully stored to the database!
+          </h3>
           <img id="qr-code" src={obj.qrCode} />
         </div>
       )}

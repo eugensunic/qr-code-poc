@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-const User = require('../mongo/model/user');
+const User = require('../../mongo/model/user');
 
 module.exports.init = app => {
   app.route('/register').post((req, res, next) => {
