@@ -49,6 +49,11 @@ textarea:focus {
   outline-width: 0;
 }
 
+.overview-item {
+  border: 1px solid grey;
+  padding: 7px 10px;
+}
+
 .main-wrapper {
   padding: 0px 50px;
 }
@@ -57,6 +62,20 @@ textarea:focus {
   border: 1px solid #dd6565;
   background: #ffcece;
   border-radius: 1px;
+}
+
+.text-wrapper {
+  word-break: break-all;
+}
+
+.empty-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  font-size: 35px;
+  color: #4e4d4d;
+  margin-top: -10px;
 }
 
 #footer {

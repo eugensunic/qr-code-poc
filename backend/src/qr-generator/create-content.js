@@ -3,7 +3,7 @@ const utils = require('../utils');
 const QRCode = require('qrcode');
 const multer = require('multer');
 const ImageMuseum = require('../mongo/model/image-data');
-const upload = multer({ dest: 'uploads/' });
+const upload = multer({ dest: 'uploads/museum-images' });
 
 module.exports.init = app => {
   app
@@ -38,3 +38,5 @@ module.exports.init = app => {
       );
     });
 };
+
+

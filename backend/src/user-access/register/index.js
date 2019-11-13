@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt');
 const User = require('../../mongo/model/user');
 
 module.exports.init = app => {
-  app.route('/register').post((req, res, next) => {
+  app.route('/user-registration').post((req, res) => {
     User.find({ email: req.body.email }, (err, mongoResponse) => {
       if (err) {
         return res.status(500).end();
@@ -19,26 +19,17 @@ module.exports.init = app => {
           req.body.email,
           req.body.password,
           req.body.registrationTime,
-          res,
-          next
+          res
         );
       }
     });
   });
 };
 
-function saveUserToDatabase(
-  firstName,
-  lastName,
-  email,
-  password,
-  time,
-  res,
-  next
-) {
+function saveUserToDatabase(firstName, lastName, email, password, time, res) {
   bcrypt.hash(password, 10, (err, hash) => {
     if (err) {
-       res.status(500).end()
+      res.status(500).end();
       // return next(err);
     }
     const user = new User({

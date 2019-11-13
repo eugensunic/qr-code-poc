@@ -3,10 +3,13 @@ const proxy = require('http-proxy-middleware');
 module.exports = function(app) {
   const proxyRoutes = [
     '/overview-content',
+    '/overview-content/edit',
+    '/overview-content/delete',
     '/create-content',
     '/user-registration',
     '/auth',
-    '/logout'
+    '/logout',
+    '/museum-images/*'
   ];
   app.use(
     proxyRoutes,
