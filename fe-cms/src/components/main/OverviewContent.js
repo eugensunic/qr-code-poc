@@ -1,13 +1,40 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
+import ModalWindow from '../utils/ModalWindow';
 
 function OverviewContent() {
   const [content, setState] = useState({
     arr: [],
-    itemId: null
+    itemId: null,
+    modalShow: false,
+    modalHeading: null,
+    modalContent: null,
+    actionButtonName: null,
+    actionButtonColor: null,
+    actionButtonBorderColor: null,
+    actionHandler: null
   });
 
-  const logText = () => {
-    console.log('in Render:', content.arr);
+  const invokeDeleteModal = itemId => {
+    setState({
+      ...content,
+      modalShow: true,
+      modalContent: `Are you sure you want to delete the selected item?`,
+      actionButtonName: 'Delete',
+      actionButtonBorderColor: '#dc3545',
+      actionButtonColor: '#dc3545',
+      handleAction: () => deleteItem(itemId)
+    });
+  };
+
+  const invokeEditModal = itemId => {
+    setState({
+      ...content,
+      modalShow: true,
+      actionButtonName: 'Submit',
+      actionButtonBorderColor: '#007bff',
+      actionButtonColor: '#007bff',
+      handleAction: () => editItem(itemId)
+    });
   };
 
   const deleteItem = itemId => {
@@ -36,9 +63,17 @@ function OverviewContent() {
       .catch(err => console.log(err));
   };
 
+  const editItem = () => {};
+
+  const closeModal = () => {
+    setState({ ...content, modalShow: false });
+  };
+
+  const openImageModal = () => {
+    console.log('open image modal');
+  };
+
   useEffect(() => {
-    console.log(content);
-    console.log('on component load');
     fetch('/overview-content')
       .then(res => {
         if (res.ok) {
@@ -56,7 +91,6 @@ function OverviewContent() {
   }
   return (
     <div className="container">
-      {logText()}
       {content.arr.map((arr, i) => (
         <div key={i} className="row">
           {arr.map((obj, j) => (
@@ -64,17 +98,21 @@ function OverviewContent() {
               <button
                 type="button"
                 className="btn btn-danger d-inline"
-                onClick={() => deleteItem(obj.id)}
+                onClick={() => invokeDeleteModal(obj.id)}
               >
                 Delete
               </button>
-              <button type="button" className="btn btn-warning d-inline ml-1">
+              <button
+                type="button"
+                className="btn btn-warning d-inline ml-1"
+                onClick={() => invokeEditModal(obj.id)}
+              >
                 Edit
               </button>
               <div className="row">
                 <div className="col-xs-12 col-sm-6 ">
                   <h5 className="text-wrapper">{obj.imageName}</h5>
-                  <img width="170" src={obj.path} />
+                  <img width="170" src={obj.path} onClick={openImageModal} />
                   <p className="text-wrapper">{obj.imageDescription}</p>
                 </div>
                 <div className="col-xs-12 col-sm-6">
@@ -85,6 +123,16 @@ function OverviewContent() {
           ))}
         </div>
       ))}
+      <ModalWindow
+        show={content.modalShow}
+        content={content.modalContent}
+        heading={content.modalHeading}
+        actionButtonName={content.actionButtonName}
+        actionButtonColor={content.actionButtonColor}
+        actionButtonBorderColor={content.actionButtonBorderColor}
+        handleAction={content.handleAction}
+        handleClose={closeModal}
+      />
     </div>
   );
 }
