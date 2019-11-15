@@ -2,21 +2,13 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 
 function ModalWindow(props) {
-  const { handleClose, html } = props;
-  const {
-    modalShow,
-    modalHeading,
-    handleAction,
-    actionButtonBorderColor,
-    actionButtonColor,
-    actionButtonName,
-    showSubmitButton
-  } = props.content;
+  const { html, handleClose } = props;
+  const { modal, actionButton, showSubmitButton } = props.content;
 
   return (
-    <Modal show={modalShow} onHide={handleClose}>
+    <Modal show={modal.show} onHide={handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title>{modalHeading}</Modal.Title>
+        <Modal.Title>{modal.heading}</Modal.Title>
       </Modal.Header>
       <Modal.Body>{html}</Modal.Body>
       <Modal.Footer>
@@ -26,13 +18,13 @@ function ModalWindow(props) {
         {showSubmitButton && (
           <Button
             variant="primary"
-            onClick={handleAction}
+            onClick={actionButton.handler}
             style={{
-              backgroundColor: actionButtonColor,
-              borderColor: actionButtonBorderColor
+              backgroundColor: actionButton.color,
+              borderColor: actionButton.borderColor
             }}
           >
-            {actionButtonName}
+            {actionButton.name}
           </Button>
         )}
       </Modal.Footer>

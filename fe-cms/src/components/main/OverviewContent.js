@@ -3,22 +3,27 @@ import ModalWindow from '../utils/ModalWindow';
 
 function OverviewContent() {
   const [content, setState] = useState({
-    arr: [],
-    mode: null,
+    overviewArr: [],
+    modeType: null,
     showSubmitButton: true,
     qrCodePath: null,
-    imageName: null,
-    imageDescription: null,
-    imageSrc: null,
     itemId: null,
-    modalShow: false,
-    imageModalShow: false,
-    modalHeading: null,
-    modalContent: null,
-    actionButtonName: null,
-    actionButtonColor: null,
-    actionButtonBorderColor: null,
-    actionHandler: null
+    image: {
+      name: null,
+      description: null,
+      src: null
+    },
+    modal: {
+      show: false,
+      heading: null,
+      content: null
+    },
+    actionButton: {
+      name: null,
+      color: null,
+      borderColor: null,
+      handler: null
+    }
   });
 
   const htmlContent = mode => {
@@ -33,7 +38,7 @@ function OverviewContent() {
         return '';
     }
   };
-
+  // HTML CONTENT BEGIN
   const editContent = () => {
     return (
       <div className="container main-wrapper">
@@ -46,9 +51,14 @@ function OverviewContent() {
             id="image-name"
             name="image-name"
             type="text"
-            value={content.imageName}
+            value={content.image.name}
             placeholder="Image name"
-            onChange={e => setState({ ...content, imageName: e.target.value })}
+            onChange={e =>
+              setState({
+                ...content,
+                image: { ...content.image, name: e.target.value }
+              })
+            }
           />
         </div>
         <span>Image description:</span>
@@ -56,7 +66,7 @@ function OverviewContent() {
           <textarea
             id="image-description"
             name="image-description"
-            value={content.imageDescription}
+            value={content.image.description}
             placeholder="Image description"
             rows="20"
             cols="40"
@@ -64,12 +74,15 @@ function OverviewContent() {
             autoComplete="off"
             role="textbox"
             onChange={e =>
-              setState({ ...content, imageDescription: e.target.value })
+              setState({
+                ...content,
+                image: { ...content.image, description: e.target.value }
+              })
             }
           ></textarea>
         </div>
         <span>Current image:</span>
-        <img width="170" src={content.imageSrc} style={{ display: 'block' }} />
+        <img width="170" src={content.image.src} style={{ display: 'block' }} />
         <div className="row">
           <input
             id="image-file"
@@ -90,48 +103,65 @@ function OverviewContent() {
     return <img width="400" height="400" src={content.qrCodePath} />;
   };
 
+  // HTML CONTENT END
+
+  // HTML MODAL BEGIN
   const invokeDeleteModal = (itemId, imageName) => {
     setState({
       ...content,
-      mode: 'DELETE',
+      modeType: 'DELETE',
       showSubmitButton: true,
-      modalShow: true,
-      modalHeading: `Delete ${imageName}`,
-      actionButtonName: 'Delete',
-      actionButtonBorderColor: '#dc3545',
-      actionButtonColor: '#dc3545',
-      handleAction: () => deleteItemConfirm(itemId)
+      modal: { ...content.modal, show: true, heading: `Delete ${imageName}` },
+      actionButton: {
+        name: 'Delete',
+        color: '#dc3545',
+        borderColor: '#dc3545',
+        handler: () => deleteItemConfirm(itemId)
+      }
     });
   };
 
   const invokeEditModal = (itemId, imageName, imageDescription, imageSrc) => {
     setState({
       ...content,
-      mode: 'EDIT',
+      modeType: 'EDIT',
       showSubmitButton: true,
-      modalShow: true,
-      actionButtonName: 'Submit',
-      actionButtonBorderColor: '#007bff',
-      actionButtonColor: '#007bff',
-      modalHeading: `Edit ${imageName}`,
-      imageName: imageName,
-      imageDescription: imageDescription,
-      imageSrc: imageSrc,
-      handleAction: () => editItemConfirm(itemId)
+      modal: {
+        ...content.modal,
+        show: true,
+        heading: `Edit ${imageName}`
+      },
+      image: {
+        ...content.image,
+        name: imageName,
+        description: imageDescription,
+        src: imageSrc
+      },
+      actionButton: {
+        name: 'Submit',
+        color: '#007bff',
+        borderColor: '#007bff',
+        handler: () => editItemConfirm(itemId)
+      }
     });
   };
 
   const invokeQrCodeModal = (path, imageName) => {
     setState({
       ...content,
-      modalShow: true,
+      modeType: 'ZOOM',
       showSubmitButton: false,
-      modalHeading: `QR code for ${imageName}`,
-      mode: 'ZOOM',
+      modal: {
+        ...content.modal,
+        show: true,
+        heading: `QR code for ${imageName}`
+      },
       qrCodePath: path
     });
   };
 
+  // HTML MODAL END
+  // MODAL CONFIRM BUTTON BEGIN
   const deleteItemConfirm = itemId => {
     fetch('/overview-content/delete', {
       method: 'POST',
@@ -152,7 +182,9 @@ function OverviewContent() {
       .then(_ =>
         setState({
           ...content,
-          arr: content.arr.map(array => array.filter(x => x.id !== itemId))
+          overviewArr: content.overviewArr.map(array =>
+            array.filter(x => x.id !== itemId)
+          )
         })
       )
       .catch(err => console.log(err));
@@ -181,8 +213,10 @@ function OverviewContent() {
     //   .catch(err => console.log(err));
   };
 
+  // MODAL CONFIRM BUTTON END
+
   const closeModal = () => {
-    setState({ ...content, modalShow: false });
+    setState({ ...content, modal: { ...content.modal, show: false } });
   };
 
   useEffect(() => {
@@ -193,17 +227,17 @@ function OverviewContent() {
         }
         throw new Error('error');
       })
-      .then(x => setState({ ...content, arr: x }))
+      .then(x => setState({ ...content, overviewArr: x }))
       .then(_ => console.log(content))
       .catch(err => console.log(err));
   }, []);
 
-  if (!content.arr.length) {
+  if (!content.overviewArr.length) {
     return <div className="empty-content">No content added yet!</div>;
   }
   return (
     <div className="container">
-      {content.arr.map((arr, i) => (
+      {content.overviewArr.map((arr, i) => (
         <div key={i} className="row">
           {arr.map((obj, j) => (
             <div key={j} className="col-sm-12 col-md-4 overview-item">
@@ -247,7 +281,7 @@ function OverviewContent() {
         </div>
       ))}
       <ModalWindow
-        html={htmlContent(content.mode)}
+        html={htmlContent(content.modeType)}
         content={content}
         handleClose={closeModal}
       />
