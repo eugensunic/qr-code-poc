@@ -15,8 +15,8 @@ function Navbar(history) {
         Navbar
       </a>
       <button
-        className="navbar-toggler"
         type="button"
+        className="navbar-toggler"
         data-toggle="collapse"
         data-target="#navbarNav"
         aria-controls="navbarNav"

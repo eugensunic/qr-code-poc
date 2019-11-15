@@ -48,7 +48,6 @@ function OverviewContent() {
         <span>Image name:</span>
         <div className="row">
           <input
-            id="image-name"
             name="image-name"
             type="text"
             value={content.image.name}
@@ -64,10 +63,9 @@ function OverviewContent() {
         <span>Image description:</span>
         <div className="row">
           <textarea
-            id="image-description"
             name="image-description"
-            value={content.image.description}
             placeholder="Image description"
+            value={content.image.description}
             rows="20"
             cols="40"
             className="ui-autocomplete-input"
@@ -82,14 +80,9 @@ function OverviewContent() {
           ></textarea>
         </div>
         <span>Current image:</span>
-        <img width="170" src={content.image.src} style={{ display: 'block' }} />
+        <img width="170" src={content.image.src} className="d-block" />
         <div className="row">
-          <input
-            id="image-file"
-            name="image-file"
-            type="file"
-            accept="image/*"
-          />
+          <input name="image-file" type="file" accept="image/*" />
         </div>
       </div>
     );
@@ -272,6 +265,7 @@ function OverviewContent() {
                   <img
                     width="170"
                     src={obj.qrCode}
+                    className="page-link"
                     onClick={() => invokeQrCodeModal(obj.qrCode, obj.imageName)}
                   />
                 </div>

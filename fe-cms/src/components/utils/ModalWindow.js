@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React from 'react';
 import { Button, Modal } from 'react-bootstrap';
 
 function ModalWindow(props) {

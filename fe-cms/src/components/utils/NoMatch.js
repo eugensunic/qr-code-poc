@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React from 'react';
 
 function NoMatch() {
   return <div>Could not find route!˝</div>;

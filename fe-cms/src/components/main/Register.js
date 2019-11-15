@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { withRouter } from 'react-router-dom';
-import { isLoggedIn, getCurrentDateTimeString } from '../../helpers';
+import { getCurrentDateTimeString } from '../../helpers';
 import { GlobalErrorContext } from '../../App';
 
 import {
@@ -13,11 +13,11 @@ import {
 function Register() {
   const errorContext = useContext(GlobalErrorContext);
   const [obj, setCredential] = useState({
+    firstName: null,
+    lastName: null,
     email: null,
     password: null,
     repeatPassword: null,
-    firstName: null,
-    lastName: null,
     firstNameError: null,
     lastNameError: null,
     passwordError: null,
@@ -29,10 +29,10 @@ function Register() {
   const resetState = () => {
     setCredential({
       ...obj,
-      password: null,
-      repeatPassword: null,
       firstName: null,
       lastName: null,
+      password: null,
+      repeatPassword: null,
       firstNameError: null,
       lastNameError: null,
       passwordError: null,
@@ -154,10 +154,10 @@ function Register() {
           <div className="form-signin">
             <div className="form-label-group">
               <input
-                type="text"
                 id="first-name"
-                className="form-control"
+                type="text"
                 placeholder="First name"
+                className="form-control"
                 required
                 onChange={e =>
                   setCredential({
@@ -174,10 +174,10 @@ function Register() {
             )}
             <div className="form-label-group">
               <input
-                type="text"
                 id="last-name"
-                className="form-control"
+                type="text"
                 placeholder="last name"
+                className="form-control"
                 required
                 onChange={e =>
                   setCredential({
@@ -194,10 +194,10 @@ function Register() {
             )}
             <div className="form-label-group">
               <input
-                type="email"
                 id="email"
-                className="form-control"
+                type="email"
                 placeholder="E-mail"
+                className="form-control"
                 required
                 onChange={e =>
                   setCredential({
@@ -216,10 +216,10 @@ function Register() {
             <div id="register-password-container">
               <div className="form-label-group">
                 <input
-                  type="password"
                   id="password"
-                  className="form-control"
+                  type="password"
                   placeholder="Password"
+                  className="form-control"
                   onChange={e =>
                     setCredential({
                       ...obj,
@@ -233,10 +233,10 @@ function Register() {
               </div>
               <div className="form-label-group">
                 <input
-                  type="password"
                   id="repeat-password"
-                  className="form-control"
+                  type="password"
                   placeholder="Password"
+                  className="form-control"
                   onChange={e =>
                     setCredential({
                       ...obj,
@@ -255,9 +255,9 @@ function Register() {
 
             {obj.submitRequest && <div className="loader"></div>}
             <button
+              type="submit"
               className="btn btn-lg btn-primary btn-block text-uppercase"
               disabled={obj.submitRequest}
-              type="submit"
               onClick={() => validateUser()}
             >
               Confirm registration

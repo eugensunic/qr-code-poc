@@ -70,8 +70,8 @@ function CreateContent() {
       <div className="row">
         <input
           id="image-name"
-          name="image-name"
           type="text"
+          name="image-name"
           placeholder="Image name"
           className={obj.imageNameError ? 'error-input-container' : ''}
           onChange={e =>
@@ -106,8 +106,8 @@ function CreateContent() {
       <div className="row">
         <input
           id="image-file"
-          name="image-file"
           type="file"
+          name="image-file"
           accept="image/*"
           className={obj.imageFilesError ? 'error-input-container' : ''}
           onChange={e => {
@@ -120,8 +120,8 @@ function CreateContent() {
         />
       </div>
       <button
-        className="btn btn-lg btn-primary btn-block text-uppercase mt-2"
         type="submit"
+        className="btn btn-lg btn-primary btn-block text-uppercase mt-2"
         onClick={uploadContent}
       >
         Submit
