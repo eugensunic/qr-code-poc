@@ -4,11 +4,15 @@ import ModalWindow from '../utils/ModalWindow';
 function OverviewContent() {
   const [content, setState] = useState({
     arr: [],
+    mode: null,
+    showSubmitButton: true,
+    qrCodePath: null,
     imageName: null,
     imageDescription: null,
     imageSrc: null,
     itemId: null,
     modalShow: false,
+    imageModalShow: false,
     modalHeading: null,
     modalContent: null,
     actionButtonName: null,
@@ -17,28 +21,18 @@ function OverviewContent() {
     actionHandler: null
   });
 
-  const onChangeImageDescription = e => {
-    console.log('inside the imageDescription callback func', content.modalShow);
-    setState({ ...content, imageDescription: e.target.value });
+  const htmlContent = mode => {
+    switch (mode) {
+      case 'EDIT':
+        return editContent();
+      case 'DELETE':
+        return deleteContent();
+      case 'ZOOM':
+        return qrCodeContent();
+      default:
+        return '';
+    }
   };
-
-  const onChangeImageName = e => {
-    console.log('inside the imageName callback func', content.modalShow);
-    // setState({ ...content, imageName: e.target.value });
-  };
-
-  // useEffect(() => {
-  //   if (!content.modalContent) return;
-  //   console.log('side effect content', content.modalContent);
-  //   // setState({
-  //   //   ...setState,
-  //   //   modalHeading: `Edit ${content.imageName}`,
-  //   //   modalShow: true,
-  //   //   imageName: content.imageName,
-  //   //   imageDescription: content.imageDescription,
-  //   //   imageSrc: content.imageSrc
-  //   // });
-  // }, [content.modalContent]);
 
   const editContent = () => {
     return (
@@ -54,7 +48,7 @@ function OverviewContent() {
             type="text"
             value={content.imageName}
             placeholder="Image name"
-            onChange={onChangeImageName}
+            onChange={e => setState({ ...content, imageName: e.target.value })}
           />
         </div>
         <span>Image description:</span>
@@ -69,7 +63,9 @@ function OverviewContent() {
             className="ui-autocomplete-input"
             autoComplete="off"
             role="textbox"
-            onChange={onChangeImageDescription}
+            onChange={e =>
+              setState({ ...content, imageDescription: e.target.value })
+            }
           ></textarea>
         </div>
         <span>Current image:</span>
@@ -86,12 +82,21 @@ function OverviewContent() {
     );
   };
 
+  const deleteContent = () => {
+    return <p>Are you sure you want to delete the selected item?</p>;
+  };
+
+  const qrCodeContent = () => {
+    return <img width="400" height="400" src={content.qrCodePath} />;
+  };
+
   const invokeDeleteModal = (itemId, imageName) => {
     setState({
       ...content,
+      mode: 'DELETE',
+      showSubmitButton: true,
       modalShow: true,
-      modalHeading: imageName,
-      modalContent: `Are you sure you want to delete the selected item?`,
+      modalHeading: `Delete ${imageName}`,
       actionButtonName: 'Delete',
       actionButtonBorderColor: '#dc3545',
       actionButtonColor: '#dc3545',
@@ -102,15 +107,28 @@ function OverviewContent() {
   const invokeEditModal = (itemId, imageName, imageDescription, imageSrc) => {
     setState({
       ...content,
+      mode: 'EDIT',
+      showSubmitButton: true,
       modalShow: true,
       actionButtonName: 'Submit',
       actionButtonBorderColor: '#007bff',
       actionButtonColor: '#007bff',
-      modalHeading: `Edit ${content.imageName}`,
+      modalHeading: `Edit ${imageName}`,
       imageName: imageName,
       imageDescription: imageDescription,
       imageSrc: imageSrc,
       handleAction: () => editItemConfirm(itemId)
+    });
+  };
+
+  const invokeQrCodeModal = (path, imageName) => {
+    setState({
+      ...content,
+      modalShow: true,
+      showSubmitButton: false,
+      modalHeading: `QR code for ${imageName}`,
+      mode: 'ZOOM',
+      qrCodePath: path
     });
   };
 
@@ -140,15 +158,31 @@ function OverviewContent() {
       .catch(err => console.log(err));
   };
 
-  // TO BE DONE
-  const editItemConfirm = () => {};
+  const editItemConfirm = itemId => {
+    // fetch('/overview-content/edit', {
+    //   method: 'POST',
+    //   headers: {
+    //     Accept: 'application/json',
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: JSON.stringify({
+    //     itemId: itemId
+    //   })
+    // })
+    //   .then(res => {
+    //     if (res.ok) {
+    //       return res.json();
+    //     }
+    //     throw new Error('error');
+    //   })
+    //   .then(_ => {
+    //     console.log('EDIT SUCCESSFUL');
+    //   })
+    //   .catch(err => console.log(err));
+  };
 
   const closeModal = () => {
     setState({ ...content, modalShow: false });
-  };
-
-  const openImageModal = () => {
-    console.log('open image modal');
   };
 
   useEffect(() => {
@@ -197,11 +231,15 @@ function OverviewContent() {
               <div className="row">
                 <div className="col-xs-12 col-sm-6 ">
                   <h5 className="text-wrapper">{obj.imageName}</h5>
-                  <img width="170" src={obj.path} onClick={openImageModal} />
+                  <img width="170" src={obj.path} />
                   <p className="text-wrapper">{obj.imageDescription}</p>
                 </div>
                 <div className="col-xs-12 col-sm-6">
-                  <img width="170" src={obj.qrCode} />
+                  <img
+                    width="170"
+                    src={obj.qrCode}
+                    onClick={() => invokeQrCodeModal(obj.qrCode, obj.imageName)}
+                  />
                 </div>
               </div>
             </div>
@@ -209,7 +247,7 @@ function OverviewContent() {
         </div>
       ))}
       <ModalWindow
-        html={editContent()}
+        html={htmlContent(content.mode)}
         content={content}
         handleClose={closeModal}
       />
