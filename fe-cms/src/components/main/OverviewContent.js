@@ -4,6 +4,9 @@ import ModalWindow from '../utils/ModalWindow';
 function OverviewContent() {
   const [content, setState] = useState({
     arr: [],
+    imageName: null,
+    imageDescription: null,
+    imageSrc: null,
     itemId: null,
     modalShow: false,
     modalHeading: null,
@@ -14,30 +17,104 @@ function OverviewContent() {
     actionHandler: null
   });
 
-  const invokeDeleteModal = itemId => {
+  const onChangeImageDescription = e => {
+    console.log('inside the imageDescription callback func', content.modalShow);
+    setState({ ...content, imageDescription: e.target.value });
+  };
+
+  const onChangeImageName = e => {
+    console.log('inside the imageName callback func', content.modalShow);
+    // setState({ ...content, imageName: e.target.value });
+  };
+
+  // useEffect(() => {
+  //   if (!content.modalContent) return;
+  //   console.log('side effect content', content.modalContent);
+  //   // setState({
+  //   //   ...setState,
+  //   //   modalHeading: `Edit ${content.imageName}`,
+  //   //   modalShow: true,
+  //   //   imageName: content.imageName,
+  //   //   imageDescription: content.imageDescription,
+  //   //   imageSrc: content.imageSrc
+  //   // });
+  // }, [content.modalContent]);
+
+  const editContent = () => {
+    return (
+      <div className="container main-wrapper">
+        <div className="row">
+          <h2></h2>
+        </div>
+        <span>Image name:</span>
+        <div className="row">
+          <input
+            id="image-name"
+            name="image-name"
+            type="text"
+            value={content.imageName}
+            placeholder="Image name"
+            onChange={onChangeImageName}
+          />
+        </div>
+        <span>Image description:</span>
+        <div className="row">
+          <textarea
+            id="image-description"
+            name="image-description"
+            value={content.imageDescription}
+            placeholder="Image description"
+            rows="20"
+            cols="40"
+            className="ui-autocomplete-input"
+            autoComplete="off"
+            role="textbox"
+            onChange={onChangeImageDescription}
+          ></textarea>
+        </div>
+        <span>Current image:</span>
+        <img width="170" src={content.imageSrc} style={{ display: 'block' }} />
+        <div className="row">
+          <input
+            id="image-file"
+            name="image-file"
+            type="file"
+            accept="image/*"
+          />
+        </div>
+      </div>
+    );
+  };
+
+  const invokeDeleteModal = (itemId, imageName) => {
     setState({
       ...content,
       modalShow: true,
+      modalHeading: imageName,
       modalContent: `Are you sure you want to delete the selected item?`,
       actionButtonName: 'Delete',
       actionButtonBorderColor: '#dc3545',
       actionButtonColor: '#dc3545',
-      handleAction: () => deleteItem(itemId)
+      handleAction: () => deleteItemConfirm(itemId)
     });
   };
 
-  const invokeEditModal = itemId => {
+  const invokeEditModal = (itemId, imageName, imageDescription, imageSrc) => {
     setState({
       ...content,
       modalShow: true,
       actionButtonName: 'Submit',
       actionButtonBorderColor: '#007bff',
       actionButtonColor: '#007bff',
-      handleAction: () => editItem(itemId)
+      modalHeading: `Edit ${content.imageName}`,
+      imageName: imageName,
+      imageDescription: imageDescription,
+      imageSrc: imageSrc,
+      handleAction: () => editItemConfirm(itemId)
     });
   };
 
-  const deleteItem = itemId => {
+  const deleteItemConfirm = itemId => {
     fetch('/overview-content/delete', {
       method: 'POST',
       headers: {
@@ -63,7 +140,8 @@ function OverviewContent() {
       .catch(err => console.log(err));
   };
 
-  const editItem = () => {};
+  // TO BE DONE
+  const editItemConfirm = () => {};
 
   const closeModal = () => {
     setState({ ...content, modalShow: false });
@@ -98,14 +176,21 @@ function OverviewContent() {
               <button
                 type="button"
                 className="btn btn-danger d-inline"
-                onClick={() => invokeDeleteModal(obj.id)}
+                onClick={() => invokeDeleteModal(obj.id, obj.imageName)}
               >
                 Delete
               </button>
               <button
                 type="button"
                 className="btn btn-warning d-inline ml-1"
-                onClick={() => invokeEditModal(obj.id)}
+                onClick={() =>
+                  invokeEditModal(
+                    obj.id,
+                    obj.imageName,
+                    obj.imageDescription,
+                    obj.path
+                  )
+                }
               >
                 Edit
               </button>
@@ -124,13 +209,8 @@ function OverviewContent() {
         </div>
       ))}
       <ModalWindow
-        show={content.modalShow}
-        content={content.modalContent}
-        heading={content.modalHeading}
-        actionButtonName={content.actionButtonName}
-        actionButtonColor={content.actionButtonColor}
-        actionButtonBorderColor={content.actionButtonBorderColor}
-        handleAction={content.handleAction}
+        html={editContent()}
+        content={content}
         handleClose={closeModal}
       />
     </div>

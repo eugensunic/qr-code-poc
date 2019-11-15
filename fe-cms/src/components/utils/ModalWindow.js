@@ -2,35 +2,31 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 
 function ModalWindow(props) {
-  const {
-    handleClose,
-    handleAction,
-    show,
-    actionButtonName,
-    actionButtonColor,
-    actionButtonBorderColor,
-    content,
-    heading
-  } = props;
+  const { content, handleClose, html } = props;
+  const showLog = () => {
+    console.log('modal window rendered', props.content);
+  };
+
   return (
-    <Modal show={show} onHide={handleClose}>
+    <Modal show={content.modalShow} onHide={handleClose}>
+      {showLog()}
       <Modal.Header closeButton>
-        <Modal.Title>{heading}</Modal.Title>
+        <Modal.Title>{content.heading}</Modal.Title>
       </Modal.Header>
-      <Modal.Body>{content}</Modal.Body>
+      <Modal.Body>{html}</Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={handleClose}>
           Close
         </Button>
         <Button
           variant="primary"
-          onClick={handleAction}
+          onClick={content.handleAction}
           style={{
-            backgroundColor: actionButtonColor,
-            borderColor: actionButtonBorderColor
+            backgroundColor: content.actionButtonColor,
+            borderColor: content.actionButtonBorderColor
           }}
         >
-          {actionButtonName}
+          {content.actionButtonName}
         </Button>
       </Modal.Footer>
     </Modal>
