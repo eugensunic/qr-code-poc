@@ -1,7 +1,8 @@
 - see why history.push doesn't work in throws an error saying that push is undefined.
 - re-evaluate JWT token (test combinations with it)
 - implement error handler in middleware to nad pass next in node.js if error occurs instead of res.status(500).end()
-
+- check fi multiple emails can be entered to the database
+- implement extension of JWT token
 
 TODO
 - typescript FE+BE

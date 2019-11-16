@@ -1,10 +1,11 @@
 const jwt = require('jsonwebtoken');
 const jwtKey = require('../config').jwtKey;
+const nodemailer = require('nodemailer');
 
 const tokenValid = (req, res, next) => {
   // We can obtain the session token from the requests cookies, which come with every request
   const token = req.cookies.token;
-  console.log('Token cookie value:', token);
+  // console.log('Token cookie value:', token);
 
   // if the cookie is not set, return an unauthorized error
   if (!token) {
@@ -19,9 +20,9 @@ const tokenValid = (req, res, next) => {
     // or if the signature does not match
 
     payload = jwt.verify(token, jwtKey);
-    console.log('payload value', payload)
+    // console.log('payload value', payload);
     if (typeof payload !== 'undefined') {
-      console.log('Jwt payload valid', payload);
+      // console.log('Jwt payload valid', payload);
       next();
     }
   } catch (e) {
@@ -37,6 +38,33 @@ const tokenValid = (req, res, next) => {
   // username given in the token
 };
 
+const sendMail = (serviceName, recipientMail, subjectName, contentText) => {
+  const message = {
+    from: serviceName,
+    to: recipientMail,
+    subject: subjectName,
+    text: contentText
+  };
+
+  let transport = nodemailer.createTransport({
+    service: serviceName,
+    auth: {
+      user: 'eugen.sunic@comsysto.com',
+      pass: 'mili7788'
+    }
+  });
+
+  return new Promise((resolve, reject) => {
+    transport.sendMail(message, err => {
+      if (err) {
+        reject();
+      }
+      resolve();
+    });
+  });
+};
+
 module.exports = {
-  tokenValid: tokenValid
+  tokenValid: tokenValid,
+  sendMail: sendMail
 };

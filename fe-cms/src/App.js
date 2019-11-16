@@ -39,8 +39,8 @@ function App() {
         <Navbar />
         <ErrorContainer message={error.message} />
         <Switch>
-          <PrivateRoute path="/change-password" component={ChangePassword} />
-          <Route path="/forgot-password" component={ForgotPassword} />
+          <PrivateRoute path="/changepassword" component={ChangePassword} />
+          <Route path="/forgotpassword" component={ForgotPassword} />
           <Route exact path="/" component={Login} />
           <Route path="/login" component={Login} />
           <PrivateRoute path="/register" component={Register} />

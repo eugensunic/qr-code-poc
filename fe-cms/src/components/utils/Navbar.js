@@ -28,10 +28,10 @@ function Navbar(history) {
       <div className="collapse navbar-collapse" id="navbarNav">
         <ul className="navbar-nav">
           <li className="nav-item">
-            <Link to={'/forgot-password'}> Forgot password</Link>
+            <Link to={'/forgotpassword'}> Forgot password</Link>
           </li>
           <li className="nav-item">
-            <Link to={'/change-password'}> Change password</Link>
+            <Link to={'/changepassword'}> Change password</Link>
           </li>
           <Link to={'/register'}> Register</Link>
           <li className="nav-item">

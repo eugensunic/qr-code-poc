@@ -13,6 +13,33 @@ function ForgotPassword() {
     forgotPasswordSuccess: false
   });
 
+  const isFrontendValid = () => {
+    return !!isEmailValid(obj.email);
+  };
+
+  const onSubmitHandler = () => {
+    // FE validation
+    let emailErr = '';
+
+    if (!isFrontendValid()) {
+      if (isEmpty(obj.email)) {
+        emailErr = 'Please provide email';
+      } else if (!isEmailValid(obj.email)) {
+        emailErr = 'Please provide valid mail';
+      }
+
+      setCredential({
+        ...obj,
+        emailError: emailErr
+      });
+      return;
+    }
+    // triggers BE validation hook
+    setCredential({
+      ...obj,
+      submitRequest: true
+    });
+  };
   // successful forgot password submit hook
   useEffect(() => {}, [obj.forgotPasswordSuccess]);
 
@@ -40,14 +67,12 @@ function ForgotPassword() {
         return res.success
           ? setCredential({
               ...obj,
-              passwordError: '',
-              loginSuccess: true,
               submitRequest: false
             })
           : setCredential({
               ...obj,
-              passwordError: 'Wrong credentials, Try again',
-              submitRequest: false
+              submitRequest: false,
+              emailError: `email doesn't exist in the database`
             });
       })
 
@@ -73,14 +98,15 @@ function ForgotPassword() {
               <input
                 type="email"
                 className="form-control"
-                placeholder="Username/mail"
+                placeholder="mail"
                 required
-                onChange={e => () =>
+                onChange={e =>
                   setCredential({
                     ...obj,
                     email: e.target.value,
                     emailError: ''
-                  })}
+                  })
+                }
               />
               <label htmlFor="inputEmail">Email address</label>
             </div>
@@ -92,7 +118,7 @@ function ForgotPassword() {
               type="submit"
               className="btn btn-lg btn-primary btn-block text-uppercase"
               disabled={obj.submitRequest}
-              onClick={() => {}}
+              onClick={() => onSubmitHandler()}
             >
               Send Password to email
             </button>

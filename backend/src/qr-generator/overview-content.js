@@ -74,13 +74,17 @@ module.exports.init = app => {
             findQuery,
             updateData,
             {
-              upsert: true,
+              upsert: false,
               useFindAndModify: false,
               new: true
             },
             (err, doc) => {
               if (err) {
                 return next(err);
+              }
+              // image does not exist
+              if (!doc) {
+                res.status(401).json();
               }
 
               const updatedObject = {

@@ -8,8 +8,8 @@ module.exports = function(app) {
     '/create-content',
     '/user-registration',
     '/auth',
-    '/change-password',
-    '/forgot-password',
+    '/changepassword',
+    '/forgotpassword',
     '/logout',
     '/museum-images/*'
   ];
