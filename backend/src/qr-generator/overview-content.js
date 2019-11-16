@@ -45,20 +45,31 @@ module.exports.init = app => {
             _id: new ObjectId(imageId)
           };
 
-          const updateData = {
-            $set: {
+          let objUpdate = null;
+
+          // is image object empty
+          console.log(req.file);
+          if (isObjectEmpty(req.file)) {
+            objUpdate = {
+              imageName: imageName,
+              imageDescription: imageDescription,
+              qrCode: qrCodeStream
+            };
+          } else {
+            objUpdate = {
               imageName: imageName,
               imageDescription: imageDescription,
               qrCode: qrCodeStream,
               image: {
-                originalName: req.hasOwnProperty('file')
-                  ? req.file.originalname
-                  : null,
-                fileName: req.hasOwnProperty('file') ? req.file.filename : null,
-                path: req.hasOwnProperty('file') ? req.file.path : null,
-                mimeType: req.hasOwnProperty('file') ? req.file.mimetype : null
+                originalName: req.file.originalname,
+                fileName: req.file.filename,
+                path: req.file.path,
+                mimeType: req.file.mimetype
               }
-            }
+            };
+          }
+          const updateData = {
+            $set: objUpdate
           };
 
           ImageMuseum.findOneAndUpdate(
@@ -105,4 +116,8 @@ function getImagePath(pathToFile, folderName) {
   return pathToFile
     ? pathToFile.substring(pathToFile.indexOf(folderName))
     : 'default-image.png';
+}
+
+function isObjectEmpty(obj) {
+  !obj || (Object.keys(obj).length === 0 && obj.constructor === Object);
 }
