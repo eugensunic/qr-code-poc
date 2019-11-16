@@ -14,8 +14,14 @@ module.exports.init = app => {
       if (!data.length) {
         return res.json({});
       }
-      const layoutArr = adjustForFrontendLayout(data);
-      res.json(layoutArr);
+      data = data.map(x => ({
+        id: x._id,
+        imageName: x.imageName,
+        imageDescription: x.imageDescription,
+        qrCode: x.qrCode,
+        path: getImagePath(x.image.path, 'museum-images')
+      }));
+      res.json(data);
     });
   });
 
@@ -45,10 +51,12 @@ module.exports.init = app => {
               imageDescription: imageDescription,
               qrCode: qrCodeStream,
               image: {
-                originalName: req.file.originalname,
-                fileName: req.file.filename,
-                path: req.file.path,
-                mimeType: req.file.mimetype
+                originalName: req.hasOwnProperty('file')
+                  ? req.file.originalname
+                  : null,
+                fileName: req.hasOwnProperty('file') ? req.file.filename : null,
+                path: req.hasOwnProperty('file') ? req.file.path : null,
+                mimeType: req.hasOwnProperty('file') ? req.file.mimetype : null
               }
             }
           };
@@ -58,13 +66,23 @@ module.exports.init = app => {
             updateData,
             {
               upsert: true,
-              useFindAndModify: false
+              useFindAndModify: false,
+              new: true
             },
             (err, doc) => {
               if (err) {
                 return next(err);
               }
-              res.json({ edit_successful: true });
+
+              const updatedObject = {
+                id: doc._id,
+                imageName: doc.imageName,
+                imageDescription: doc.imageDescription,
+                qrCode: doc.qrCode,
+                path: getImagePath(doc.image.path, 'museum-images')
+              };
+
+              res.json(updatedObject);
             }
           );
         }
@@ -82,26 +100,6 @@ module.exports.init = app => {
       });
     });
 };
-
-function adjustForFrontendLayout(data) {
-  let index = -1;
-  return data
-    .map(x => ({
-      id: x._id,
-      imageName: x.imageName,
-      imageDescription: x.imageDescription,
-      qrCode: x.qrCode,
-      path: getImagePath(x.image.path, 'museum-images')
-    }))
-    .reduce((acc, x, i) => {
-      if (i % 3 === 0) {
-        acc.push([]);
-        ++index;
-      }
-      acc[index].push(x);
-      return acc;
-    }, []);
-}
 
 function getImagePath(pathToFile, folderName) {
   return pathToFile

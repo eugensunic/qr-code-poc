@@ -28,6 +28,18 @@ function OverviewContent() {
     }
   });
 
+  const adjustForLayout = data => {
+    let index = -1;
+    return data.reduce((acc, x, i) => {
+      if (i % 3 === 0) {
+        acc.push([]);
+        ++index;
+      }
+      acc[index].push(x);
+      return acc;
+    }, []);
+  };
+
   const htmlContent = mode => {
     switch (mode) {
       case 'EDIT':
@@ -51,6 +63,7 @@ function OverviewContent() {
         return '';
     }
   };
+
   // HTML CONTENT BEGIN
   const editContent = () => {
     return (
@@ -113,10 +126,6 @@ function OverviewContent() {
       </div>
     );
   };
-
-  // useEffect(() => {
-  //   console.log('content image description', content.image.description);
-  // }, [content.image.description]);
 
   const deleteContent = () => {
     return <p>Are you sure you want to delete the selected item?</p>;
@@ -207,6 +216,10 @@ function OverviewContent() {
       .then(_ =>
         setState({
           ...content,
+          modal: {
+            ...content.modal,
+            show: false
+          },
           overviewArr: content.overviewArr.map(array =>
             array.filter(x => x.id !== content.image.id)
           )
@@ -223,13 +236,30 @@ function OverviewContent() {
     form.append('file', content.image.description);
     form.append('file', content.image.files[0]);
 
-    console.log(form.getAll('file1'), content);
     fetch('/overview-content/edit', {
       method: 'POST',
       body: form
     })
       .then(res => res.json())
-      .then(_ => {})
+      .then(res =>
+        setState({
+          ...content,
+          modal: { ...content.modal, show: false },
+          overviewArr: content.overviewArr.map(arr => {
+            return arr.map(x => {
+              if (x.id === res.id) {
+                return {
+                  ...res,
+                  image: {
+                    ...res.image
+                  }
+                };
+              }
+              return x;
+            });
+          })
+        })
+      )
       .catch(_ => {
         setState({ ...content, modal: { ...content.modal, show: false } });
         errorContext.dispatchError({
@@ -252,8 +282,7 @@ function OverviewContent() {
         }
         throw new Error('error');
       })
-      .then(x => setState({ ...content, overviewArr: x }))
-      .then(_ => console.log(content))
+      .then(res => setState({ ...content, overviewArr: adjustForLayout(res) }))
       .catch(err => console.log(err));
   }, []);
 
@@ -262,6 +291,7 @@ function OverviewContent() {
   }
   return (
     <div className="container">
+      {console.log('INSIDE DOM', content.overviewArr)}
       {content.overviewArr.map((arr, i) => (
         <div key={i} className="row">
           {arr.map((obj, j) => (
