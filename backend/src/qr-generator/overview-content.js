@@ -1,5 +1,9 @@
 const utils = require('../utils');
+const QRCode = require('qrcode');
+const multer = require('multer');
+const upload = multer({ dest: 'uploads/museum-images' });
 const ImageMuseum = require('../mongo/model/image-data');
+const ObjectId = require('mongodb').ObjectID;
 
 module.exports.init = app => {
   app.route('/overview-content').get(utils.tokenValid, (req, res, next) => {
@@ -17,37 +21,52 @@ module.exports.init = app => {
 
   app
     .route('/overview-content/edit')
-    .post(utils.tokenValid, (req, res, next) => {
-      const findQuery = {
-        _id: new ObjectId(req.body.itemId)
-      };
+    .post(utils.tokenValid, upload.single('file'), (req, res, next) => {
+      console.log('in EDIT:', req.file, req.body);
 
-      const updateData = {
-        $set: {
-          imageName: req.body.imageName,
-          imageDescription: req.body.imageDescription,
-          qrCode: req.body.qrCode,
-          image: {
-            originalName: req.body.image.originalName,
-            fileName: req.body.image.fileName,
-            path: req.body.image.path,
-            mimeType: req.body.image.mimeType
-          }
-        }
-      };
+      const imageId = req.body.file[0];
+      const imageName = req.body.file[1];
+      const imageDescription = req.body.file[2];
 
-      ImageMuseum.findOneAndUpdate(
-        findQuery,
-        updateData,
-        {
-          upsert: true,
-          useFindAndModify: false
-        },
-        (err, doc) => {
+      QRCode.toDataURL(
+        'https://www.google.com/' + imageName,
+        (err, qrCodeStream) => {
           if (err) {
-            return next(err);
+            return;
           }
-          res.json({ edit_successful: true });
+
+          const findQuery = {
+            _id: new ObjectId(imageId)
+          };
+
+          const updateData = {
+            $set: {
+              imageName: imageName,
+              imageDescription: imageDescription,
+              qrCode: qrCodeStream,
+              image: {
+                originalName: req.file.originalname,
+                fileName: req.file.filename,
+                path: req.file.path,
+                mimeType: req.file.mimetype
+              }
+            }
+          };
+
+          ImageMuseum.findOneAndUpdate(
+            findQuery,
+            updateData,
+            {
+              upsert: true,
+              useFindAndModify: false
+            },
+            (err, doc) => {
+              if (err) {
+                return next(err);
+              }
+              res.json({ edit_successful: true });
+            }
+          );
         }
       );
     });
@@ -65,7 +84,7 @@ module.exports.init = app => {
 };
 
 function adjustForFrontendLayout(data) {
-  let index = 0;
+  let index = -1;
   return data
     .map(x => ({
       id: x._id,
@@ -74,17 +93,14 @@ function adjustForFrontendLayout(data) {
       qrCode: x.qrCode,
       path: getImagePath(x.image.path, 'museum-images')
     }))
-    .reduce(
-      (acc, x, i) => {
-        if (i % 3 === 0 && i !== 0) {
-          acc.push([]);
-          ++index;
-        }
-        acc[index].push(x);
-        return acc;
-      },
-      [[]]
-    );
+    .reduce((acc, x, i) => {
+      if (i % 3 === 0) {
+        acc.push([]);
+        ++index;
+      }
+      acc[index].push(x);
+      return acc;
+    }, []);
 }
 
 function getImagePath(pathToFile, folderName) {

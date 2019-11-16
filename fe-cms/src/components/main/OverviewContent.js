@@ -1,17 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import ModalWindow from '../utils/ModalWindow';
+import { GlobalErrorContext } from '../../App';
 
 function OverviewContent() {
+  const errorContext = useContext(GlobalErrorContext);
   const [content, setState] = useState({
     overviewArr: [],
     modeType: null,
     showSubmitButton: true,
     qrCodePath: null,
-    itemId: null,
     image: {
+      id: null,
       name: null,
       description: null,
-      src: null
+      src: null,
+      files: []
     },
     modal: {
       show: false,
@@ -21,8 +24,7 @@ function OverviewContent() {
     actionButton: {
       name: null,
       color: null,
-      borderColor: null,
-      handler: null
+      borderColor: null
     }
   });
 
@@ -34,6 +36,17 @@ function OverviewContent() {
         return deleteContent();
       case 'ZOOM':
         return qrCodeContent();
+      default:
+        return '';
+    }
+  };
+
+  const submitActionButton = mode => {
+    switch (mode) {
+      case 'EDIT':
+        return editItemConfirm;
+      case 'DELETE':
+        return deleteItemConfirm;
       default:
         return '';
     }
@@ -71,22 +84,39 @@ function OverviewContent() {
             className="ui-autocomplete-input"
             autoComplete="off"
             role="textbox"
-            onChange={e =>
+            onChange={e => {
               setState({
                 ...content,
                 image: { ...content.image, description: e.target.value }
-              })
-            }
+              });
+            }}
           ></textarea>
         </div>
         <span>Current image:</span>
         <img width="170" src={content.image.src} className="d-block" />
         <div className="row">
-          <input name="image-file" type="file" accept="image/*" />
+          <input
+            name="image-file"
+            type="file"
+            accept="image/*"
+            onChange={e =>
+              setState({
+                ...content,
+                image: {
+                  ...content.image,
+                  files: e.target.files
+                }
+              })
+            }
+          />
         </div>
       </div>
     );
   };
+
+  // useEffect(() => {
+  //   console.log('content image description', content.image.description);
+  // }, [content.image.description]);
 
   const deleteContent = () => {
     return <p>Are you sure you want to delete the selected item?</p>;
@@ -105,11 +135,12 @@ function OverviewContent() {
       modeType: 'DELETE',
       showSubmitButton: true,
       modal: { ...content.modal, show: true, heading: `Delete ${imageName}` },
+      image: { ...content.image, id: itemId },
       actionButton: {
+        ...content.actionButton,
         name: 'Delete',
         color: '#dc3545',
-        borderColor: '#dc3545',
-        handler: () => deleteItemConfirm(itemId)
+        borderColor: '#dc3545'
       }
     });
   };
@@ -126,15 +157,16 @@ function OverviewContent() {
       },
       image: {
         ...content.image,
+        id: itemId,
         name: imageName,
         description: imageDescription,
         src: imageSrc
       },
       actionButton: {
+        ...content.actionButton,
         name: 'Submit',
         color: '#007bff',
-        borderColor: '#007bff',
-        handler: () => editItemConfirm(itemId)
+        borderColor: '#007bff'
       }
     });
   };
@@ -155,7 +187,7 @@ function OverviewContent() {
 
   // HTML MODAL END
   // MODAL CONFIRM BUTTON BEGIN
-  const deleteItemConfirm = itemId => {
+  const deleteItemConfirm = () => {
     fetch('/overview-content/delete', {
       method: 'POST',
       headers: {
@@ -163,7 +195,7 @@ function OverviewContent() {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        itemId: itemId
+        itemId: content.image.id
       })
     })
       .then(res => {
@@ -176,38 +208,38 @@ function OverviewContent() {
         setState({
           ...content,
           overviewArr: content.overviewArr.map(array =>
-            array.filter(x => x.id !== itemId)
+            array.filter(x => x.id !== content.image.id)
           )
         })
       )
       .catch(err => console.log(err));
   };
 
-  const editItemConfirm = itemId => {
-    // fetch('/overview-content/edit', {
-    //   method: 'POST',
-    //   headers: {
-    //     Accept: 'application/json',
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify({
-    //     itemId: itemId
-    //   })
-    // })
-    //   .then(res => {
-    //     if (res.ok) {
-    //       return res.json();
-    //     }
-    //     throw new Error('error');
-    //   })
-    //   .then(_ => {
-    //     console.log('EDIT SUCCESSFUL');
-    //   })
-    //   .catch(err => console.log(err));
+  const editItemConfirm = () => {
+    const form = new FormData();
+
+    form.append('file', content.image.id);
+    form.append('file', content.image.name);
+    form.append('file', content.image.description);
+    form.append('file', content.image.files[0]);
+
+    console.log(form.getAll('file1'), content);
+    fetch('/overview-content/edit', {
+      method: 'POST',
+      body: form
+    })
+      .then(res => res.json())
+      .then(_ => {})
+      .catch(_ => {
+        setState({ ...content, modal: { ...content.modal, show: false } });
+        errorContext.dispatchError({
+          type: 'global',
+          payload: 'Server error ocurred'
+        });
+      });
   };
 
   // MODAL CONFIRM BUTTON END
-
   const closeModal = () => {
     setState({ ...content, modal: { ...content.modal, show: false } });
   };
@@ -277,6 +309,7 @@ function OverviewContent() {
       <ModalWindow
         html={htmlContent(content.modeType)}
         content={content}
+        handleAction={submitActionButton(content.modeType)}
         handleClose={closeModal}
       />
     </div>
