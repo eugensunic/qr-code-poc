@@ -13,6 +13,8 @@ import About from './components/main/About';
 
 import { Router, Route, Switch } from 'react-router-dom';
 import { history } from './helpers';
+import ForgotPassword from './components/main/ForgotPassword';
+import ChangePassword from './components/main/ChangePassword';
 
 // global error reducer
 const reducer = (state = { message: '' }, action) => {
@@ -37,9 +39,11 @@ function App() {
         <Navbar />
         <ErrorContainer message={error.message} />
         <Switch>
+          <PrivateRoute path="/change-password" component={ChangePassword} />
+          <Route path="/forgot-password" component={ForgotPassword} />
           <Route exact path="/" component={Login} />
           <Route path="/login" component={Login} />
-          <Route path="/register" component={Register} />
+          <PrivateRoute path="/register" component={Register} />
           <PrivateRoute path="/create" component={CreateContent} />
           <PrivateRoute path="/overview" component={OverviewContent} />
           <Route path="/about" component={About} />

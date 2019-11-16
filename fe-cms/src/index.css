@@ -134,7 +134,8 @@ textarea:focus {
   height: 200px;
 }
 
-#register-password-container {
+#register-password-container,
+#change-password-container {
   margin-top: 30px;
   border: 1px solid #efefef;
   padding: 10px;

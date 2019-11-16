@@ -47,8 +47,6 @@ module.exports.init = app => {
 
           let objUpdate = null;
 
-          // is image object empty
-          console.log(req.file);
           if (isObjectEmpty(req.file)) {
             objUpdate = {
               imageName: imageName,
