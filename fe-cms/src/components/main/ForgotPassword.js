@@ -13,6 +13,15 @@ function ForgotPassword() {
     forgotPasswordSuccess: false
   });
 
+  const resetState = () => {
+    setCredential({
+      ...obj,
+      email: null,
+      emailError: null,
+      submitRequest: false
+    });
+  };
+
   const isFrontendValid = () => {
     return !!isEmailValid(obj.email);
   };
@@ -40,8 +49,12 @@ function ForgotPassword() {
       submitRequest: true
     });
   };
-  // successful forgot password submit hook
-  useEffect(() => {}, [obj.forgotPasswordSuccess]);
+
+  // Effect hooks
+  useEffect(() => {
+    if (!obj.forgotPasswordSuccess) return;
+    resetState();
+  }, [obj.forgotPasswordSuccess]);
 
   // BE validation hook
   useEffect(() => {
@@ -67,12 +80,13 @@ function ForgotPassword() {
         return res.success
           ? setCredential({
               ...obj,
-              submitRequest: false
+              submitRequest: false,
+              forgotPasswordSuccess: true
             })
           : setCredential({
               ...obj,
               submitRequest: false,
-              emailError: `email doesn't exist in the database`
+              emailError: `Email doesn't exist in the database`
             });
       })
 
@@ -93,9 +107,13 @@ function ForgotPassword() {
       <div className="card card-signin my-5 center">
         <div className="card-body">
           <h5 className="card-title text-center">Forgot Password</h5>
+          {obj.forgotPasswordSuccess && (
+            <h4 className="success-container">Password successfully sent!</h4>
+          )}
           <div className="form-signin">
             <div className="form-label-group">
               <input
+                id="forgot-section-email"
                 type="email"
                 className="form-control"
                 placeholder="mail"
@@ -103,12 +121,13 @@ function ForgotPassword() {
                 onChange={e =>
                   setCredential({
                     ...obj,
+                    forgotPasswordSuccess: false,
                     email: e.target.value,
                     emailError: ''
                   })
                 }
               />
-              <label htmlFor="inputEmail">Email address</label>
+              <label>Email address</label>
             </div>
 
             {obj.emailError && (

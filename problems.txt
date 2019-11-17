@@ -1,11 +1,23 @@
 - see why history.push doesn't work in throws an error saying that push is undefined.
 - re-evaluate JWT token (test combinations with it)
-- implement error handler in middleware to nad pass next in node.js if error occurs instead of res.status(500).end()
-- check fi multiple emails can be entered to the database
+- implement error handler in middleware to pass next in node.js if error occurs instead of res.status(500).end()
 - implement extension of JWT token
+- fix layout on deleting item in overview section
+- put all urls in config file (REACT.js)
+- 401 vs 403 re-evaluate
+
 
 TODO
+----
 - typescript FE+BE
 - refactoring folder structure
 - rename variables
 - see if import works instead of require
+
+
+
+
+DONE
+----
+- check if multiple emails can be entered to the database --> they cannot
+- backend user-registration needs findOne instead of find --> replaced

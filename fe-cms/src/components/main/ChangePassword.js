@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { withRouter } from 'react-router-dom';
 import { GlobalErrorContext } from '../../App';
+import { parseCookie, parseJwt } from '../../helpers';
 
 import {
   isEmpty,
@@ -12,6 +13,7 @@ function ChangePassword() {
   const errorContext = useContext(GlobalErrorContext);
   const [obj, setCredential] = useState({
     currentPassword: null,
+    userId: null,
     currentPasswordError: null,
     newPassword: null,
     repeatPassword: null,
@@ -48,17 +50,31 @@ function ChangePassword() {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        newPassword: obj.newPassword
+        currentPassword: obj.currentPassword,
+        newPassword: obj.newPassword,
+        id: parseJwt(parseCookie('token')).id
       })
     })
-      .then(res => res.json())
       .then(res => {
-        setCredential({
-          ...obj,
-          changePasswordError: '',
-          submitRequest: false,
-          changePasswordSuccess: true
-        });
+        if (res.ok || res.status === 401) {
+          return res.json();
+        }
+        throw new Error();
+      })
+      .then(res => {
+        res.success
+          ? setCredential({
+              ...obj,
+              changePasswordError: '',
+              submitRequest: false,
+              changePasswordSuccess: true
+            })
+          : setCredential({
+              ...obj,
+              changePasswordError: 'Your current password is wrong, try again',
+              submitRequest: false,
+              changePasswordSuccess: false
+            });
       })
 
       .catch(_ => {
@@ -107,12 +123,14 @@ function ChangePassword() {
       });
       return;
     }
+
     // triggers BE validation hook
     setCredential({
       ...obj,
       submitRequest: true
     });
   };
+
   return (
     <div className="container">
       <div className="card card-signin my-5 center">

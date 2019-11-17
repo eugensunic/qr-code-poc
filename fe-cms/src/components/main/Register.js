@@ -163,7 +163,8 @@ function Register() {
                   setCredential({
                     ...obj,
                     firstName: e.target.value,
-                    firstNameError: null
+                    firstNameError: null,
+                    registrationSuccess:false,
                   })
                 }
               />
@@ -183,7 +184,8 @@ function Register() {
                   setCredential({
                     ...obj,
                     lastName: e.target.value,
-                    lastNameError: null
+                    lastNameError: null,
+                    registrationSuccess: false
                   })
                 }
               />
@@ -203,7 +205,8 @@ function Register() {
                   setCredential({
                     ...obj,
                     email: e.target.value,
-                    emailError: null
+                    emailError: null,
+                    registrationSuccess: false
                   })
                 }
               />
@@ -224,7 +227,8 @@ function Register() {
                     setCredential({
                       ...obj,
                       password: e.target.value,
-                      passwordError: null
+                      passwordError: null,
+                      registrationSuccess: false
                     })
                   }
                   required
@@ -241,7 +245,8 @@ function Register() {
                     setCredential({
                       ...obj,
                       repeatPassword: e.target.value,
-                      passwordError: null
+                      passwordError: null,
+                      registrationSuccess: false
                     })
                   }
                   required

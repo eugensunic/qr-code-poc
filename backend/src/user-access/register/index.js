@@ -3,12 +3,13 @@ const User = require('../../mongo/model/user');
 
 module.exports.init = app => {
   app.route('/user-registration').post((req, res) => {
-    User.find({ email: req.body.email }, (err, mongoResponse) => {
+    User.findOne({ email: req.body.email }, (err, mongoResponse) => {
       if (err) {
         return res.status(500).end();
         // return next(err);
       }
-      if (mongoResponse.length > 0) {
+      console.log(mongoResponse);
+      if (!!mongoResponse) {
         res.json({
           isAlreadyRegistered: true
         });
