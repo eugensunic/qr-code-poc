@@ -88,7 +88,7 @@ function Register() {
         });
         errorContext.dispatchError({
           type: 'global',
-          payload: 'Server error ocurred 1'
+          payload: 'Server error ocurred'
         });
       });
   }, [obj.submitRequest]);

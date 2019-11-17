@@ -220,8 +220,10 @@ function OverviewContent() {
             ...content.modal,
             show: false
           },
-          overviewArr: content.overviewArr.map(array =>
-            array.filter(x => x.id !== content.image.id)
+          overviewArr: adjustForLayout(
+            content.overviewArr
+              .map(array => array.filter(x => x.id !== content.image.id))
+              .reduce((acc, arr) => [...acc, ...arr], [])
           )
         })
       )
