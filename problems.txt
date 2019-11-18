@@ -1,13 +1,14 @@
 TODO
 ----
-
 - see why history.push doesn't work in throws an error saying that push is undefined.
 - re-evaluate JWT token (test combinations with it)
 - implement error handler in middleware to pass next in node.js if error occurs instead of res.status(500).end()
 - implement extension of JWT token
-- put all urls in config file (REACT.js)
+- put all url's in config file (REACT.js)
 - 401 vs 403 re-evaluate
-
+- after change password submit, logout the user
+- store url of generated QR code to the database (important)
+- clear inputs after submit
 
 TODO (nice to have)
 ----

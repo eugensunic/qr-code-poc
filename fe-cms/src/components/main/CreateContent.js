@@ -1,14 +1,16 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useRef } from 'react';
 import { GlobalErrorContext } from '../../App';
 
 function CreateContent() {
   const errorContext = useContext(GlobalErrorContext);
+  const fileInput = useRef(null);
   const [obj, setData] = useState({
-    imageName: null,
+    imageName: '',
     imageNameError: false,
-    imageDescription: null,
+    imageDescription: '',
     imageDescriptionError: false,
     imageFiles: [],
+    imageFileValue: '',
     imageFilesError: false,
     qrCode: null
   });
@@ -46,14 +48,22 @@ function CreateContent() {
     form.append('file', obj.imageDescription);
     form.append('file', obj.imageFiles[0]);
 
-    console.log(form.getAll('file'));
     fetch('/create-content', {
       method: 'POST',
       body: form,
       credentials: 'include'
     })
       .then(res => res.json())
-      .then(x => setData({ ...obj, qrCode: x }))
+      .then(x => {
+        fileInput.current.value = '';
+        setData({
+          ...obj,
+          qrCode: x,
+          imageName: '',
+          imageDescription: '',
+          imageFiles: []
+        });
+      })
       .catch(_ =>
         errorContext.dispatchError({
           type: 'global',
@@ -64,6 +74,7 @@ function CreateContent() {
 
   return (
     <div className="container main-wrapper">
+      {console.log(obj.imageFiles)}
       <div className="row">
         <h2></h2>
       </div>
@@ -71,6 +82,7 @@ function CreateContent() {
         <input
           id="image-name"
           type="text"
+          value={obj.imageName}
           name="image-name"
           placeholder="Image name"
           className={obj.imageNameError ? 'error-input-container' : ''}
@@ -87,6 +99,7 @@ function CreateContent() {
         <textarea
           id="image-description"
           name="image-description"
+          value={obj.imageDescription}
           placeholder="Image description"
           rows="20"
           cols="40"
@@ -107,6 +120,7 @@ function CreateContent() {
         <input
           id="image-file"
           type="file"
+          ref={fileInput}
           name="image-file"
           accept="image/*"
           className={obj.imageFilesError ? 'error-input-container' : ''}

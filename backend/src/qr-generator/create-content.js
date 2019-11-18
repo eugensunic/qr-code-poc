@@ -11,7 +11,6 @@ module.exports.init = app => {
     .post(utils.tokenValid, upload.single('file'), (req, res, next) => {
       const imageName = req.body.file[0];
       const imageDescription = req.body.file[1];
-      console.log('WENT TO CREATE CONTENT');
       QRCode.toDataURL(
         'https://www.google.com/' + imageName,
         (err, qrCodeStream) => {

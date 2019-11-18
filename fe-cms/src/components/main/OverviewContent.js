@@ -293,7 +293,6 @@ function OverviewContent() {
   }
   return (
     <div className="container">
-      {console.log('INSIDE DOM', content.overviewArr)}
       {content.overviewArr.map((arr, i) => (
         <div key={i} className="row">
           {arr.map((obj, j) => (

@@ -23,14 +23,12 @@ function Login(history) {
   // if logged in don't show the login page
   useEffect(() => {
     if (!isLoggedIn()) return;
-    console.log(history.push);
     window.location.href = '/overview';
   }, [isLoggedIn()]);
 
   // successful login hook
   useEffect(() => {
     if (!obj.loginSuccess) return;
-    console.log(history.push);
     window.location.href = '/create';
   }, [obj.loginSuccess]);
 
@@ -56,7 +54,6 @@ function Login(history) {
         throw new Error();
       })
       .then(res => {
-        console.log(res);
         return res.success
           ? setCredential({
               ...obj,
