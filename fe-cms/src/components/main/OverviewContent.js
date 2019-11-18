@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import ModalWindow from '../utils/ModalWindow';
 import { GlobalErrorContext } from '../../App';
+import { contentEndpoint } from '../../config';
 
 function OverviewContent() {
   const errorContext = useContext(GlobalErrorContext);
@@ -197,7 +198,7 @@ function OverviewContent() {
   // HTML MODAL END
   // MODAL CONFIRM BUTTON BEGIN
   const deleteItemConfirm = () => {
-    fetch('/overview-content/delete', {
+    fetch(contentEndpoint.OVERVIEW_CONTENT_DELETE, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -238,7 +239,7 @@ function OverviewContent() {
     form.append('file', content.image.description);
     form.append('file', content.image.files[0]);
 
-    fetch('/overview-content/edit', {
+    fetch(contentEndpoint.OVERVIEW_CONTENT_EDIT, {
       method: 'POST',
       body: form
     })
@@ -277,7 +278,7 @@ function OverviewContent() {
   };
 
   useEffect(() => {
-    fetch('/overview-content')
+    fetch(contentEndpoint.OVERVIEW_CONTENT)
       .then(res => {
         if (res.ok) {
           return res.json();

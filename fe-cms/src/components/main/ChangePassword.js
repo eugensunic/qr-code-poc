@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { withRouter } from 'react-router-dom';
 import { GlobalErrorContext } from '../../App';
 import { parseCookie, parseJwt } from '../../helpers';
+import { userAccessEndpoint } from '../../config';
 
 import {
   isEmpty,
@@ -43,7 +44,7 @@ function ChangePassword() {
   // BE validation hook
   useEffect(() => {
     if (!obj.submitRequest) return;
-    fetch('/change-password', {
+    fetch(userAccessEndpoint.CHANGE_PASSWORD, {
       method: 'POST',
       headers: {
         Accept: 'application/json',

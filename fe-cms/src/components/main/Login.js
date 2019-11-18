@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { withRouter } from 'react-router-dom';
 import { isLoggedIn } from '../../helpers';
 import { GlobalErrorContext } from '../../App';
+import { userAccessEndpoint } from '../../config';
 
 import {
   isEmailValid,
@@ -36,7 +37,7 @@ function Login(history) {
   useEffect(() => {
     if (!obj.submitRequest) return;
 
-    fetch('/auth', {
+    fetch(userAccessEndpoint.LOGIN, {
       method: 'POST',
       headers: {
         Accept: 'application/json',

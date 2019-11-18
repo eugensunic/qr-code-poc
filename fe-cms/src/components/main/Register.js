@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { withRouter } from 'react-router-dom';
 import { getCurrentDateTimeString } from '../../helpers';
 import { GlobalErrorContext } from '../../App';
+import { userAccessEndpoint } from '../../config';
 
 import {
   isEmailValid,
@@ -49,7 +50,7 @@ function Register() {
   // BE validation hook
   useEffect(() => {
     if (!obj.submitRequest) return;
-    fetch('/user-registration', {
+    fetch(userAccessEndpoint.REGISTER, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -164,7 +165,7 @@ function Register() {
                     ...obj,
                     firstName: e.target.value,
                     firstNameError: null,
-                    registrationSuccess:false,
+                    registrationSuccess: false
                   })
                 }
               />

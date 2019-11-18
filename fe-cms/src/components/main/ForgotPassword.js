@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 
 import { isEmailValid, isEmpty } from '../../services/login.service';
 import { GlobalErrorContext } from '../../App';
+import { userAccessEndpoint } from '../../config';
 
 function ForgotPassword() {
   const errorContext = useContext(GlobalErrorContext);
@@ -60,7 +61,7 @@ function ForgotPassword() {
   useEffect(() => {
     if (!obj.submitRequest) return;
 
-    fetch('/forgot-password', {
+    fetch(userAccessEndpoint.FORGOT_PASSWORD, {
       method: 'POST',
       headers: {
         Accept: 'application/json',

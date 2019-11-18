@@ -1,16 +1,32 @@
 const proxy = require('http-proxy-middleware');
+const { contentEndpoint, userAccessEndpoint } = require('./config');
+
+const {
+  CREATE_CONTENT,
+  OVERVIEW_CONTENT,
+  OVERVIEW_CONTENT_EDIT,
+  OVERVIEW_CONTENT_DELETE
+} = contentEndpoint;
+
+const {
+  REGISTER,
+  LOGIN,
+  LOGOUT,
+  CHANGE_PASSWORD,
+  FORGOT_PASSWORD
+} = userAccessEndpoint;
 
 module.exports = function(app) {
   const proxyRoutes = [
-    '/overview-content',
-    '/overview-content/edit',
-    '/overview-content/delete',
-    '/create-content',
-    '/user-registration',
-    '/auth',
-    '/changepassword',
-    '/forgotpassword',
-    '/logout',
+    CREATE_CONTENT,
+    OVERVIEW_CONTENT,
+    OVERVIEW_CONTENT_EDIT,
+    OVERVIEW_CONTENT_DELETE,
+    REGISTER,
+    LOGIN,
+    LOGOUT,
+    CHANGE_PASSWORD,
+    FORGOT_PASSWORD,
     '/museum-images/*'
   ];
   app.use(

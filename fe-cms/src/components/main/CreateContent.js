@@ -1,5 +1,6 @@
 import React, { useState, useContext, useRef } from 'react';
 import { GlobalErrorContext } from '../../App';
+import { contentEndpoint } from '../../config';
 
 function CreateContent() {
   const errorContext = useContext(GlobalErrorContext);
@@ -48,7 +49,7 @@ function CreateContent() {
     form.append('file', obj.imageDescription);
     form.append('file', obj.imageFiles[0]);
 
-    fetch('/create-content', {
+    fetch(contentEndpoint.CREATE_CONTENT, {
       method: 'POST',
       body: form,
       credentials: 'include'
