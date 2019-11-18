@@ -7,7 +7,8 @@ TODO
 
 - 401 vs 403 re-evaluate
 - store url of generated QR code to the database (important)
-- need to delete old images
+- secure login information when sending mail
+
 
 TODO (nice to have)
 ----
@@ -21,3 +22,4 @@ DONE
 - put all url's in config file (REACT.js)
 - clear inputs after submit
 - after change password submit, logout the user
+- need to delete old images
