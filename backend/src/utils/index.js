@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const jwtKey = require('../config').jwtKey;
 const nodemailer = require('nodemailer');
+const fs = require('fs');
 
 const tokenValid = (req, res, next) => {
   // We can obtain the session token from the requests cookies, which come with every request
@@ -50,7 +51,7 @@ const sendMail = (serviceName, recipientMail, subjectName, contentText) => {
     service: serviceName,
     auth: {
       user: 'eugen.sunic@comsysto.com',
-      pass: 'askeugenforthepassword'
+      pass: '123armstrong123'
     }
   });
 
@@ -64,7 +65,23 @@ const sendMail = (serviceName, recipientMail, subjectName, contentText) => {
   });
 };
 
+function deleteImageFile(imagePath) {
+  return new Promise((res, rej) => {
+    fs.unlink(imagePath, err => {
+      if (err) {
+        console.log(
+          err,
+          'Error ocurred while trying to delete user profile image'
+        );
+      }
+      res();
+      console.log(imagePath, 'was deleted successfully ');
+    });
+  });
+}
+
 module.exports = {
   tokenValid: tokenValid,
-  sendMail: sendMail
+  sendMail: sendMail,
+  deleteImageFile: deleteImageFile
 };

@@ -104,11 +104,16 @@ module.exports.init = app => {
   app
     .route('/overview-content/delete')
     .post(utils.tokenValid, (req, res, next) => {
-      ImageMuseum.findByIdAndRemove(req.body.itemId, function(err) {
+      ImageMuseum.findByIdAndRemove(req.body.itemId, function(
+        err,
+        deleteResponse
+      ) {
         if (err) {
           res.status(500).end();
         }
-        res.json({ delete_successful: true });
+        utils
+          .deleteImageFile(deleteResponse.image.path)
+          .then(_ => res.json({ delete_successful: true }));
       });
     });
 };
