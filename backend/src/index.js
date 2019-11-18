@@ -1,12 +1,12 @@
 const express = require('express');
 const passport = require('passport');
 const app = express();
+const userAccess = require('./user-access');
 const qrGenerator = require('./qr-generator');
+const clientVisitPage = require('./visit-page/index');
 const middleware = require('./middleware');
 
 const mongo = require('./mongo/utils');
-
-const userAccess = require('./user-access');
 
 const dbName = 'zagreb_museum';
 const connectionString =
@@ -23,6 +23,7 @@ mongo
 
       middleware.init(app, passport);
       userAccess.init(app, passport);
+      clientVisitPage.init(app);
 
       qrGenerator.init(app);
     });
