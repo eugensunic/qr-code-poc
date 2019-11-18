@@ -19,6 +19,7 @@ module.exports.init = app => {
         imageName: x.imageName,
         imageDescription: x.imageDescription,
         qrCode: x.qrCode,
+        qrCodeUniqueId: x.qrCodeUniqueId,
         path: getImagePath(x.image.path, 'museum-images')
       }));
       res.json(data);

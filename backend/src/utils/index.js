@@ -74,9 +74,9 @@ function deleteImageFile(imagePath) {
           err,
           'Error ocurred while trying to delete user profile image'
         );
+        rej();
       }
       res();
-      console.log(imagePath, 'was deleted successfully ');
     });
   });
 }

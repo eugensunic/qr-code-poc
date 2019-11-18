@@ -17,6 +17,7 @@ const imageSchema = new mongoose.Schema({
   imageName: String,
   imageDescription: String,
   qrCode: String,
+  qrCodeUniqueId: String,
   image: ImageModel
 });
 

@@ -6,8 +6,7 @@ TODO
 - implement extension of JWT token
 
 - 401 vs 403 re-evaluate
-- store url of generated QR code to the database (important)
-- secure login information when sending mail
+- create endpoint for clients after scanning the qr code
 
 
 TODO (nice to have)
@@ -23,3 +22,5 @@ DONE
 - clear inputs after submit
 - after change password submit, logout the user
 - need to delete old images
+- secure login information when sending mail
+- store url of generated QR code to the database (important)

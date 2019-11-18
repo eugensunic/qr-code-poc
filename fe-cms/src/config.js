@@ -2,7 +2,8 @@ module.exports.contentEndpoint = {
   CREATE_CONTENT: '/create-content',
   OVERVIEW_CONTENT: '/overview-content',
   OVERVIEW_CONTENT_EDIT: '/overview-content/edit',
-  OVERVIEW_CONTENT_DELETE: '/overview-content/delete'
+  OVERVIEW_CONTENT_DELETE: '/overview-content/delete',
+  VISIT_UNIQUE_CONTENT_DOMAIN: 'http://domain.com/'
 };
 
 module.exports.userAccessEndpoint = {
