@@ -50,7 +50,7 @@ const sendMail = (serviceName, recipientMail, subjectName, contentText) => {
     service: serviceName,
     auth: {
       user: 'eugen.sunic@comsysto.com',
-      pass: 'mili7788'
+      pass: 'askeugenforthepassword'
     }
   });
 
