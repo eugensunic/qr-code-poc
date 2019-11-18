@@ -49,6 +49,10 @@ textarea:focus {
   outline-width: 0;
 }
 
+.cursor-pointer {
+  cursor: pointer;
+}
+
 .overview-item {
   border: 1px solid grey;
   padding: 7px 10px;

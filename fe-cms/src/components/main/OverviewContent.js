@@ -329,7 +329,7 @@ function OverviewContent() {
                   <img
                     width="170"
                     src={obj.qrCode}
-                    className="page-link"
+                    className="page-link cursor-pointer"
                     onClick={() => invokeQrCodeModal(obj.qrCode, obj.imageName)}
                   />
                 </div>

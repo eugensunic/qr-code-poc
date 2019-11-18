@@ -50,7 +50,7 @@ module.exports.init = app => {
                 if (!user) {
                   res.status(401).json({ success: false });
                 }
-
+                res.clearCookie('token');
                 res.json({
                   success: true
                 });

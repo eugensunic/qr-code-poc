@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+
 // create table for registered users
 const userSchema = new mongoose.Schema({
   firstName: String,

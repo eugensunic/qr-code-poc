@@ -105,7 +105,10 @@ function ForgotPassword() {
 
   return (
     <div className="container">
-      <div className="card card-signin my-5 center">
+      <div
+        className="card card-signin my-5 center"
+        style={{ opacity: obj.submitRequest ? 0.4 : 1 }}
+      >
         <div className="card-body">
           <h5 className="card-title text-center">Forgot Password</h5>
           {obj.forgotPasswordSuccess && (
@@ -135,6 +138,7 @@ function ForgotPassword() {
             {obj.emailError && (
               <div className="error-container">{obj.emailError}</div>
             )}
+            {obj.submitRequest && <div className="loader"></div>}
             <button
               type="submit"
               className="btn btn-lg btn-primary btn-block text-uppercase"

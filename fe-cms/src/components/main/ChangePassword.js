@@ -38,6 +38,7 @@ function ChangePassword() {
   useEffect(() => {
     if (!obj.changePasswordSuccess) return;
     resetState();
+    window.location.href = '/login';
   }, [obj.changePasswordSuccess]);
 
   // BE validation hook
@@ -136,7 +137,10 @@ function ChangePassword() {
 
   return (
     <div className="container">
-      <div className="card card-signin my-5 center">
+      <div
+        className="card card-signin my-5 center"
+        style={{ opacity: obj.changePasswordSuccess ? 0.4 : 1 }}
+      >
         <div className="card-body">
           <h5 className="card-title text-center">Change password</h5>
           {obj.changePasswordSuccess && (

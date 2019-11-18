@@ -4,9 +4,11 @@ const mongoose = require('mongoose');
 
 const mongoFunctions = {
   mongoConnect: (urlString, dbName) => {
+    mongoFunctions.configureMongoDeprecation();
     return mongoose.connect(urlString + dbName, {
       useNewUrlParser: true,
-      poolSize: 15
+      poolSize: 15,
+      useUnifiedTopology: true
     });
   },
 
@@ -14,6 +16,10 @@ const mongoFunctions = {
     mongoose.disconnect();
     process.exit(0);
     console.log('Ive disconnected mongo');
+  },
+
+  configureMongoDeprecation: () => {
+    mongoose.set('useFindAndModify', false);
   }
 };
 
