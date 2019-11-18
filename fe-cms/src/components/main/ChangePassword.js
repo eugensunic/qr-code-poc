@@ -13,12 +13,12 @@ import {
 function ChangePassword() {
   const errorContext = useContext(GlobalErrorContext);
   const [obj, setCredential] = useState({
-    currentPassword: null,
+    currentPassword: '',
     userId: null,
-    currentPasswordError: null,
-    newPassword: null,
-    repeatPassword: null,
-    changePasswordError: null,
+    currentPasswordError: '',
+    newPassword: '',
+    repeatPassword: '',
+    changePasswordError: '',
     submitRequest: false,
     changePasswordSuccess: false
   });
@@ -26,11 +26,11 @@ function ChangePassword() {
   const resetState = () => {
     setCredential({
       ...obj,
-      currentPassword: null,
-      currentPasswordError: null,
-      newPassword: null,
-      repeatPassword: null,
-      changePasswordError: null,
+      currentPassword: '',
+      currentPasswordError: '',
+      newPassword: '',
+      repeatPassword: '',
+      changePasswordError: '',
       submitRequest: false
     });
   };

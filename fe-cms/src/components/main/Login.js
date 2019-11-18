@@ -13,10 +13,10 @@ import {
 function Login(history) {
   const errorContext = useContext(GlobalErrorContext);
   const [obj, setCredential] = useState({
-    email: null,
-    password: null,
-    passwordError: null,
-    emailError: null,
+    email: '',
+    password: '',
+    passwordError: '',
+    emailError: '',
     submitRequest: false,
     loginSuccess: false
   });

@@ -8,8 +8,8 @@ import { userAccessEndpoint } from '../../config';
 function ForgotPassword() {
   const errorContext = useContext(GlobalErrorContext);
   const [obj, setCredential] = useState({
-    email: null,
-    emailError: null,
+    email: '',
+    emailError: '',
     submitRequest: false,
     forgotPasswordSuccess: false
   });
@@ -17,8 +17,8 @@ function ForgotPassword() {
   const resetState = () => {
     setCredential({
       ...obj,
-      email: null,
-      emailError: null,
+      email: '',
+      emailError: '',
       submitRequest: false
     });
   };
@@ -116,6 +116,7 @@ function ForgotPassword() {
               <input
                 id="forgot-section-email"
                 type="email"
+                value={obj.email}
                 className="form-control"
                 placeholder="mail"
                 required

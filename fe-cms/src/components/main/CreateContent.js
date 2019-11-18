@@ -75,7 +75,6 @@ function CreateContent() {
 
   return (
     <div className="container main-wrapper">
-      {console.log(obj.imageFiles)}
       <div className="row">
         <h2></h2>
       </div>

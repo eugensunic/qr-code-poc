@@ -14,15 +14,15 @@ import {
 function Register() {
   const errorContext = useContext(GlobalErrorContext);
   const [obj, setCredential] = useState({
-    firstName: null,
-    lastName: null,
-    email: null,
-    password: null,
-    repeatPassword: null,
-    firstNameError: null,
-    lastNameError: null,
-    passwordError: null,
-    emailError: null,
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    repeatPassword: '',
+    firstNameError: '',
+    lastNameError: '',
+    passwordError: '',
+    emailError: '',
     submitRequest: false,
     registrationSuccess: false
   });
@@ -45,6 +45,7 @@ function Register() {
   useEffect(() => {
     if (!obj.registrationSuccess) return;
     resetState();
+    window.location.href = '/login';
   }, [obj.registrationSuccess]);
 
   // BE validation hook

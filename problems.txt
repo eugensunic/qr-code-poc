@@ -4,15 +4,17 @@ TODO
 - re-evaluate JWT token (test combinations with it)
 - implement error handler in middleware to pass next in node.js if error occurs instead of res.status(500).end()
 - implement extension of JWT token
-- put all url's in config file (REACT.js)
+
 - 401 vs 403 re-evaluate
+- put all url's in config file (REACT.js)
 - after change password submit, logout the user
 - store url of generated QR code to the database (important)
 - clear inputs after submit
+- need to delete old images
 
 TODO (nice to have)
 ----
-- typescript FE+BE
+- typescript FE + BE
 - refactoring folder structure
 - rename variables
 - see if import works instead of require

@@ -46,7 +46,6 @@ module.exports.init = app => {
           };
 
           let objUpdate = null;
-
           if (isObjectEmpty(req.file)) {
             objUpdate = {
               imageName: imageName,
@@ -121,5 +120,5 @@ function getImagePath(pathToFile, folderName) {
 }
 
 function isObjectEmpty(obj) {
-  !obj || (Object.keys(obj).length === 0 && obj.constructor === Object);
+  return !obj || (Object.keys(obj).length === 0 && obj.constructor === Object);
 }
