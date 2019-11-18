@@ -31,8 +31,7 @@ function ChangePassword() {
       newPassword: null,
       repeatPassword: null,
       changePasswordError: null,
-      submitRequest: false,
-      changePasswordSuccess: false
+      submitRequest: false
     });
   };
 
@@ -67,6 +66,9 @@ function ChangePassword() {
           ? setCredential({
               ...obj,
               changePasswordError: '',
+              currentPassword: '',
+              newPassword: '',
+              repeatPassword: '',
               submitRequest: false,
               changePasswordSuccess: true
             })
@@ -145,12 +147,14 @@ function ChangePassword() {
               <input
                 type="password"
                 placeholder="Password"
+                value={obj.currentPassword}
                 className="form-control"
                 onChange={e =>
                   setCredential({
                     ...obj,
                     currentPassword: e.target.value,
-                    currentPasswordError: null
+                    currentPasswordError: null,
+                    changePasswordSuccess: false
                   })
                 }
                 required
@@ -165,12 +169,14 @@ function ChangePassword() {
                 <input
                   type="password"
                   placeholder="Password"
+                  value={obj.newPassword}
                   className="form-control"
                   onChange={e =>
                     setCredential({
                       ...obj,
                       newPassword: e.target.value,
-                      passwordError: null
+                      passwordError: null,
+                      changePasswordSuccess: false
                     })
                   }
                   required
@@ -181,12 +187,14 @@ function ChangePassword() {
                 <input
                   type="password"
                   placeholder="Password"
+                  value={obj.repeatPassword}
                   className="form-control"
                   onChange={e =>
                     setCredential({
                       ...obj,
                       repeatPassword: e.target.value,
-                      changePasswordError: null
+                      changePasswordError: null,
+                      changePasswordSuccess: false
                     })
                   }
                   required
