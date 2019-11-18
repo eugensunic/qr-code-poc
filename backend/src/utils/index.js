@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken');
 const jwtKey = require('../config').jwtKey;
 const nodemailer = require('nodemailer');
 const fs = require('fs');
+const credentials = require('dotenv').config().parsed;
 
 const tokenValid = (req, res, next) => {
   // We can obtain the session token from the requests cookies, which come with every request
@@ -50,8 +51,8 @@ const sendMail = (serviceName, recipientMail, subjectName, contentText) => {
   let transport = nodemailer.createTransport({
     service: serviceName,
     auth: {
-      user: 'eugen.sunic@comsysto.com',
-      pass: '123armstrong123'
+      user: credentials.EMAIL,
+      pass: credentials.PASSWORD
     }
   });
 
