@@ -325,7 +325,7 @@ function OverviewContent() {
                   <h5 className="text-wrapper">{obj.imageName}</h5>
                   <img width="170" src={obj.path} />
                   <p className="text-wrapper">{obj.imageDescription}</p>
-                  <a href={'/sub/' + obj.qrCodeUniqueId} target="_blank">
+                  <a href={'/view-image/' + obj.qrCodeUniqueId} target="_blank">
                     Visit page
                   </a>
                 </div>

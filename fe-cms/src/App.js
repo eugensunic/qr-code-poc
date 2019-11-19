@@ -40,7 +40,7 @@ function App() {
         <Navbar />
         <ErrorContainer message={error.message} />
         <Switch>
-          <Route path="/sub/:qrCodeId" component={VisitorPage} />
+          <Route path="/view-image/:qrCodeId" component={VisitorPage} />
           <PrivateRoute path="/changepassword" component={ChangePassword} />
           <Route path="/forgotpassword" component={ForgotPassword} />
           <Route exact path="/" component={Login} />

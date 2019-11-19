@@ -1,14 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import { contentEndpoint } from '../../config';
+import { contentEndpoint, DOMAIN_NAME } from '../../config';
+import Speech from 'speak-tts';
 
+let speech;
 function VisitorPage(props) {
   const [obj, setState] = useState({
     imageName: '',
     imageDescription: '',
     imageSrc: ''
   });
+
+  const speakText = text => {
+    speech.speak({
+      text: text
+    });
+  };
+
   // BE validation hook
   useEffect(() => {
+    speech = new Speech();
+    console.log(speech);
     fetch(contentEndpoint.VISITOR_PAGE, {
       method: 'POST',
       headers: {
@@ -36,11 +47,21 @@ function VisitorPage(props) {
   }, []);
   return (
     <div className="container">
-      <h4 className="text-center">Visitor page</h4>
+      <h4 className="text-center">Visitor page (preview mode)</h4>
       <div id="client-content">
-        <p>Image name:{obj.imageName}</p>
-        <p>Image description:{obj.imageDescription}</p>
-        <img src={obj.imageSrc}></img>
+        <p>
+          <span className="font-weight-bold">Image name: </span>
+          {obj.imageName}
+        </p>
+        <p>
+          <span className="font-weight-bold">Image description: </span>
+          {obj.imageDescription}
+        </p>
+      </div>
+      <div className="row">
+        <div className="col text-center">
+          <img src={DOMAIN_NAME + obj.imageSrc} className="img-fluid" />
+        </div>
       </div>
     </div>
   );

@@ -13,3 +13,5 @@ module.exports.userAccessEndpoint = {
   CHANGE_PASSWORD: '/change-password',
   FORGOT_PASSWORD: '/forgot-password'
 };
+
+module.exports.DOMAIN_NAME = 'http://localhost:3000/';
