@@ -21,11 +21,11 @@ mongo
     app.listen(5000, () => {
       console.log('app running on port 5000');
 
-      middleware.init(app, passport);
+      middleware.initPreMiddleware(app, passport);
       userAccess.init(app, passport);
       clientVisitPage.init(app);
-
       qrGenerator.init(app);
+      middleware.initErrorRoutingMiddleware(app);
     });
   })
   .catch(err => {

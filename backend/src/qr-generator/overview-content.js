@@ -9,7 +9,7 @@ module.exports.init = app => {
   app.route('/overview-content').get(utils.tokenValid, (req, res, next) => {
     ImageMuseum.find({}, function(err, data) {
       if (err) {
-        res.status(500).end();
+        next(err);
       }
       if (!data.length) {
         return res.json({});
@@ -110,7 +110,7 @@ module.exports.init = app => {
         deleteResponse
       ) {
         if (err) {
-          res.status(500).end();
+          return next(err);
         }
         utils
           .deleteImageFile(deleteResponse.image.path)

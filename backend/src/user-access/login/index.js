@@ -7,8 +7,7 @@ module.exports = {
     app.post('/auth', function(req, res, next) {
       passport.authenticate('local', function(err, user, info) {
         if (err) {
-          // server error
-          return res.status(500).end();
+          return next(err);
         }
         if (info && info.error) {
           // wrong credentials

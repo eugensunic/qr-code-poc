@@ -16,8 +16,7 @@ module.exports.init = app => {
 
       QRCode.toDataURL('http://domain.com/' + uniqueId, (err, qrCodeStream) => {
         if (err) {
-          res.status(500).end();
-          return;
+          return next(err);
         }
         const imageMuseum = new ImageMuseum({
           imageName: imageName,

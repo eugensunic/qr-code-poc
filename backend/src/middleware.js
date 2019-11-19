@@ -4,7 +4,7 @@ const localMiddleware = require('./user-access/login/middleware');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 
-module.exports.init = (app, passport) => {
+module.exports.initPreMiddleware = (app, passport) => {
   // cookie parser
   app.use(cookieParser());
 
@@ -31,12 +31,13 @@ module.exports.init = (app, passport) => {
   });
 
   localMiddleware.localStrategyMiddleware(passport);
+};
 
-  // app.use(function(err, req, res, next) {
-  //   console.log('WENT TO MIDDLEWARE AFTER DONE!!!')
-  //   if (err) {
-  //     res.status(403).json({ error: 'wrong credentials' });
-  //     return;
-  //   }
-  // });
+module.exports.initErrorRoutingMiddleware = (app, passport) => {
+  app.use(function(err, req, res, next) {
+    console.log('WENT TO MIDDLEWARE AFTER DONE!!!');
+    if (err) {
+      res.status(500).end();
+    }
+  });
 };

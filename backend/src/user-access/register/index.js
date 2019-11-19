@@ -5,8 +5,7 @@ module.exports.init = app => {
   app.route('/user-registration').post((req, res) => {
     User.findOne({ email: req.body.email }, (err, mongoResponse) => {
       if (err) {
-        return res.status(500).end();
-        // return next(err);
+        return next(err);
       }
       console.log(mongoResponse);
       if (!!mongoResponse) {
@@ -30,8 +29,7 @@ module.exports.init = app => {
 function saveUserToDatabase(firstName, lastName, email, password, time, res) {
   bcrypt.hash(password, 10, (err, hash) => {
     if (err) {
-      res.status(500).end();
-      // return next(err);
+      return next(err);
     }
     const user = new User({
       firstName: firstName,
@@ -48,6 +46,6 @@ function saveUserToDatabase(firstName, lastName, email, password, time, res) {
         });
         console.log('saved to database');
       })
-      .catch(() => res.status(500).end());
+      .catch(() => next(err));
   });
 }

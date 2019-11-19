@@ -16,8 +16,7 @@ module.exports.init = app => {
 
     bcrypt.hash(password, 10, (err, hash) => {
       if (err) {
-        res.status(500).end();
-        // return next(err);
+        return next(err);
       }
       const findQuery = {
         email: RECIPIENT
@@ -48,15 +47,11 @@ module.exports.init = app => {
           utils
             .sendMail(SERVICE_NAME, RECIPIENT, SUBJECT, MESSAGE_CONTENT)
             .then(_ => {
-              res.clearCookie('token');
-              res.json({
+              res.clearCookie('token').json({
                 success: true
               });
             })
-            .catch(err => {
-              res.status(500).end();
-              console.log('Error ocurred: ', err);
-            });
+            .catch(err => next(err));
         }
       );
     });
