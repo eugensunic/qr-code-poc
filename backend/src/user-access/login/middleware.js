@@ -11,7 +11,7 @@ module.exports = {
 
     passport.use(
       new LocalStrategy(localOptions, (username, password, done) => {
-        console.log('inside')
+        console.log('inside, local strategy');
         User.findOne({ email: username }, function(err1, user) {
           if (err1) {
             return done(err1);

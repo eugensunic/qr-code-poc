@@ -11,7 +11,7 @@ import {
   passwordsMatch
 } from '../../services/login.service';
 
-function Register() {
+function Register(route) {
   const errorContext = useContext(GlobalErrorContext);
   const [obj, setCredential] = useState({
     firstName: '',
@@ -45,7 +45,7 @@ function Register() {
   useEffect(() => {
     if (!obj.registrationSuccess) return;
     resetState();
-    window.location.href = '/login';
+    route.history.push('/login');
   }, [obj.registrationSuccess]);
 
   // BE validation hook

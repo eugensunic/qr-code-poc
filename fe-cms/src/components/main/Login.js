@@ -10,7 +10,7 @@ import {
   isPasswordLessThan5
 } from '../../services/login.service';
 
-function Login(history) {
+function Login(route) {
   const errorContext = useContext(GlobalErrorContext);
   const [obj, setCredential] = useState({
     email: '',
@@ -24,13 +24,13 @@ function Login(history) {
   // if logged in don't show the login page
   useEffect(() => {
     if (!isLoggedIn()) return;
-    window.location.href = '/overview';
+    route.history.push('/overview');
   }, [isLoggedIn()]);
 
   // successful login hook
   useEffect(() => {
     if (!obj.loginSuccess) return;
-    window.location.href = '/create';
+    route.history.push('/create');
   }, [obj.loginSuccess]);
 
   // BE validation hook

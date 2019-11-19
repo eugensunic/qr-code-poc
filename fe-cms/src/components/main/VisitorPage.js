@@ -48,6 +48,9 @@ function VisitorPage(props) {
   return (
     <div className="container">
       <h4 className="text-center">Visitor page (preview mode)</h4>
+      <button onClick={() => speakText(obj.imageDescription)}>
+        Read in english
+      </button>
       <div id="client-content">
         <p>
           <span className="font-weight-bold">Image name: </span>

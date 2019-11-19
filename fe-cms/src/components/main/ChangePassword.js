@@ -10,7 +10,7 @@ import {
   passwordsMatch
 } from '../../services/login.service';
 
-function ChangePassword() {
+function ChangePassword(route) {
   const errorContext = useContext(GlobalErrorContext);
   const [obj, setCredential] = useState({
     currentPassword: '',
@@ -38,7 +38,7 @@ function ChangePassword() {
   useEffect(() => {
     if (!obj.changePasswordSuccess) return;
     resetState();
-    window.location.href = '/login';
+    route.history.push('/login');
   }, [obj.changePasswordSuccess]);
 
   // BE validation hook

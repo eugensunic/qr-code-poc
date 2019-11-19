@@ -2,11 +2,9 @@ import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { isLoggedIn } from '../../helpers';
 
-function Navbar(history) {
+function Navbar(route) {
   const logout = () => {
-    fetch('/logout', { method: 'POST' }).then(
-      _ => (window.location.href = '/')
-    );
+    fetch('/logout', { method: 'POST' }).then(_ => route.history.push('/'));
   };
 
   return (
