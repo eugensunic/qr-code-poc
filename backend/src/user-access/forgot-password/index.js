@@ -47,11 +47,12 @@ module.exports.init = app => {
 
           utils
             .sendMail(SERVICE_NAME, RECIPIENT, SUBJECT, MESSAGE_CONTENT)
-            .then(_ =>
+            .then(_ => {
+              res.clearCookie('token');
               res.json({
                 success: true
-              })
-            )
+              });
+            })
             .catch(err => {
               res.status(500).end();
               console.log('Error ocurred: ', err);
