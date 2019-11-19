@@ -29,7 +29,6 @@ module.exports.init = app => {
   app
     .route('/overview-content/edit')
     .post(utils.tokenValid, upload.single('file'), (req, res, next) => {
-      console.log('in EDIT:', req.file, req.body);
 
       const imageId = req.body.file[0];
       const imageName = req.body.file[1];

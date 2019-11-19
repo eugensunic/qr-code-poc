@@ -22,9 +22,11 @@ mongo
       console.log('app running on port 5000');
 
       middleware.initPreMiddleware(app, passport);
+      
       userAccess.init(app, passport);
       clientVisitPage.init(app);
       qrGenerator.init(app);
+
       middleware.initErrorRoutingMiddleware(app);
     });
   })

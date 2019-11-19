@@ -7,7 +7,6 @@ module.exports.init = app => {
       if (err) {
         return next(err);
       }
-      console.log(mongoResponse);
       if (!!mongoResponse) {
         res.json({
           isAlreadyRegistered: true

@@ -16,7 +16,6 @@ module.exports.init = app => {
             return next(err);
           }
           if (!match) {
-            console.log('WENT NO MATCH');
             return res.status(401).json({ success: false });
           }
           // if currentPassword from FE matches the password from the database
