@@ -5,7 +5,8 @@ const {
   CREATE_CONTENT,
   OVERVIEW_CONTENT,
   OVERVIEW_CONTENT_EDIT,
-  OVERVIEW_CONTENT_DELETE
+  OVERVIEW_CONTENT_DELETE,
+  VISITOR_PAGE
 } = contentEndpoint;
 
 const {
@@ -18,6 +19,7 @@ const {
 
 module.exports = function(app) {
   const proxyRoutes = [
+    VISITOR_PAGE,
     CREATE_CONTENT,
     OVERVIEW_CONTENT,
     OVERVIEW_CONTENT_EDIT,

@@ -13,8 +13,10 @@ module.exports.init = app => {
       const imageName = req.body.file[0];
       const imageDescription = req.body.file[1];
       const uniqueId = uuidv4();
+
       QRCode.toDataURL('http://domain.com/' + uniqueId, (err, qrCodeStream) => {
         if (err) {
+          res.status(500).end();
           return;
         }
         const imageMuseum = new ImageMuseum({

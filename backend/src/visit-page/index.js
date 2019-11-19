@@ -1,29 +1,25 @@
 const ImageMuseum = require('../mongo/model/image-data');
-var fs = require('fs');
+const utils = require('../utils');
 
 module.exports.init = app => {
-  app.get('/subdomain/:id', function(req, res) {
-    console.log('PARAMS ARE', req.params);
-    ImageMuseum.find(
+  app.route('/visitor').post(function(req, res) {
+    ImageMuseum.findOne(
       {
-        qrCodeUniqueId: req.params.id
+        qrCodeUniqueId: req.body.qrCodeId
       },
-      (err, image, next) => {
+      (err, obj, next) => {
         if (err) {
           return next(err);
         }
-        console.log(image);
-        console.log(__dirname);
 
-        const html = fs.readFileSync(__dirname + '/html-files/home.html');
-        res.writeHead(200, { 'Content-Type': 'text/html' });
-        res.end(html);
+        userObject = {
+          imageName: obj.imageName,
+          imageDescription: obj.imageDescription,
+          imageSrc: utils.getImagePath(obj.image.path, 'museum-images')
+        };
 
-        return;
+        res.json(userObject);
       }
     );
-    // contact database and retrieve image data
-    // for the client imageName, imageDescription, imageSrc
-    // serve static html;
   });
 };

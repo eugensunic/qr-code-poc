@@ -3,7 +3,7 @@ module.exports.contentEndpoint = {
   OVERVIEW_CONTENT: '/overview-content',
   OVERVIEW_CONTENT_EDIT: '/overview-content/edit',
   OVERVIEW_CONTENT_DELETE: '/overview-content/delete',
-  VISIT_UNIQUE_CONTENT_DOMAIN: 'http://localhost:5000/subdomain/'
+  VISITOR_PAGE: '/visitor'
 };
 
 module.exports.userAccessEndpoint = {

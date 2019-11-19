@@ -1,9 +1,9 @@
-const utils = require('../utils');
 const QRCode = require('qrcode');
 const multer = require('multer');
 const upload = multer({ dest: 'uploads/museum-images' });
 const ImageMuseum = require('../mongo/model/image-data');
 const ObjectId = require('mongodb').ObjectID;
+const utils = require('../utils');
 
 module.exports.init = app => {
   app.route('/overview-content').get(utils.tokenValid, (req, res, next) => {
@@ -20,7 +20,7 @@ module.exports.init = app => {
         imageDescription: x.imageDescription,
         qrCode: x.qrCode,
         qrCodeUniqueId: x.qrCodeUniqueId,
-        path: getImagePath(x.image.path, 'museum-images')
+        path: utils.getImagePath(x.image.path, 'museum-images')
       }));
       res.json(data);
     });
@@ -47,7 +47,7 @@ module.exports.init = app => {
           };
 
           let objUpdate = null;
-          if (isObjectEmpty(req.file)) {
+          if (utils.isObjectEmpty(req.file)) {
             objUpdate = {
               imageName: imageName,
               imageDescription: imageDescription,
@@ -92,7 +92,7 @@ module.exports.init = app => {
                 imageName: doc.imageName,
                 imageDescription: doc.imageDescription,
                 qrCode: doc.qrCode,
-                path: getImagePath(doc.image.path, 'museum-images')
+                path: utils.getImagePath(doc.image.path, 'museum-images')
               };
 
               res.json(updatedObject);
@@ -118,13 +118,3 @@ module.exports.init = app => {
       });
     });
 };
-
-function getImagePath(pathToFile, folderName) {
-  return pathToFile
-    ? pathToFile.substring(pathToFile.indexOf(folderName))
-    : 'default-image.png';
-}
-
-function isObjectEmpty(obj) {
-  return !obj || (Object.keys(obj).length === 0 && obj.constructor === Object);
-}

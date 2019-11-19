@@ -81,7 +81,19 @@ function deleteImageFile(imagePath) {
   });
 }
 
+function getImagePath(pathToFile, folderName) {
+  return pathToFile
+    ? pathToFile.substring(pathToFile.indexOf(folderName))
+    : 'default-image.png';
+}
+
+function isObjectEmpty(obj) {
+  return !obj || (Object.keys(obj).length === 0 && obj.constructor === Object);
+}
+
 module.exports = {
+  isObjectEmpty: isObjectEmpty,
+  getImagePath: getImagePath,
   tokenValid: tokenValid,
   sendMail: sendMail,
   deleteImageFile: deleteImageFile
