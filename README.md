@@ -35,10 +35,10 @@ In order to generate bundle files for the frontend (React compilation to native 
 Webpack will output the following chunks:
 
  
- build/static/js/2.30e0c262.chunk.js
- build/static/js/main.908befd7.chunk.js
- build/static/css/main.3f13f869.chunk.css
- build/static/js/runtime-main.dde129a3.js
+ 1. build/static/js/2.30e0c262.chunk.js
+ 2. build/static/js/main.908befd7.chunk.js
+ 3. build/static/css/main.3f13f869.chunk.css
+ 4. build/static/js/runtime-main.dde129a3.js
 
 
  All of them need to be added to index.html file in order for the app tu run successfully
