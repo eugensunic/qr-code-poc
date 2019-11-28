@@ -7,6 +7,7 @@ function OverviewContent() {
   const errorContext = useContext(GlobalErrorContext);
   const [content, setState] = useState({
     overviewArr: [],
+    overviewArrCopy: [],
     modeType: null,
     showSubmitButton: true,
     qrCodePath: null,
@@ -29,6 +30,8 @@ function OverviewContent() {
       borderColor: null
     }
   });
+
+  const [searchValue, search] = useState('');
 
   const adjustForLayout = data => {
     let index = -1;
@@ -279,6 +282,21 @@ function OverviewContent() {
   };
 
   useEffect(() => {
+    console.log('here');
+    setState({
+      ...content,
+      overviewArr: adjustForLayout(
+        content.overviewArrCopy
+          .reduce((acc, arr) => [...acc, ...arr], [])
+          .filter(
+            x =>
+              x.imageName.toLowerCase().indexOf(searchValue.toLowerCase()) > -1
+          )
+      )
+    });
+  }, [searchValue]);
+
+  useEffect(() => {
     fetch(contentEndpoint.OVERVIEW_CONTENT)
       .then(res => {
         if (res.ok) {
@@ -286,15 +304,36 @@ function OverviewContent() {
         }
         throw new Error('error');
       })
-      .then(res => setState({ ...content, overviewArr: adjustForLayout(res) }))
+      .then(res =>
+        setState({
+          ...content,
+          overviewArr: adjustForLayout(res),
+          overviewArrCopy: adjustForLayout(res)
+        })
+      )
       .catch(err => console.log(err));
   }, []);
 
-  if (!content.overviewArr.length) {
-    return <div className="empty-content">No content added yet!</div>;
-  }
+  // if (!content.overviewArr.length) {
+  //   return <div className="empty-content">No content added yet!</div>;
+  // }
   return (
     <div className="container">
+      <div class="form-group row" style={{ marginTop: 15 }}>
+        <label for="searchImageName" class="col-form-label">
+          Image name:
+        </label>
+        <div class="col-sm-10">
+          <input
+            id="searchImageName"
+            type="text"
+            placeholder="search..."
+            class="form-control"
+            value={searchValue}
+            onChange={e => search(e.target.value)}
+          />
+        </div>
+      </div>
       {content.overviewArr.map((arr, i) => (
         <div key={i} className="row">
           {arr.map((obj, j) => (
