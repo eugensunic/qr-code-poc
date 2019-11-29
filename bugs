@@ -1,1 +1,2 @@
-1. Bug: If you update an "article" the link for visiting its page will be /undifined
+1.If you update an "article" the link for visiting its page will be /undifined
+2.Deleting an "article" when it doesnt have an image(url is wrong/ file missing) doesn't delete element from the array
