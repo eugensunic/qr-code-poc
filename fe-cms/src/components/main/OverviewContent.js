@@ -257,6 +257,7 @@ function OverviewContent() {
               if (x.id === res.id) {
                 return {
                   ...res,
+                  qrCodeUniqueId: x.qrCodeUniqueId,
                   image: {
                     ...res.image
                   }
