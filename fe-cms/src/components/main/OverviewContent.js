@@ -283,7 +283,6 @@ function OverviewContent() {
   };
 
   useEffect(() => {
-    console.log('here');
     setState({
       ...content,
       overviewArr: adjustForLayout(
@@ -315,9 +314,9 @@ function OverviewContent() {
       .catch(err => console.log(err));
   }, []);
 
-  // if (!content.overviewArr.length) {
-  //   return <div className="empty-content">No content added yet!</div>;
-  // }
+  if (!content.overviewArrCopy.length) {
+    return <div className="empty-content">No content added</div>;
+  }
   return (
     <div className="container">
       <div class="form-group row" style={{ marginTop: 15 }}>
