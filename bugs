@@ -1,6 +1,7 @@
 BUGS
 ----
 
-1.If you update an "article" the link for visiting its page will be /undefined --> DONE (should be tested)
-2.Deleting an "article" when it doesn't have an image(url is wrong/ file missing) doesn't delete element from the array --> DONE (should be tested)
-3.Add image doesn't prohibit you from adding .psd files --> DONE (wasn't tested see if you can add photo-shopped images still)
+1. If you update an "article" the link for visiting its page will be /undefined --> DONE (should be tested)
+2. Deleting an "article" when it doesn't have an image(url is wrong/ file missing) doesn't delete element from the array --> DONE (should be tested)
+3. Add image doesn't prohibit you from adding .psd files --> DONE (wasn't tested see if you can add photo-shopped images still)
+4. Enter button doesn't work when submitting form
