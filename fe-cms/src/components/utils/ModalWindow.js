@@ -4,7 +4,7 @@ import { Button, Modal } from 'react-bootstrap';
 function ModalWindow(props) {
   const { html, handleClose, handleAction } = props;
   const { modal, actionButton, showSubmitButton } = props.content;
-   
+
   return (
     <Modal show={modal.show} onHide={handleClose}>
       <Modal.Header closeButton>
