@@ -126,6 +126,11 @@ function Login(route) {
 					<h5 className='card-title text-center'>Login</h5>
 					<div className='form-signin'>
 						<div className='form-label-group'>
+							{/* {obj.email && (
+								<label className='formLabel'>
+									Email adress
+								</label>
+							)} */}
 							<input
 								type='email'
 								id='email'

@@ -335,21 +335,16 @@ function OverviewContent() {
 	//   return <div className="empty-content">No content added yet!</div>;
 	// }
 	return (
-		<div>
-			<div class='form-group row' style={{ marginTop: 15 }}>
-				<label for='searchImageName' class='col-form-label'>
-					Image name:
-				</label>
-				<div class='col-sm-10'>
-					<input
-						id='searchImageName'
-						type='text'
-						placeholder='search...'
-						class='form-control'
-						value={searchValue}
-						onChange={(e) => search(e.target.value)}
-					/>
-				</div>
+		<>
+			<div class='searchWrapper'>
+				<input
+					id='searchImageName'
+					type='text'
+					placeholder='search...'
+					className='form-control searchInput'
+					value={searchValue}
+					onChange={(e) => search(e.target.value)}
+				/>
 			</div>
 			{content.overviewArr.map((arr, i) => (
 				<div key={i} className='row'>
@@ -358,7 +353,9 @@ function OverviewContent() {
 							key={j}
 							className='col-sm-12 col-md-6 overview-item'>
 							<h2 className='text-wrapper'>{obj.imageName}</h2>
-							<img width='50%' src={obj.path} />
+							<div className='articleImgWrapper'>
+								<img width='50%' src={obj.path} />
+							</div>
 							<p className='text-wrapper'>
 								{obj.imageDescription}
 							</p>
@@ -367,7 +364,7 @@ function OverviewContent() {
 								target='_blank'>
 								Visit page
 							</a>
-							<div className='buttonContainer bg-dark rounded'>
+							<div className='buttonWrapper rounded'>
 								<button
 									type='button'
 									className='btn btn-danger d-inline'
@@ -411,7 +408,7 @@ function OverviewContent() {
 				handleAction={submitActionButton(content.modeType)}
 				handleClose={closeModal}
 			/>
-		</div>
+		</>
 	);
 }
 
