@@ -122,7 +122,7 @@ function CreateContent() {
           type="file"
           ref={fileInput}
           name="image-file"
-          accept="image/*"
+          accept="image/x-png,image/png,image/gif,image/jpeg,image/jpg"
           className={obj.imageFilesError ? 'error-input-container' : ''}
           onChange={e => {
             setData({

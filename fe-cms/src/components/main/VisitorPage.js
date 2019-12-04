@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { contentEndpoint, DOMAIN_NAME } from '../../config';
-import Speech from 'speak-tts';
+import React, { useEffect, useState } from "react";
+import { contentEndpoint, DOMAIN_NAME } from "../../config";
+import Speech from "speak-tts";
 
 let speech;
 function VisitorPage(props) {
   const [obj, setState] = useState({
-    imageName: '',
-    imageDescription: '',
-    imageSrc: ''
+    imageName: "",
+    imageDescription: "",
+    imageSrc: ""
   });
 
-  const speakText = text => {
+  const speakText = (text) => {
     speech.speak({
       text: text
     });
@@ -21,20 +21,20 @@ function VisitorPage(props) {
     speech = new Speech();
     console.log(speech);
     fetch(contentEndpoint.VISITOR_PAGE, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
+        Accept: "application/json",
+        "Content-Type": "application/json"
       },
       body: JSON.stringify({ qrCodeId: props.match.params.qrCodeId })
     })
-      .then(res => {
+      .then((res) => {
         if (res.ok || res.status === 401) {
           return res.json();
         }
         throw new Error();
       })
-      .then(res => {
+      .then((res) => {
         setState({
           ...obj,
           imageName: res.imageName,
@@ -43,10 +43,10 @@ function VisitorPage(props) {
         });
       })
 
-      .catch(_ => {});
+      .catch((_) => {});
   }, []);
   return (
-    <div className="container">
+    <div>
       <h4 className="text-center">Visitor page (preview mode)</h4>
       <button onClick={() => speakText(obj.imageDescription)}>
         Read in english
