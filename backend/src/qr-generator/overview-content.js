@@ -29,7 +29,6 @@ module.exports.init = app => {
   app
     .route('/overview-content/edit')
     .post(utils.tokenValid, upload.single('file'), (req, res, next) => {
-
       const imageId = req.body.file[0];
       const imageName = req.body.file[1];
       const imageDescription = req.body.file[2];
@@ -104,6 +103,7 @@ module.exports.init = app => {
   app
     .route('/overview-content/delete')
     .post(utils.tokenValid, (req, res, next) => {
+      console.log('Route HAS BEEN HIT');
       ImageMuseum.findByIdAndRemove(req.body.itemId, function(
         err,
         deleteResponse
@@ -111,9 +111,13 @@ module.exports.init = app => {
         if (err) {
           return next(err);
         }
+        if (!deleteResponse) {
+          return res.status(404).end();
+        }
         utils
           .deleteImageFile(deleteResponse.image.path)
-          .then(_ => res.json({ delete_successful: true }));
+          .then(_ => res.json({ delete_successful: true }))
+          .catch(_ => res.json({ delete_successful: true }));
       });
     });
 };
