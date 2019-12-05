@@ -11,23 +11,23 @@ function Navbar(route) {
 
   return (
     <nav className="hero-nav">
-      <ul className="navbar-nav">
-        <li className="">
+      <ul className="hero-nav-ul">
+        <li>
           <Link to={'/overview'}> Overview</Link>
         </li>
-        <li className="">
+        <li>
           <Link to={'/create'}> Create content</Link>
         </li>
-        <li className="">
+        <li className="dropdownList">
           <Link to={'/changepassword'}>Admin</Link>
         </li>
-        <li className="">
+        <li>
           <Link to={'/about'}> About</Link>
         </li>
         <li>
-          <Link className="logoutButton" onClick={logout}>
+          <button className="logoutButton" onClick={logout}>
             Logout
-          </Link>
+          </button>
         </li>
       </ul>
     </nav>
