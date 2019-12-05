@@ -16,6 +16,12 @@ body::after {
 	height: 100px;
 }
 
+header {
+	background-color: rgb(50, 35, 45);
+	height: 65px;
+	width: 100%;
+}
+
 textarea {
 	margin-top: 10px;
 	margin-bottom: 10px;
@@ -44,13 +50,7 @@ textarea:focus {
 	background: none repeat scroll 0 0 whitesmoke;
 	outline-width: 0;
 }
-header {
-	min-height: 50px;
-	width: 100%;
-}
-footer {
-	width: 100%;
-}
+
 article {
 	border: 2px solid gray;
 }
@@ -79,7 +79,9 @@ footer {
 	position: fixed;
 	bottom: 0;
 	min-height: 50px;
+	width: 100%;
 }
+
 /* .visitorArticle button {
 	border: 1px solid black;
 	margin: 15px auto;
@@ -355,27 +357,11 @@ footer {
 	height: 11em;
 	border-radius: 50%;
 	background: #3444ff;
-	background: -moz-linear-gradient(
-		left,
-		#3444ff 10%,
-		rgba(52, 68, 255, 0) 42%
-	);
-	background: -webkit-linear-gradient(
-		left,
-		#3444ff 10%,
-		rgba(52, 68, 255, 0) 42%
-	);
+	background: -moz-linear-gradient(left, #3444ff 10%, rgba(52, 68, 255, 0) 42%);
+	background: -webkit-linear-gradient(left, #3444ff 10%, rgba(52, 68, 255, 0) 42%);
 	background: -o-linear-gradient(left, #3444ff 10%, rgba(52, 68, 255, 0) 42%);
-	background: -ms-linear-gradient(
-		left,
-		#3444ff 10%,
-		rgba(52, 68, 255, 0) 42%
-	);
-	background: linear-gradient(
-		to right,
-		#3444ff 10%,
-		rgba(52, 68, 255, 0) 42%
-	);
+	background: -ms-linear-gradient(left, #3444ff 10%, rgba(52, 68, 255, 0) 42%);
+	background: linear-gradient(to right, #3444ff 10%, rgba(52, 68, 255, 0) 42%);
 	position: relative;
 	-webkit-animation: load3 1.4s infinite linear;
 	animation: load3 1.4s infinite linear;
@@ -427,20 +413,40 @@ footer {
 	}
 }
 
-/* Navbar elements */
-.navbar-nav > li {
-	padding: 0;
+/* Header*/
+
+/* Navigation*/
+.hero-nav {
+	width: 80%;
+	max-width: 1100px;
+	margin: 0 auto;
 }
-.navbar-nav > li > a {
-	padding: 15px 30px;
+.hero-nav ul {
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	display: grid;
+	grid-template-columns: repeat(10, 1fr);
+}
+.hero-nav ul li {
+	padding: 0;
+	margin: 0;
+	grid-column: span 2;
+}
+.hero-nav ul li a {
+	text-align: center;
 	color: whitesmoke;
 	font-weight: 500;
 	font-size: 1.2em;
+	display: block;
+	padding: 15px 10px;
+	background-color: none;
 }
-nav li a:hover {
-	text-decoration: none;
-	background-color: gray;
+.logoutButton {
+	background-color: red;
+	border-radius: 5px;
 }
+
 @media (max-width: 768px) {
 	.createInputLabel {
 		transition: 1s;

@@ -86,9 +86,7 @@ function CreateContent() {
 				name='image-name'
 				placeholder='Image name'
 				className={
-					obj.imageNameError
-						? 'error-input-container createInputLabel'
-						: 'createInputLabel'
+					obj.imageNameError ? 'error-input-container createInputLabel' : 'createInputLabel'
 				}
 				onChange={(e) =>
 					setData({
@@ -109,9 +107,7 @@ function CreateContent() {
 				autoComplete='off'
 				role='textbox'
 				className={
-					obj.imageDescriptionError
-						? 'error-input-container createTextArea'
-						: 'createTextArea'
+					obj.imageDescriptionError ? 'error-input-container createTextArea' : 'createTextArea'
 				}
 				onChange={(e) =>
 					setData({
@@ -136,9 +132,7 @@ function CreateContent() {
 						aria-describedby='inputGroupFileAddon01'
 						accept='image/x-png,image/png,image/gif,image/jpeg,image/jpg'
 						className={
-							obj.imageFilesError
-								? 'error-input-container custom-file-input'
-								: 'custom-file-input'
+							obj.imageFilesError ? 'error-input-container custom-file-input' : 'custom-file-input'
 						}
 						onChange={(e) => {
 							console.log(e.target.files);
@@ -151,9 +145,7 @@ function CreateContent() {
 						}}
 					/>
 					<label class='custom-file-label' for='inputGroupFile01'>
-						{!!obj.imageLabelName
-							? obj.imageLabelName
-							: UPLOAD_LABEL_NAME}
+						{!!obj.imageLabelName ? obj.imageLabelName : UPLOAD_LABEL_NAME}
 					</label>
 				</div>
 			</div>
@@ -166,14 +158,8 @@ function CreateContent() {
 			</button>
 			{obj.qrCode && (
 				<div id='preview-mode'>
-					<h3 className='qr-code-message'>
-						Your QR code was successfully stored to the database!
-					</h3>
-					<img
-						id='qr-code'
-						src={obj.qrCode}
-						className='mx-auto d-block'
-					/>
+					<h3 className='qr-code-message'>Your QR code was successfully stored to the database!</h3>
+					<img id='qr-code' src={obj.qrCode} className='mx-auto d-block' />
 				</div>
 			)}
 		</>
