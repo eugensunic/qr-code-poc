@@ -77,7 +77,7 @@ function CreateContent() {
 	};
 
 	return (
-		<div className='main-wrapper'>
+		<>
 			<h2></h2>
 			<input
 				id='image-name'
@@ -176,7 +176,7 @@ function CreateContent() {
 					/>
 				</div>
 			)}
-		</div>
+		</>
 	);
 }
 

@@ -114,6 +114,8 @@ footer {
 	margin: 15px auto;
 }
 .createInputLabel {
+	transition: 1s;
+	width: 300px;
 	background-color: rgba(0, 0, 0, 0.07);
 	display: block;
 	text-align: center;
@@ -438,6 +440,18 @@ footer {
 nav li a:hover {
 	text-decoration: none;
 	background-color: gray;
+}
+@media (max-width: 768px) {
+	.createInputLabel {
+		transition: 1s;
+		width: 90%;
+	}
+	.createTextArea {
+		width: 90%;
+	}
+	.input-group {
+		width: 90%;
+	}
 }
 @media (min-width: 992px) {
 	.navbar li {
