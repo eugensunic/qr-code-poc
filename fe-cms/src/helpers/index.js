@@ -61,3 +61,9 @@ export const parseJwt = token => {
 
   return JSON.parse(jsonPayload);
 };
+
+export const handleEnterKeyPress = (callback, keyCode) => {
+  if (keyCode === 13) {
+    callback();
+  }
+};

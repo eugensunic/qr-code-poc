@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { isLoggedIn } from '../../helpers';
 import Navbar from './Navbar';
 function Header(route) {
