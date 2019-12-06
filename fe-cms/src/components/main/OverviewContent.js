@@ -333,7 +333,7 @@ function OverviewContent() {
   // }
   return (
     <>
-      <div class="searchWrapper">
+      <div className="searchWrapper">
         <input
           id="searchImageName"
           type="text"

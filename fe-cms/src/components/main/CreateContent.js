@@ -120,11 +120,11 @@ function CreateContent() {
 
       <div className="input-group" style={{ minWidth: '250px' }}>
         <div className="input-group-prepend">
-          <span class="input-group-text" id="inputGroupFileAddon01">
-            <i class="fas fa-upload"></i>
+          <span className="input-group-text" id="inputGroupFileAddon01">
+            <i className="fas fa-upload"></i>
           </span>
         </div>
-        <div class="custom-file">
+        <div className="custom-file">
           <input
             id="inputGroupFile01"
             type="file"
@@ -145,7 +145,7 @@ function CreateContent() {
               });
             }}
           />
-          <label class="custom-file-label" for="inputGroupFile01">
+          <label className="custom-file-label" htmlFor="inputGroupFile01">
             {!!obj.imageLabelName ? obj.imageLabelName : UPLOAD_LABEL_NAME}
           </label>
         </div>
