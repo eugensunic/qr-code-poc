@@ -1,5 +1,4 @@
 1. Add image doesn't prohibit you from adding .psd files --> DONE (wasn't tested see if you can add photo-shopped images still)
-2. Enter button doesn't work when submitting form (should work now, please test each form: forgot password, change password, login, register)
 
 
 - resize screen and open hamburger nav menu, fix hover and padding between elements,
@@ -8,6 +7,5 @@
 - fix validation styling, make it look better
 - overview content, border too thick
 - find icon and title for museum (browser tab)
-- create content see what happens on lower screen resolution, adjust to mobile view, also increase image name input field,
-  upload field deteriorates when resizing screen
+- Create content upload field is not red when no content in it and submit button pressed
 - must fix vs code Formatting!
