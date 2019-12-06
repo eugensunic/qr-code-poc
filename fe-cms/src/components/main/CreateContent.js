@@ -1,4 +1,4 @@
-import React, { useState, useContext, useRef } from 'react';
+import React, { useState, useContext, useRef, useEffect } from 'react';
 import { GlobalErrorContext } from '../../App';
 import { contentEndpoint } from '../../config';
 
@@ -18,8 +18,24 @@ function CreateContent() {
     qrCode: null
   });
 
+  useEffect(() => {
+    if (!obj.imageFilesError) return;
+    // get rid of this
+    setData({ ...obj, imageFilesError: false });
+  }, [obj.imageFilesError]);
+
   const isFrontendValid = () => {
-    return obj.imageName && obj.imageDescription && obj.imageFiles.length;
+    return (
+      obj.imageName &&
+      obj.imageDescription &&
+      obj.imageFiles.length &&
+      isImageFormatValid(obj.imageFiles[0].type)
+    );
+  };
+
+  const isImageFormatValid = imageFormat => {
+    const allowedFormats = ['png', 'jpg', 'jpeg', 'gif'];
+    return allowedFormats.some(x => imageFormat.indexOf(x) > -1);
   };
 
   const uploadContent = () => {
@@ -34,9 +50,10 @@ function CreateContent() {
       if (!obj.imageDescription) {
         imageDescriptionErr = true;
       }
-      if (!obj.imageFiles.length) {
+      if (!obj.imageFiles.length || !isImageFormatValid(obj.imageFiles[0].type)) {
         imageFilesErr = true;
       }
+
       setData({
         ...obj,
         imageNameError: imageNameErr,
@@ -136,7 +153,6 @@ function CreateContent() {
               obj.imageFilesError ? 'error-input-container custom-file-input' : 'custom-file-input'
             }
             onChange={e => {
-              console.log(e.target.files);
               setData({
                 ...obj,
                 imageFiles: e.target.files,

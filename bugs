@@ -1,4 +1,5 @@
-1. Add image doesn't prohibit you from adding .psd files --> DONE (wasn't tested see if you can add photo-shopped images still, I cannot)
+1. Add image doesn't prohibit you from adding .psd files --> DONE (wasn't tested see if you can add photo-shopped images still, I cannot),
+   -- implemented reinforcement method 
 
 
 - resize screen and open hamburger nav menu, fix hover and padding between elements,
