@@ -1,4 +1,4 @@
-1. Add image doesn't prohibit you from adding .psd files --> DONE (wasn't tested see if you can add photo-shopped images still)
+1. Add image doesn't prohibit you from adding .psd files --> DONE (wasn't tested see if you can add photo-shopped images still, I cannot)
 
 
 - resize screen and open hamburger nav menu, fix hover and padding between elements,
@@ -8,4 +8,10 @@
 - overview content, border too thick
 - find icon and title for museum (browser tab)
 - Create content upload field is not red when no content in it and submit button pressed
-- must fix vs code Formatting!
+- Create content mobile view scroll down and see what happens upload field overflow footer
+- must fix vs code Formatting (should work now)!
+
+
+TIPS
+----
+be careful not to use class attributes, use react className instead
