@@ -1,19 +1,19 @@
-import React, { useState, useContext, useRef } from 'react';
-import { GlobalErrorContext } from '../../App';
-import { contentEndpoint } from '../../config';
+import React, { useState, useContext, useRef } from "react";
+import { GlobalErrorContext } from "../../App";
+import { contentEndpoint } from "../../config";
 
 function CreateContent() {
   const errorContext = useContext(GlobalErrorContext);
   const fileInput = useRef(null);
-  const UPLOAD_LABEL_NAME = 'Choose file';
+  const UPLOAD_LABEL_NAME = "Choose file";
   const [obj, setData] = useState({
-    imageName: '',
+    imageName: "",
     imageNameError: false,
-    imageDescription: '',
+    imageDescription: "",
     imageDescriptionError: false,
     imageFiles: [],
-    imageLabelName: '',
-    imageFileValue: '',
+    imageLabelName: "",
+    imageFileValue: "",
     imageFilesError: false,
     qrCode: null
   });
@@ -47,37 +47,37 @@ function CreateContent() {
     }
     const form = new FormData();
 
-    form.append('file', obj.imageName);
-    form.append('file', obj.imageDescription);
-    form.append('file', obj.imageFiles[0]);
+    form.append("file", obj.imageName);
+    form.append("file", obj.imageDescription);
+    form.append("file", obj.imageFiles[0]);
 
     fetch(contentEndpoint.CREATE_CONTENT, {
-      method: 'POST',
+      method: "POST",
       body: form,
-      credentials: 'include'
+      credentials: "include"
     })
       .then(res => res.json())
       .then(x => {
-        fileInput.current.value = '';
+        fileInput.current.value = "";
         setData({
           ...obj,
           qrCode: x,
-          imageName: '',
-          imageDescription: '',
+          imageName: "",
+          imageDescription: "",
           imageLabelName: UPLOAD_LABEL_NAME,
           imageFiles: []
         });
       })
       .catch(_ =>
         errorContext.dispatchError({
-          type: 'global',
-          payload: 'Server error ocurred'
+          type: "global",
+          payload: "Server error ocurred"
         })
       );
   };
 
   return (
-    <div className="main-wrapper">
+    <>
       <h2></h2>
       <input
         id="image-name"
@@ -87,8 +87,8 @@ function CreateContent() {
         placeholder="Image name"
         className={
           obj.imageNameError
-            ? 'error-input-container createInputLabel'
-            : 'createInputLabel'
+            ? "error-input-container createInputLabel"
+            : "createInputLabel"
         }
         onChange={e =>
           setData({
@@ -110,8 +110,8 @@ function CreateContent() {
         role="textbox"
         className={
           obj.imageDescriptionError
-            ? 'error-input-container createTextArea'
-            : 'createTextArea'
+            ? "error-input-container createTextArea"
+            : "createTextArea"
         }
         onChange={e =>
           setData({
@@ -138,8 +138,8 @@ function CreateContent() {
             accept="image/x-png,image/png,image/gif,image/jpeg,image/jpg"
             className={
               obj.imageFilesError
-                ? 'error-input-container custom-file-input'
-                : 'custom-file-input'
+                ? "error-input-container custom-file-input"
+                : "custom-file-input"
             }
             onChange={e => {
               console.log(e.target.files);
@@ -172,7 +172,7 @@ function CreateContent() {
           <img id="qr-code" src={obj.qrCode} className="mx-auto d-block" />
         </div>
       )}
-    </div>
+    </>
   );
 }
 
