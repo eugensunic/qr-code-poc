@@ -1,10 +1,9 @@
-import React, { useState, useContext, useRef, useEffect } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { GlobalErrorContext } from '../../App';
 import { contentEndpoint } from '../../config';
 
 function CreateContent() {
   const errorContext = useContext(GlobalErrorContext);
-  const fileInput = useRef(null);
   const UPLOAD_LABEL_NAME = 'Choose file';
   const [obj, setData] = useState({
     imageName: '',
@@ -74,8 +73,7 @@ function CreateContent() {
       credentials: 'include'
     })
       .then(res => res.json())
-      .then(x => {
-        fileInput.current.value = '';
+      .then(x =>
         setData({
           ...obj,
           qrCode: x,
@@ -83,8 +81,8 @@ function CreateContent() {
           imageDescription: '',
           imageLabelName: UPLOAD_LABEL_NAME,
           imageFiles: []
-        });
-      })
+        })
+      )
       .catch(_ =>
         errorContext.dispatchError({
           type: 'global',
@@ -145,7 +143,6 @@ function CreateContent() {
           <input
             id="inputGroupFile01"
             type="file"
-            ref={fileInput}
             name="image-file"
             aria-describedby="inputGroupFileAddon01"
             accept="image/x-png,image/png,image/gif,image/jpeg,image/jpg"
