@@ -20,6 +20,7 @@ function CreateContent() {
   useEffect(() => {
     if (!obj.imageFilesError) return;
     // get rid of this
+    alert('please add image');
     setData({ ...obj, imageFilesError: false });
   }, [obj.imageFilesError]);
 
