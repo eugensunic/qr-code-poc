@@ -133,35 +133,35 @@ function CreateContent() {
           })
         }
       ></textarea>
-
-      <div className="input-group" style={{ minWidth: '250px' }}>
-        <div className="input-group-prepend">
-          <span className="input-group-text" id="inputGroupFileAddon01">
-            <i className="fas fa-upload"></i>
-          </span>
-        </div>
-        <div className="custom-file">
-          <input
-            id="inputGroupFile01"
-            type="file"
-            name="image-file"
-            aria-describedby="inputGroupFileAddon01"
-            accept="image/x-png,image/png,image/gif,image/jpeg,image/jpg"
-            className={
-              obj.imageFilesError ? 'error-input-container custom-file-input' : 'custom-file-input'
-            }
-            onChange={e => {
-              setData({
-                ...obj,
-                imageFiles: e.target.files,
-                imageFilesError: false,
-                imageLabelName: e.target.files[0].name
-              });
-            }}
-          />
-          <label className="custom-file-label" htmlFor="inputGroupFile01">
-            {!!obj.imageLabelName ? obj.imageLabelName : UPLOAD_LABEL_NAME}
-          </label>
+      <div className="input-wrapper">
+        <div className={`input-group ${obj.imageFilesError && 'fileError'}`}>
+          <div className="input-group-prepend">
+            <span class="input-group-text" id="inputGroupFileAddon01">
+              <i class="fas fa-upload"></i>
+            </span>
+          </div>
+          <div class="custom-file">
+            <input
+              id="inputGroupFile01"
+              type="file"
+              ref={fileInput}
+              name="image-file"
+              aria-describedby="inputGroupFileAddon01"
+              accept="image/x-png,image/png,image/gif,image/jpeg,image/jpg"
+              onChange={e => {
+                console.log(e.target.files);
+                setData({
+                  ...obj,
+                  imageFiles: e.target.files,
+                  imageFilesError: false,
+                  imageLabelName: e.target.files[0].name
+                });
+              }}
+            />
+            <label class="custom-file-label" for="inputGroupFile01">
+              {!!obj.imageLabelName ? obj.imageLabelName : UPLOAD_LABEL_NAME}
+            </label>
+          </div>
         </div>
       </div>
 

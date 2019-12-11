@@ -10,7 +10,7 @@ import Header from './components/utils/Header';
 import CreateContent from './components/main/CreateContent';
 import OverviewContent from './components/main/OverviewContent';
 import About from './components/main/About';
-
+import AdminPage from './components/main/Admin';
 import { Router, Route, Switch } from 'react-router-dom';
 import { history, isLoggedIn } from './helpers';
 import ForgotPassword from './components/main/ForgotPassword';
@@ -43,6 +43,7 @@ function App() {
         <ErrorContainer message={error.message} />
         <div className="container">
           <Switch>
+            <PrivateRoute path="/admin" component={AdminPage} />
             <Route path="/view-image/:qrCodeId" component={VisitorPage} />
             <PrivateRoute path="/changepassword" component={ChangePassword} />
             <Route path="/forgotpassword" component={ForgotPassword} />

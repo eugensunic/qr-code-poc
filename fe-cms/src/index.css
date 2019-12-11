@@ -4,7 +4,6 @@ html {
 
 body {
   background: whitesmoke;
-  min-height: 100%;
   padding: 0;
   margin: 0;
   position: relative;
@@ -18,7 +17,6 @@ body::after {
 
 header {
   background-color: rgb(50, 35, 45);
-  max-height: 65px;
   width: 100%;
 }
 
@@ -52,7 +50,7 @@ textarea:focus {
 }
 
 article {
-  border: 2px solid gray;
+  border: 1px solid gray;
 }
 article h2 {
   text-align: center;
@@ -199,14 +197,10 @@ footer {
 
 .error-container {
   padding: 3px;
-  background: #fbb1b1;
-  position: relative;
-  top: -10px;
+  background-color: rgba(255, 70, 70, 0.4);
   margin: 0px 20px;
   text-align: center;
-  border-radius: 3px;
-  box-shadow: 1px 1px 1px #c8c8c8;
-  color: #363535;
+  color: rgb(50, 35, 45);
 }
 
 .success-container {
@@ -417,34 +411,31 @@ footer {
 
 /* Navigation*/
 .hero-nav {
-  width: 80%;
-  max-width: 1100px;
-  margin: 0 auto;
-}
-.hero-nav .hero-nav-ul {
-  list-style: none;
   width: 100%;
-  padding: 0;
   margin: 0;
-  display: grid;
-  grid-template-columns: repeat(10, 1fr);
-}
-.hero-nav .hero-nav-ul li {
   padding: 0;
-  margin: 0;
-  grid-column: span 2;
 }
-.hero-nav .hero-nav-ul li a {
+.hero-nav-ul {
+  width: 80%;
+  padding: 0;
+  margin: 0 auto;
+  list-style-type: none;
+  font-size: 0;
+}
+.hero-nav-ul li {
+  font-size: 1rem;
+  display: inline-block;
+  width: 20%;
+  margin: 0;
+  padding: 0;
+}
+.hero-nav-ul li a {
   text-align: center;
   color: whitesmoke;
   font-weight: 500;
   font-size: 1.2em;
   display: block;
   padding: 15px 10px;
-}
-.hero-nav .hero-nav-ul li a:hover {
-  background-color: white;
-  color: red;
 }
 
 .logoutButton {
@@ -458,7 +449,23 @@ footer {
   border-radius: 5px;
   padding: 5px;
 }
-
+.tabWrapper {
+  width: 65%;
+  padding-bottom: 50px;
+  border-radius: 15px;
+  background-color: rgba(50, 35, 45, 0.1);
+  margin: 50px auto;
+}
+.tabWrapper button {
+  width: 50%;
+  padding: 10px 10px;
+  color: whitesmoke;
+  border: 1px solid whitesmoke;
+  background-color: rgb(50, 35, 45);
+}
+.adminBtn {
+  margin: 0 auto;
+}
 @media (max-width: 768px) {
   .createInputLabel {
     transition: 1s;
@@ -470,15 +477,79 @@ footer {
   .input-group {
     width: 90%;
   }
+  .fileError:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    pointer-events: none;
+    z-index: 10;
+    background-color: rgba(255, 70, 70, 0.2);
+  }
+  .hidden-header {
+    overflow: hidden;
+    max-height: 58.8px;
+  }
+  .hero-nav li {
+    width: 100%;
+    height: 58.8px;
+    display: block;
+  }
+  .logoutLi {
+    padding: 15px;
+  }
+  .logoutButton {
+    position: relative;
+    top: 10px;
+    margin: 0px auto;
+  }
+  .hamburger {
+    z-index: 12;
+    color: whitesmoke;
+    font-size: 30px;
+    display: auto;
+    position: absolute;
+    right: 30px;
+    top: 10px;
+  }
+}
+.backToLogin {
+  margin: 59px auto;
+  padding: 10px;
+  text-transform: uppercase;
+  font-size: 15px;
+}
+.backToLogin i {
+  vertical-align: middle;
+  margin-right: 10px;
+}
+a span {
+  vertical-align: middle;
+  font-size: 15px;
+  text-align: center;
+}
+@media (min-width: 768px) {
+  header {
+    max-height: 100px;
+  }
+  .hamburger {
+    display: none;
+  }
 }
 @media (min-width: 992px) {
-  .navbar li {
-    margin-left: 1em;
-    margin-right: 1em;
+  .hero-nav .hero-nav-ul li:hover a {
+    background-color: white;
+    color: red;
   }
 }
 @media (max-width: 992px) {
   .userFromWrapper {
     width: 85%;
+  }
+  .hero-nav-ul {
+    width: 100%;
   }
 }

@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { withRouter } from 'react-router-dom';
-
+import { Link, withRouter } from 'react-router-dom';
 import { isEmailValid, isEmpty } from '../../services/login.service';
 import { GlobalErrorContext } from '../../App';
 import { userAccessEndpoint } from '../../config';
@@ -124,9 +123,7 @@ function ForgotPassword() {
                 className="form-control"
                 placeholder="Enter your email"
                 required
-                onKeyPress={e =>
-                  handleEnterKeyPress(() => onSubmitHandler(), e.which)
-                }
+                onKeyPress={e => handleEnterKeyPress(() => onSubmitHandler(), e.which)}
                 onChange={e =>
                   setCredential({
                     ...obj,
@@ -138,9 +135,7 @@ function ForgotPassword() {
               />
             </div>
 
-            {obj.emailError && (
-              <div className="error-container">{obj.emailError}</div>
-            )}
+            {obj.emailError && <div className="error-container">{obj.emailError}</div>}
             {obj.submitRequest && <div className="loader"></div>}
             <button
               type="submit"
@@ -150,6 +145,11 @@ function ForgotPassword() {
             >
               Send Password to email
             </button>
+
+            <Link to={'/login'} className="btn btn-block backToLogin">
+              <i className="fas fa-chevron-left fa-2x"></i>
+              <span>Back to login</span>
+            </Link>
           </div>
         </div>
       </div>

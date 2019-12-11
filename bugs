@@ -2,17 +2,13 @@
    -- implemented reinforcement method 
 
 
-- resize screen and open hamburger nav menu, fix hover and padding between elements,
-- when going to forgot password, should have some navigation after it to navigate back to login, put navigation on footer?
-- register should be somewhere else because you can access it only when logged in (Amir's request)
-- fix validation styling, make it look better
-- overview content, border too thick
+- resize screen and open hamburger nav menu, fix hover and padding between elements (DONE, ready for testing)
+- when going to forgot password, should have some navigation after it to navigate back to login, put navigation on footer? (DONE, ready for testing)
+- register should be somewhere else because you can access it only when logged in (Amir's request) (DONE,ready for testing)
+- fix validation styling, make it look better(DONE, ready for testing)
+- overview content, border too thick(DONE, ready for testing)
 - find icon and title for museum (browser tab)
-- Create content upload field is not red when no content in it and submit button pressed
-- Create content mobile view scroll down and see what happens upload field overflow footer
-- must fix vs code Formatting (should work now)!
-
-
-TIPS
-----
-be careful not to use class attributes, use react className instead
+- create content see what happens on lower screen resolution, adjust to mobile view, also increase image name input field,
+  upload field deteriorates when resizing screen(DONE, ready for testing)
+- must fix vs code Formatting!
+- clean yellow warnings before production
