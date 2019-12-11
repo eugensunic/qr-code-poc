@@ -2,13 +2,11 @@
    -- implemented reinforcement method 
 
 
-- resize screen and open hamburger nav menu, fix hover and padding between elements (DONE, ready for testing)
-- when going to forgot password, should have some navigation after it to navigate back to login, put navigation on footer? (DONE, ready for testing)
-- register should be somewhere else because you can access it only when logged in (Amir's request) (DONE,ready for testing)
-- fix validation styling, make it look better(DONE, ready for testing)
-- overview content, border too thick(DONE, ready for testing)
+- hamburger icon too big on Chrome
+- resize admin set min-width
+- overview content, border too thick (needs work...)
 - find icon and title for museum (browser tab)
-- create content see what happens on lower screen resolution, adjust to mobile view, also increase image name input field,
-  upload field deteriorates when resizing screen(DONE, ready for testing)
+- create content upload field not red on desktop views (at least not in Chrome)
 - must fix vs code Formatting!
+- provide i18 (English, Croatian)
 - clean yellow warnings before production

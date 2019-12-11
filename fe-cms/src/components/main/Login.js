@@ -4,11 +4,7 @@ import { isLoggedIn, handleEnterKeyPress } from '../../helpers';
 import { GlobalErrorContext } from '../../App';
 import { userAccessEndpoint } from '../../config';
 
-import {
-  isEmailValid,
-  isEmpty,
-  isPasswordLessThan5
-} from '../../services/login.service';
+import { isEmailValid, isEmpty, isPasswordLessThan5 } from '../../services/login.service';
 
 function Login(route) {
   const errorContext = useContext(GlobalErrorContext);
@@ -132,9 +128,7 @@ function Login(route) {
                 className="form-control"
                 placeholder="Enter mail"
                 required
-                onKeyPress={e =>
-                  handleEnterKeyPress(() => validateUser(), e.which)
-                }
+                onKeyPress={e => handleEnterKeyPress(() => validateUser(), e.which)}
                 onChange={e =>
                   setCredential({
                     ...obj,
@@ -145,9 +139,7 @@ function Login(route) {
               />
             </div>
 
-            {obj.emailError && (
-              <div className="error-container">{obj.emailError}</div>
-            )}
+            {obj.emailError && <div className="error-container">{obj.emailError}</div>}
 
             <div className="form-label-group">
               <input
@@ -155,9 +147,7 @@ function Login(route) {
                 id="password"
                 className="form-control"
                 placeholder="Password"
-                onKeyPress={e =>
-                  handleEnterKeyPress(() => validateUser(), e.which)
-                }
+                onKeyPress={e => handleEnterKeyPress(() => validateUser(), e.which)}
                 onChange={e =>
                   setCredential({
                     ...obj,
@@ -168,9 +158,7 @@ function Login(route) {
                 required
               />
             </div>
-            {obj.passwordError && (
-              <div className="error-container">{obj.passwordError}</div>
-            )}
+            {obj.passwordError && <div className="error-container">{obj.passwordError}</div>}
             {obj.submitRequest && <div className="loader"></div>}
 
             <button
@@ -187,11 +175,6 @@ function Login(route) {
             </Link>
 
             <hr className="my-4" />
-
-            <Link className="userFormLink" to={'/register'}>
-              {' '}
-              Register
-            </Link>
           </div>
         </div>
       </div>

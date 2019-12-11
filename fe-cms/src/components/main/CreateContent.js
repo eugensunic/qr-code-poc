@@ -17,13 +17,6 @@ function CreateContent() {
     qrCode: null
   });
 
-  useEffect(() => {
-    if (!obj.imageFilesError) return;
-    // get rid of this
-    alert('please add image');
-    setData({ ...obj, imageFilesError: false });
-  }, [obj.imageFilesError]);
-
   const isFrontendValid = () => {
     return (
       obj.imageName &&
@@ -136,15 +129,14 @@ function CreateContent() {
       <div className="input-wrapper">
         <div className={`input-group ${obj.imageFilesError && 'fileError'}`}>
           <div className="input-group-prepend">
-            <span class="input-group-text" id="inputGroupFileAddon01">
-              <i class="fas fa-upload"></i>
+            <span className="input-group-text" id="inputGroupFileAddon01">
+              <i className="fas fa-upload"></i>
             </span>
           </div>
-          <div class="custom-file">
+          <div className="custom-file">
             <input
               id="inputGroupFile01"
               type="file"
-              ref={fileInput}
               name="image-file"
               aria-describedby="inputGroupFileAddon01"
               accept="image/x-png,image/png,image/gif,image/jpeg,image/jpg"
@@ -158,7 +150,7 @@ function CreateContent() {
                 });
               }}
             />
-            <label class="custom-file-label" for="inputGroupFile01">
+            <label className="custom-file-label" htmlFor="inputGroupFile01">
               {!!obj.imageLabelName ? obj.imageLabelName : UPLOAD_LABEL_NAME}
             </label>
           </div>
