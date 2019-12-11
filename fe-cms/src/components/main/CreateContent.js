@@ -1,19 +1,19 @@
-import React, { useState, useContext, useRef } from "react";
-import { GlobalErrorContext } from "../../App";
-import { contentEndpoint } from "../../config";
+import React, { useState, useContext, useRef } from 'react';
+import { GlobalErrorContext } from '../../App';
+import { contentEndpoint } from '../../config';
 
 function CreateContent() {
   const errorContext = useContext(GlobalErrorContext);
   const fileInput = useRef(null);
-  const UPLOAD_LABEL_NAME = "Choose file";
+  const UPLOAD_LABEL_NAME = 'Choose file';
   const [obj, setData] = useState({
-    imageName: "",
+    imageName: '',
     imageNameError: false,
-    imageDescription: "",
+    imageDescription: '',
     imageDescriptionError: false,
     imageFiles: [],
-    imageLabelName: "",
-    imageFileValue: "",
+    imageLabelName: '',
+    imageFileValue: '',
     imageFilesError: false,
     qrCode: null
   });
@@ -47,31 +47,31 @@ function CreateContent() {
     }
     const form = new FormData();
 
-    form.append("file", obj.imageName);
-    form.append("file", obj.imageDescription);
-    form.append("file", obj.imageFiles[0]);
+    form.append('file', obj.imageName);
+    form.append('file', obj.imageDescription);
+    form.append('file', obj.imageFiles[0]);
 
     fetch(contentEndpoint.CREATE_CONTENT, {
-      method: "POST",
+      method: 'POST',
       body: form,
-      credentials: "include"
+      credentials: 'include'
     })
       .then(res => res.json())
       .then(x => {
-        fileInput.current.value = "";
+        fileInput.current.value = '';
         setData({
           ...obj,
           qrCode: x,
-          imageName: "",
-          imageDescription: "",
+          imageName: '',
+          imageDescription: '',
           imageLabelName: UPLOAD_LABEL_NAME,
           imageFiles: []
         });
       })
       .catch(_ =>
         errorContext.dispatchError({
-          type: "global",
-          payload: "Server error ocurred"
+          type: 'global',
+          payload: 'Server error ocurred'
         })
       );
   };
@@ -86,9 +86,7 @@ function CreateContent() {
         name="image-name"
         placeholder="Image name"
         className={
-          obj.imageNameError
-            ? "error-input-container createInputLabel"
-            : "createInputLabel"
+          obj.imageNameError ? 'error-input-container createInputLabel' : 'createInputLabel'
         }
         onChange={e =>
           setData({
@@ -109,9 +107,7 @@ function CreateContent() {
         autoComplete="off"
         role="textbox"
         className={
-          obj.imageDescriptionError
-            ? "error-input-container createTextArea"
-            : "createTextArea"
+          obj.imageDescriptionError ? 'error-input-container createTextArea' : 'createTextArea'
         }
         onChange={e =>
           setData({
@@ -121,39 +117,35 @@ function CreateContent() {
           })
         }
       ></textarea>
-
-      <div className="input-group">
-        <div className="input-group-prepend">
-          <span class="input-group-text" id="inputGroupFileAddon01">
-            <i class="fas fa-upload"></i>
-          </span>
-        </div>
-        <div class="custom-file">
-          <input
-            id="inputGroupFile01"
-            type="file"
-            ref={fileInput}
-            name="image-file"
-            aria-describedby="inputGroupFileAddon01"
-            accept="image/x-png,image/png,image/gif,image/jpeg,image/jpg"
-            className={
-              obj.imageFilesError
-                ? "error-input-container custom-file-input"
-                : "custom-file-input"
-            }
-            onChange={e => {
-              console.log(e.target.files);
-              setData({
-                ...obj,
-                imageFiles: e.target.files,
-                imageFilesError: false,
-                imageLabelName: e.target.files[0].name
-              });
-            }}
-          />
-          <label class="custom-file-label" for="inputGroupFile01">
-            {!!obj.imageLabelName ? obj.imageLabelName : UPLOAD_LABEL_NAME}
-          </label>
+      <div className="input-wrapper">
+        <div className={`input-group ${obj.imageFilesError && 'fileError'}`}>
+          <div className="input-group-prepend">
+            <span class="input-group-text" id="inputGroupFileAddon01">
+              <i class="fas fa-upload"></i>
+            </span>
+          </div>
+          <div class="custom-file">
+            <input
+              id="inputGroupFile01"
+              type="file"
+              ref={fileInput}
+              name="image-file"
+              aria-describedby="inputGroupFileAddon01"
+              accept="image/x-png,image/png,image/gif,image/jpeg,image/jpg"
+              onChange={e => {
+                console.log(e.target.files);
+                setData({
+                  ...obj,
+                  imageFiles: e.target.files,
+                  imageFilesError: false,
+                  imageLabelName: e.target.files[0].name
+                });
+              }}
+            />
+            <label class="custom-file-label" for="inputGroupFile01">
+              {!!obj.imageLabelName ? obj.imageLabelName : UPLOAD_LABEL_NAME}
+            </label>
+          </div>
         </div>
       </div>
 
@@ -166,9 +158,7 @@ function CreateContent() {
       </button>
       {obj.qrCode && (
         <div id="preview-mode">
-          <h3 className="qr-code-message">
-            Your QR code was successfully stored to the database!
-          </h3>
+          <h3 className="qr-code-message">Your QR code was successfully stored to the database!</h3>
           <img id="qr-code" src={obj.qrCode} className="mx-auto d-block" />
         </div>
       )}

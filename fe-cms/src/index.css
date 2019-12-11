@@ -50,7 +50,7 @@ textarea:focus {
 }
 
 article {
-  border: 2px solid gray;
+  border: 1px solid gray;
 }
 article h2 {
   text-align: center;
@@ -461,7 +461,20 @@ footer {
   .input-group {
     width: 90%;
   }
+  .fileError:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    pointer-events: none;
+    z-index: 10;
+    background-color: rgba(255, 70, 70, 0.2);
+  }
   .hidden-header {
+    overflow: hidden;
     transition: 1s;
     max-height: 58.8px;
   }
