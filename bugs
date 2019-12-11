@@ -3,7 +3,7 @@
 
 
 - resize screen and open hamburger nav menu, fix hover and padding between elements (DONE, ready for testing)
-- when going to forgot password, should have some navigation after it to navigate back to login, put navigation on footer?
+- when going to forgot password, should have some navigation after it to navigate back to login, put navigation on footer? (DONE, ready for)
 - register should be somewhere else because you can access it only when logged in (Amir's request)
 - fix validation styling, make it look better
 - overview content, border too thick
