@@ -2,7 +2,7 @@
 2. Enter button doesn't work when submitting form (should work now, please test each form: forgot password, change password, login, register)
 
 
-- resize screen and open hamburger nav menu, fix hover and padding between elements,
+- resize screen and open hamburger nav menu, fix hover and padding between elements (DONE, ready for testing)
 - when going to forgot password, should have some navigation after it to navigate back to login, put navigation on footer?
 - register should be somewhere else because you can access it only when logged in (Amir's request)
 - fix validation styling, make it look better
