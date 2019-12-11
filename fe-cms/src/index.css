@@ -449,7 +449,23 @@ footer {
   border-radius: 5px;
   padding: 5px;
 }
-
+.tabWrapper {
+  width: 65%;
+  padding-bottom: 50px;
+  border-radius: 15px;
+  background-color: rgba(50, 35, 45, 0.1);
+  margin: 50px auto;
+}
+.tabWrapper button {
+  width: 50%;
+  padding: 10px 10px;
+  color: whitesmoke;
+  border: 1px solid whitesmoke;
+  background-color: rgb(50, 35, 45);
+}
+.adminBtn {
+  margin: 0 auto;
+}
 @media (max-width: 768px) {
   .createInputLabel {
     transition: 1s;
@@ -475,7 +491,6 @@ footer {
   }
   .hidden-header {
     overflow: hidden;
-    transition: 1s;
     max-height: 58.8px;
   }
   .hero-nav li {

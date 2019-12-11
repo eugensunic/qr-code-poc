@@ -5,11 +5,7 @@ import { parseCookie, parseJwt } from '../../helpers';
 import { userAccessEndpoint } from '../../config';
 import { handleEnterKeyPress } from '../../helpers';
 
-import {
-  isEmpty,
-  isPasswordLessThan5,
-  passwordsMatch
-} from '../../services/login.service';
+import { isEmpty, isPasswordLessThan5, passwordsMatch } from '../../services/login.service';
 
 function ChangePassword(route) {
   const errorContext = useContext(GlobalErrorContext);
@@ -144,9 +140,7 @@ function ChangePassword(route) {
       >
         <div className="card-body">
           <h5 className="card-title text-center">Change password</h5>
-          {obj.changePasswordSuccess && (
-            <h4 className="success-container">Successful Change!</h4>
-          )}
+          {obj.changePasswordSuccess && <h4 className="success-container">Successful Change!</h4>}
           <div className="form-signin">
             <div className="form-label-group">
               <label htmlFor="inputPassword">Current password:</label>
@@ -155,9 +149,7 @@ function ChangePassword(route) {
                 placeholder="Password"
                 value={obj.currentPassword}
                 className="form-control"
-                onKeyPress={e =>
-                  handleEnterKeyPress(() => validateUser(), e.which)
-                }
+                onKeyPress={e => handleEnterKeyPress(() => validateUser(), e.which)}
                 onChange={e =>
                   setCredential({
                     ...obj,
@@ -180,9 +172,7 @@ function ChangePassword(route) {
                   placeholder="Password"
                   value={obj.newPassword}
                   className="form-control"
-                  onKeyPress={e =>
-                    handleEnterKeyPress(() => validateUser(), e.which)
-                  }
+                  onKeyPress={e => handleEnterKeyPress(() => validateUser(), e.which)}
                   onChange={e =>
                     setCredential({
                       ...obj,
@@ -201,9 +191,7 @@ function ChangePassword(route) {
                   placeholder="Password"
                   value={obj.repeatPassword}
                   className="form-control"
-                  onKeyPress={e =>
-                    handleEnterKeyPress(() => validateUser(), e.which)
-                  }
+                  onKeyPress={e => handleEnterKeyPress(() => validateUser(), e.which)}
                   onChange={e =>
                     setCredential({
                       ...obj,
@@ -223,7 +211,7 @@ function ChangePassword(route) {
             {obj.submitRequest && <div className="loader"></div>}
             <button
               type="submit"
-              className="btn btn-lg btn-primary btn-block text-uppercase"
+              className="btn btn-lg btn-primary btn-block text-uppercase adminBtn"
               disabled={obj.submitRequest}
               onClick={() => validateUser()}
             >

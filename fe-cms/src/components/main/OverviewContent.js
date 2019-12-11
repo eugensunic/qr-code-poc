@@ -302,10 +302,7 @@ function OverviewContent() {
       overviewArr: adjustForLayout(
         content.overviewArrCopy
           .reduce((acc, arr) => [...acc, ...arr], [])
-          .filter(
-            x =>
-              x.imageName.toLowerCase().indexOf(searchValue.toLowerCase()) > -1
-          )
+          .filter(x => x.imageName.toLowerCase().indexOf(searchValue.toLowerCase()) > -1)
       )
     });
   }, [searchValue]);
@@ -333,7 +330,7 @@ function OverviewContent() {
   // }
   return (
     <>
-      <div class="searchWrapper">
+      <div className="searchWrapper">
         <input
           id="searchImageName"
           type="text"
@@ -367,12 +364,7 @@ function OverviewContent() {
                   type="button"
                   className="btn btn-warning d-inline ml-1"
                   onClick={() =>
-                    invokeEditModal(
-                      obj.id,
-                      obj.imageName,
-                      obj.imageDescription,
-                      obj.path
-                    )
+                    invokeEditModal(obj.id, obj.imageName, obj.imageDescription, obj.path)
                   }
                 >
                   Edit

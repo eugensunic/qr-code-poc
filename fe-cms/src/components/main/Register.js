@@ -147,7 +147,7 @@ function Register(route) {
     });
   };
   return (
-    <div>
+    <>
       <div className="registerFromWrapper card card-signin my-5 ">
         <div className="card-body">
           <h5 className="card-title text-center">Register</h5>
@@ -279,7 +279,7 @@ function Register(route) {
             {obj.submitRequest && <div className="loader"></div>}
             <button
               type="submit"
-              className="btn btn-lg btn-primary btn-block text-uppercase"
+              className="btn btn-lg btn-primary btn-block text-uppercase adminBtn"
               disabled={obj.submitRequest}
               onClick={() => validateUser()}
             >
@@ -289,7 +289,7 @@ function Register(route) {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

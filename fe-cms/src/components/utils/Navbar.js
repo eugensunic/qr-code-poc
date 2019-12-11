@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { isLoggedIn } from '../../helpers';
+import { Button } from 'react-bootstrap';
 
 function Navbar(route) {
   const [toggleHeader, setToggleHeader] = useState(false);
@@ -13,9 +14,9 @@ function Navbar(route) {
 
   return (
     <nav className={`hero-nav ${!toggleHeader && 'hidden-header'}`}>
-      <Link className="hamburger" onClick={() => setToggleHeader(!toggleHeader)}>
+      <Button className="hamburger" onClick={() => setToggleHeader(!toggleHeader)}>
         <i className="fa fa-bars"></i>
-      </Link>
+      </Button>
       <ul className="hero-nav-ul">
         <li>
           <Link to={'/overview'}> Overview</Link>
@@ -24,7 +25,7 @@ function Navbar(route) {
           <Link to={'/create'}>New content</Link>
         </li>
         <li className="dropdownList">
-          <Link to={'/changepassword'}>Admin</Link>
+          <Link to={'/admin'}>Admin</Link>
         </li>
         <li>
           <Link to={'/about'}> About</Link>
