@@ -197,14 +197,10 @@ footer {
 
 .error-container {
   padding: 3px;
-  background: #fbb1b1;
-  position: relative;
-  top: -10px;
+  background-color: rgba(255, 70, 70, 0.4);
   margin: 0px 20px;
   text-align: center;
-  border-radius: 3px;
-  box-shadow: 1px 1px 1px #c8c8c8;
-  color: #363535;
+  color: rgb(50, 35, 45);
 }
 
 .success-container {
