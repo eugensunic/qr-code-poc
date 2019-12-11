@@ -4,7 +4,6 @@ html {
 
 body {
   background: whitesmoke;
-  min-height: 100%;
   padding: 0;
   margin: 0;
   position: relative;
@@ -18,7 +17,6 @@ body::after {
 
 header {
   background-color: rgb(50, 35, 45);
-  max-height: 65px;
   width: 100%;
 }
 
@@ -417,34 +415,31 @@ footer {
 
 /* Navigation*/
 .hero-nav {
-  width: 80%;
-  max-width: 1100px;
-  margin: 0 auto;
-}
-.hero-nav .hero-nav-ul {
-  list-style: none;
   width: 100%;
-  padding: 0;
   margin: 0;
-  display: grid;
-  grid-template-columns: repeat(10, 1fr);
-}
-.hero-nav .hero-nav-ul li {
   padding: 0;
-  margin: 0;
-  grid-column: span 2;
 }
-.hero-nav .hero-nav-ul li a {
+.hero-nav-ul {
+  width: 80%;
+  padding: 0;
+  margin: 0 auto;
+  list-style-type: none;
+  font-size: 0;
+}
+.hero-nav-ul li {
+  font-size: 1rem;
+  display: inline-block;
+  width: 20%;
+  margin: 0;
+  padding: 0;
+}
+.hero-nav-ul li a {
   text-align: center;
   color: whitesmoke;
   font-weight: 500;
   font-size: 1.2em;
   display: block;
   padding: 15px 10px;
-}
-.hero-nav .hero-nav-ul li a:hover {
-  background-color: white;
-  color: red;
 }
 
 .logoutButton {
@@ -470,15 +465,53 @@ footer {
   .input-group {
     width: 90%;
   }
+  .hidden-header {
+    transition: 1s;
+    max-height: 58.8px;
+  }
+  .hero-nav li {
+    width: 100%;
+    height: 58.8px;
+    display: block;
+  }
+  .logoutLi {
+    padding: 15px;
+  }
+  .logoutButton {
+    position: relative;
+    top: 10px;
+    margin: 0px auto;
+  }
+  .hamburger {
+    z-index: 12;
+    color: whitesmoke;
+    font-size: 30px;
+    display: auto;
+    position: absolute;
+    right: 30px;
+    top: 10px;
+  }
+}
+
+@media (min-width: 768px) {
+  header {
+    max-height: 100px;
+  }
+  .hamburger {
+    display: none;
+  }
 }
 @media (min-width: 992px) {
-  .navbar li {
-    margin-left: 1em;
-    margin-right: 1em;
+  .hero-nav .hero-nav-ul li:hover a {
+    background-color: white;
+    color: red;
   }
 }
 @media (max-width: 992px) {
   .userFromWrapper {
     width: 85%;
+  }
+  .hero-nav-ul {
+    width: 100%;
   }
 }
