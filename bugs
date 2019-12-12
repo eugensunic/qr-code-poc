@@ -1,12 +1,15 @@
 1. Add image doesn't prohibit you from adding .psd files --> DONE (wasn't tested see if you can add photo-shopped images still, I cannot),
    -- implemented reinforcement method 
 
-
-- hamburger icon too big on Chrome
-- resize admin set min-width
 - overview content, border too thick (needs work...)
 - find icon and title for museum (browser tab)
-- create content upload field not red on desktop views (at least not in Chrome)
 - must fix vs code Formatting!
 - provide i18 (English, Croatian)
 - clean yellow warnings before production
+
+
+TODO 
+- style visit page
+- make delete/edit/qr code better looking
+- close dropdown menu when clickin on item list (<li/>)
+- find somehin o remove unused impors

@@ -19,16 +19,26 @@ function Navbar(route) {
       </Button>
       <ul className="hero-nav-ul">
         <li>
-          <Link to={'/overview'}> Overview</Link>
+          <Link onClick={() => setToggleHeader(!toggleHeader)} to={'/overview'}>
+            {' '}
+            Overview
+          </Link>
         </li>
         <li>
-          <Link to={'/create'}>New content</Link>
+          <Link onClick={() => setToggleHeader(!toggleHeader)} to={'/create'}>
+            New content
+          </Link>
         </li>
         <li className="dropdownList">
-          <Link to={'/admin'}>Admin</Link>
+          <Link onClick={() => setToggleHeader(!toggleHeader)} to={'/admin'}>
+            Admin
+          </Link>
         </li>
         <li>
-          <Link to={'/about'}> About</Link>
+          <Link onClick={() => setToggleHeader(!toggleHeader)} to={'/about'}>
+            {' '}
+            About
+          </Link>
         </li>
         <li className="logoutLi">
           <button className="logoutButton" onClick={logout}>

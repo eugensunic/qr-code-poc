@@ -349,31 +349,39 @@ function OverviewContent() {
                 <img width="50%" src={obj.path} />
               </div>
               <p className="text-wrapper">{obj.imageDescription}</p>
-              <a href={'/view-image/' + obj.qrCodeUniqueId} target="_blank">
-                Visit page
-              </a>
-              <div className="buttonWrapper rounded">
+              <div className="buttonWrapper">
+                <a
+                  className="visitorPageButton"
+                  href={'/view-image/' + obj.qrCodeUniqueId}
+                  target="_blank"
+                >
+                  <i className="fas fa-eye"></i>
+                  Visit page
+                </a>
                 <button
                   type="button"
-                  className="btn btn-danger d-inline"
+                  className="deleteButton"
                   onClick={() => invokeDeleteModal(obj.id, obj.imageName)}
                 >
+                  <i className="fas fa-trash"></i>
                   Delete
                 </button>
                 <button
                   type="button"
-                  className="btn btn-warning d-inline ml-1"
+                  className="editButton"
                   onClick={() =>
                     invokeEditModal(obj.id, obj.imageName, obj.imageDescription, obj.path)
                   }
                 >
+                  <i className="far fa-edit"></i>
                   Edit
                 </button>
                 <button
                   type="button"
-                  className="btn btn-success d-inline ml-1"
+                  className="qrButton"
                   onClick={() => invokeQrCodeModal(obj.qrCode, obj.imageName)}
                 >
+                  <i className="fas fa-qrcode"></i>
                   QR Kod
                 </button>
               </div>
