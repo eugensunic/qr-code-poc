@@ -17,7 +17,7 @@ function Navbar(route) {
       <Button className="hamburger" onClick={() => setToggleHeader(!toggleHeader)}>
         <i className="fa fa-bars"></i>
       </Button>
-      <ul className="hero-nav-ul">
+      <ul className="hero-nav-ul" onClick={e => setToggleHeader(!toggleHeader)}>
         <li>
           <Link to={'/overview'}> Overview</Link>
         </li>

@@ -51,6 +51,8 @@ textarea:focus {
 
 article {
   border: 1px solid gray;
+  padding: 7px 10px;
+  padding-bottom: 10px;
 }
 article h2 {
   text-align: center;
@@ -69,23 +71,39 @@ article p {
   overflow-y: scroll;
   border: 1px solid lightgray;
 }
-article a {
-  display: block;
-  margin-bottom: 50px;
-}
 footer {
   position: fixed;
   bottom: 0;
   min-height: 50px;
   width: 100%;
 }
+.visitorPageButton {
+  color: whitesmoke;
+  text-decoration: none;
+  display: inline-block;
+  padding: 7px 10px;
+  border-radius: 7px;
+  transition: 0.1s;
+  background-color: rgba(50, 35, 45, 0.5);
+}
+.buttonWrapper i {
+  margin-right: 5px;
+}
+.buttonWrapper a:hover {
+  color: whitesmoke;
+  text-decoration: none;
+}
+.buttonWrapper button {
+  margin: 1px;
+  color: whitesmoke;
+  border: none;
+  display: inline-block;
+  padding: 7px 10px;
+  border-radius: 7px;
+  background-color: rgba(50, 35, 45, 0.5);
+  transition: 0.1s;
+}
 
-/* .visitorArticle button {
-	border: 1px solid black;
-	margin: 15px auto;
-	display: block;
-	background-color: whitesmoke;
-} */
 .visitorArticle h1 {
   font-weight: 300;
   font-size: 35px;
@@ -145,6 +163,8 @@ footer {
   background-color: teal;
 }
 .buttonWrapper {
+  color: whitesmoke;
+  margin-bottom: 10px;
   padding: 5px 0px;
   margin: 0;
   width: 100%;
@@ -153,10 +173,6 @@ footer {
 }
 .cursor-pointer {
   cursor: pointer;
-}
-
-.overview-item {
-  padding: 7px 10px;
 }
 
 .main-wrapper {
@@ -284,7 +300,18 @@ footer {
 .unprotected-route:hover {
   color: #3444ff;
 }
-
+.fileError:after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  pointer-events: none;
+  z-index: 10;
+  background-color: rgba(255, 70, 70, 0.2);
+}
 /* Cards */
 .card-signin {
   border: 0;
@@ -466,6 +493,22 @@ footer {
 .adminBtn {
   margin: 0 auto;
 }
+.backToLogin {
+  margin: 59px auto;
+  padding: 10px;
+  text-transform: uppercase;
+  font-size: 15px;
+}
+.backToLogin i {
+  vertical-align: middle;
+  margin-right: 10px;
+}
+a span {
+  vertical-align: middle;
+  font-size: 15px;
+  text-align: center;
+}
+
 @media (max-width: 768px) {
   .createInputLabel {
     transition: 1s;
@@ -476,18 +519,6 @@ footer {
   }
   .input-group {
     width: 90%;
-  }
-  .fileError:after {
-    content: '';
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    pointer-events: none;
-    z-index: 10;
-    background-color: rgba(255, 70, 70, 0.2);
   }
   .hidden-header {
     overflow: hidden;
@@ -509,27 +540,17 @@ footer {
   .hamburger {
     z-index: 12;
     color: whitesmoke;
-    font-size: 30px;
     display: auto;
     position: absolute;
     right: 30px;
     top: 10px;
+    cursor: pointer;
   }
-}
-.backToLogin {
-  margin: 59px auto;
-  padding: 10px;
-  text-transform: uppercase;
-  font-size: 15px;
-}
-.backToLogin i {
-  vertical-align: middle;
-  margin-right: 10px;
-}
-a span {
-  vertical-align: middle;
-  font-size: 15px;
-  text-align: center;
+  .tabWrapper {
+    padding: 0;
+    padding-bottom: 10px;
+    width: 100%;
+  }
 }
 @media (min-width: 768px) {
   header {
@@ -551,5 +572,13 @@ a span {
   }
   .hero-nav-ul {
     width: 100%;
+  }
+  .buttonWrapper .visitorPageButton {
+    width: 46%;
+    margin: 2px 1.5%;
+  }
+  .buttonWrapper button {
+    width: 46%;
+    margin: 2px 1.5%;
   }
 }
