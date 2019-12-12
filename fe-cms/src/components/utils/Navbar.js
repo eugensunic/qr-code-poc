@@ -17,28 +17,18 @@ function Navbar(route) {
       <Button className="hamburger" onClick={() => setToggleHeader(!toggleHeader)}>
         <i className="fa fa-bars"></i>
       </Button>
-      <ul className="hero-nav-ul">
+      <ul className="hero-nav-ul" onClick={e => setToggleHeader(!toggleHeader)}>
         <li>
-          <Link onClick={() => setToggleHeader(!toggleHeader)} to={'/overview'}>
-            {' '}
-            Overview
-          </Link>
+          <Link to={'/overview'}> Overview</Link>
         </li>
         <li>
-          <Link onClick={() => setToggleHeader(!toggleHeader)} to={'/create'}>
-            New content
-          </Link>
+          <Link to={'/create'}>New content</Link>
         </li>
         <li className="dropdownList">
-          <Link onClick={() => setToggleHeader(!toggleHeader)} to={'/admin'}>
-            Admin
-          </Link>
+          <Link to={'/admin'}>Admin</Link>
         </li>
         <li>
-          <Link onClick={() => setToggleHeader(!toggleHeader)} to={'/about'}>
-            {' '}
-            About
-          </Link>
+          <Link to={'/about'}> About</Link>
         </li>
         <li className="logoutLi">
           <button className="logoutButton" onClick={logout}>
