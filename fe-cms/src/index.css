@@ -284,7 +284,18 @@ footer {
 .unprotected-route:hover {
   color: #3444ff;
 }
-
+.fileError:after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  pointer-events: none;
+  z-index: 10;
+  background-color: rgba(255, 70, 70, 0.2);
+}
 /* Cards */
 .card-signin {
   border: 0;
@@ -477,18 +488,6 @@ footer {
   .input-group {
     width: 90%;
   }
-  .fileError:after {
-    content: '';
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    pointer-events: none;
-    z-index: 10;
-    background-color: rgba(255, 70, 70, 0.2);
-  }
   .hidden-header {
     overflow: hidden;
     max-height: 58.8px;
@@ -509,11 +508,16 @@ footer {
   .hamburger {
     z-index: 12;
     color: whitesmoke;
-    font-size: 30px;
     display: auto;
     position: absolute;
     right: 30px;
     top: 10px;
+    cursor: pointer;
+  }
+  .tabWrapper {
+    padding: 0;
+    padding-bottom: 10px;
+    width: 100%;
   }
 }
 .backToLogin {

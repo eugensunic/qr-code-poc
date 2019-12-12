@@ -146,7 +146,7 @@ function CreateContent() {
                   ...obj,
                   imageFiles: e.target.files,
                   imageFilesError: false,
-                  imageLabelName: e.target.files[0].name
+                  imageLabelName: !!e.target.files.length ? e.target.files[0].name : ''
                 });
               }}
             />
