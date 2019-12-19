@@ -8,5 +8,11 @@
 - clean yellow warnings before production
 
 
-TODO 
+BUGS
+-wrong link on scaning qr code
+
+
+
+TODO
 - find somehin o remove unused impors
+-qrCode remove on sm
