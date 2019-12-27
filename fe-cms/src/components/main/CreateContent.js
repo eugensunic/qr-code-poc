@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import { GlobalErrorContext } from '../../App';
 import { contentEndpoint } from '../../config';
 

@@ -20,19 +20,18 @@ function ChangePassword(route) {
     changePasswordSuccess: false
   });
 
-  const resetState = () => {
-    setCredential({
-      ...obj,
-      currentPassword: '',
-      currentPasswordError: '',
-      newPassword: '',
-      repeatPassword: '',
-      changePasswordError: '',
-      submitRequest: false
-    });
-  };
-
   useEffect(() => {
+    const resetState = () => {
+      setCredential({
+        ...obj,
+        currentPassword: '',
+        currentPasswordError: '',
+        newPassword: '',
+        repeatPassword: '',
+        changePasswordError: '',
+        submitRequest: false
+      });
+    };
     if (!obj.changePasswordSuccess) return;
     resetState();
     route.history.push('/login');

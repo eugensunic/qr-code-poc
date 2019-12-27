@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { contentEndpoint, DOMAIN_NAME } from '../../config';
-import Speech from 'speak-tts';
 
-let speech;
+import { contentEndpoint, DOMAIN_NAME } from '../../config';
+
 function VisitorPage(props) {
   const [obj, setState] = useState({
     imageName: '',
@@ -10,16 +9,8 @@ function VisitorPage(props) {
     imageSrc: ''
   });
 
-  const speakText = text => {
-    speech.speak({
-      text: text
-    });
-  };
-
   // BE validation hook
   useEffect(() => {
-    speech = new Speech();
-    console.log(speech);
     fetch(contentEndpoint.VISITOR_PAGE, {
       method: 'POST',
       headers: {
@@ -47,9 +38,6 @@ function VisitorPage(props) {
   }, []);
   return (
     <div className="visitorArticle">
-      {/* <button onClick={() => speakText(obj.imageDescription)}>
-				Read in english
-			</button> */}
       <div id="client-content">
         <h1 className="text-center h-md">{obj.imageName}</h1>
         <div className="col text-center">

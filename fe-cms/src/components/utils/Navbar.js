@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Link, withRouter } from 'react-router-dom';
-import { isLoggedIn } from '../../helpers';
 import { Button } from 'react-bootstrap';
 
 function Navbar(route) {
