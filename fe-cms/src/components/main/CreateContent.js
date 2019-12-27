@@ -140,15 +140,14 @@ function CreateContent() {
               name="image-file"
               aria-describedby="inputGroupFileAddon01"
               accept="image/x-png,image/png,image/gif,image/jpeg,image/jpg"
-              onChange={e => {
-                console.log(e.target.files);
+              onChange={e =>
                 setData({
                   ...obj,
                   imageFiles: e.target.files,
                   imageFilesError: false,
                   imageLabelName: !!e.target.files.length ? e.target.files[0].name : ''
-                });
-              }}
+                })
+              }
             />
             <label className="custom-file-label" htmlFor="inputGroupFile01">
               {!!obj.imageLabelName ? obj.imageLabelName : UPLOAD_LABEL_NAME}

@@ -296,7 +296,6 @@ function OverviewContent() {
   };
 
   useEffect(() => {
-    console.log('here');
     setState({
       ...content,
       overviewArr: adjustForLayout(

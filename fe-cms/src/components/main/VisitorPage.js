@@ -35,13 +35,13 @@ function VisitorPage(props) {
       })
 
       .catch(_ => {});
-  }, []);
+  }, [obj, props.match.params.qrCodeId]);
   return (
     <div className="visitorArticle">
       <div id="client-content">
         <h1 className="text-center h-md">{obj.imageName}</h1>
         <div className="col text-center">
-          <img src={DOMAIN_NAME + obj.imageSrc} className="img-fluid" />
+          <img alt={obj.imageName} src={DOMAIN_NAME + obj.imageSrc} className="img-fluid" />
         </div>
         <p>{obj.imageDescription}</p>
       </div>

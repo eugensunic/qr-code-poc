@@ -24,6 +24,7 @@ function Login(route) {
   }, [isLoggedIn()]);
 
   // successful login hook
+  // react-hooks/exhaustive-deps
   useEffect(() => {
     if (!obj.loginSuccess) return;
     route.history.push('/overview');
