@@ -34,7 +34,6 @@ const isVisitorPage = path => path.indexOf('view-image') > -1;
 
 function App() {
   const [error, dispatch] = useReducer(reducer, { message: '' });
-  console.log(history);
   return (
     <GlobalErrorContext.Provider value={{ dispatchError: dispatch }}>
       <Router history={history}>
