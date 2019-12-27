@@ -7,7 +7,7 @@ import { handleEnterKeyPress } from '../../helpers';
 
 import { isEmpty, isPasswordLessThan5, passwordsMatch } from '../../services/login.service';
 
-function ChangePassword(route) {
+function ChangePassword({ history }) {
   const errorContext = useContext(GlobalErrorContext);
   const [obj, setCredential] = useState({
     currentPassword: '',
@@ -34,8 +34,8 @@ function ChangePassword(route) {
     };
     if (!obj.changePasswordSuccess) return;
     resetState();
-    route.history.push('/login');
-  }, [obj.changePasswordSuccess]);
+    history.push('/login');
+  }, [history, obj, obj.changePasswordSuccess]);
 
   // BE validation hook
   useEffect(() => {
@@ -87,7 +87,7 @@ function ChangePassword(route) {
           payload: 'Server error ocurred 1'
         });
       });
-  }, [obj.submitRequest]);
+  }, [obj, obj.submitRequest, errorContext]);
 
   const isFrontendValid = () => {
     return (

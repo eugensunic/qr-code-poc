@@ -6,7 +6,7 @@ import { userAccessEndpoint } from '../../config';
 
 import { isEmailValid, isEmpty, isPasswordLessThan5 } from '../../services/login.service';
 
-function Login(route) {
+function Login({ history }) {
   const errorContext = useContext(GlobalErrorContext);
   const [obj, setCredential] = useState({
     email: '',
@@ -16,19 +16,21 @@ function Login(route) {
     submitRequest: false,
     loginSuccess: false
   });
+  
+  const isUserLoggedIn = isLoggedIn();
 
   // if logged in don't show the login page
   useEffect(() => {
-    if (!isLoggedIn()) return;
-    route.history.push('/overview');
-  }, [isLoggedIn()]);
+    if (!isUserLoggedIn) return;
+    history.push('/overview');
+  }, [isUserLoggedIn, history]);
 
   // successful login hook
   // react-hooks/exhaustive-deps
   useEffect(() => {
     if (!obj.loginSuccess) return;
-    route.history.push('/overview');
-  }, [obj.loginSuccess]);
+    history.push('/overview');
+  }, [obj.loginSuccess, history]);
 
   // BE validation hook
   useEffect(() => {
@@ -76,7 +78,7 @@ function Login(route) {
           payload: 'Server error ocurred'
         });
       });
-  }, [obj.submitRequest]);
+  }, [obj, obj.submitRequest, errorContext]);
 
   const isFrontendValid = (email, password) => {
     return isEmailValid(email) && !!password && !isPasswordLessThan5(password);

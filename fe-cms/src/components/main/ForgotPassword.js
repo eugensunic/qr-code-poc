@@ -14,15 +14,6 @@ function ForgotPassword() {
     forgotPasswordSuccess: false
   });
 
-  const resetState = () => {
-    setCredential({
-      ...obj,
-      email: '',
-      emailError: '',
-      submitRequest: false
-    });
-  };
-
   const isFrontendValid = () => {
     return !!isEmailValid(obj.email);
   };
@@ -53,9 +44,17 @@ function ForgotPassword() {
 
   // Effect hooks
   useEffect(() => {
+    const resetState = () => {
+      setCredential({
+        ...obj,
+        email: '',
+        emailError: '',
+        submitRequest: false
+      });
+    };
     if (!obj.forgotPasswordSuccess) return;
     resetState();
-  }, [obj.forgotPasswordSuccess]);
+  }, [obj, obj.forgotPasswordSuccess]);
 
   // BE validation hook
   useEffect(() => {
@@ -101,7 +100,7 @@ function ForgotPassword() {
           payload: 'Server error ocurred'
         });
       });
-  }, [obj.submitRequest]);
+  }, [obj, obj.submitRequest, errorContext]);
 
   return (
     <div>

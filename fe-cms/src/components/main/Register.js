@@ -12,7 +12,7 @@ import {
   passwordsMatch
 } from '../../services/login.service';
 
-function Register(route) {
+function Register({ history }) {
   const errorContext = useContext(GlobalErrorContext);
   const [obj, setCredential] = useState({
     firstName: '',
@@ -28,26 +28,25 @@ function Register(route) {
     registrationSuccess: false
   });
 
-  const resetState = () => {
-    setCredential({
-      ...obj,
-      firstName: null,
-      lastName: null,
-      password: null,
-      repeatPassword: null,
-      firstNameError: null,
-      lastNameError: null,
-      passwordError: null,
-      emailError: null,
-      submitRequest: false
-    });
-  };
-
   useEffect(() => {
+    const resetState = () => {
+      setCredential({
+        ...obj,
+        firstName: null,
+        lastName: null,
+        password: null,
+        repeatPassword: null,
+        firstNameError: null,
+        lastNameError: null,
+        passwordError: null,
+        emailError: null,
+        submitRequest: false
+      });
+    };
     if (!obj.registrationSuccess) return;
     resetState();
-    route.history.push('/login');
-  }, [obj.registrationSuccess]);
+    history.push('/login');
+  }, [obj, obj.registrationSuccess, history]);
 
   // BE validation hook
   useEffect(() => {
@@ -94,7 +93,7 @@ function Register(route) {
           payload: 'Server error ocurred'
         });
       });
-  }, [obj.submitRequest]);
+  }, [obj, obj.submitRequest, errorContext]);
 
   const isFrontendValid = () => {
     return (
@@ -162,9 +161,7 @@ function Register(route) {
                 placeholder="First name"
                 className="form-control"
                 required
-                onKeyPress={e =>
-                  handleEnterKeyPress(() => validateUser(), e.which)
-                }
+                onKeyPress={e => handleEnterKeyPress(() => validateUser(), e.which)}
                 onChange={e =>
                   setCredential({
                     ...obj,
@@ -176,9 +173,7 @@ function Register(route) {
               />
               <label htmlFor="inputEmail">First name</label>
             </div>
-            {obj.firstNameError && (
-              <div className="error-container">{obj.firstNameError}</div>
-            )}
+            {obj.firstNameError && <div className="error-container">{obj.firstNameError}</div>}
             <div className="form-label-group">
               <input
                 id="last-name"
@@ -186,9 +181,7 @@ function Register(route) {
                 placeholder="last name"
                 className="form-control"
                 required
-                onKeyPress={e =>
-                  handleEnterKeyPress(() => validateUser(), e.which)
-                }
+                onKeyPress={e => handleEnterKeyPress(() => validateUser(), e.which)}
                 onChange={e =>
                   setCredential({
                     ...obj,
@@ -200,9 +193,7 @@ function Register(route) {
               />
               <label htmlFor="inputEmail">Last name</label>
             </div>
-            {obj.lastNameError && (
-              <div className="error-container">{obj.lastNameError}</div>
-            )}
+            {obj.lastNameError && <div className="error-container">{obj.lastNameError}</div>}
             <div className="form-label-group">
               <input
                 id="email"
@@ -210,9 +201,7 @@ function Register(route) {
                 placeholder="E-mail"
                 className="form-control"
                 required
-                onKeyPress={e =>
-                  handleEnterKeyPress(() => validateUser(), e.which)
-                }
+                onKeyPress={e => handleEnterKeyPress(() => validateUser(), e.which)}
                 onChange={e =>
                   setCredential({
                     ...obj,
@@ -225,9 +214,7 @@ function Register(route) {
               <label htmlFor="inputEmail">Email address</label>
             </div>
 
-            {obj.emailError && (
-              <div className="error-container">{obj.emailError}</div>
-            )}
+            {obj.emailError && <div className="error-container">{obj.emailError}</div>}
             <div id="register-password-container">
               <div className="form-label-group">
                 <input
@@ -235,9 +222,7 @@ function Register(route) {
                   type="password"
                   placeholder="Password"
                   className="form-control"
-                  onKeyPress={e =>
-                    handleEnterKeyPress(() => validateUser(), e.which)
-                  }
+                  onKeyPress={e => handleEnterKeyPress(() => validateUser(), e.which)}
                   onChange={e =>
                     setCredential({
                       ...obj,
@@ -256,9 +241,7 @@ function Register(route) {
                   type="password"
                   placeholder="Password"
                   className="form-control"
-                  onKeyPress={e =>
-                    handleEnterKeyPress(() => validateUser(), e.which)
-                  }
+                  onKeyPress={e => handleEnterKeyPress(() => validateUser(), e.which)}
                   onChange={e =>
                     setCredential({
                       ...obj,
@@ -271,9 +254,7 @@ function Register(route) {
                 />
                 <label htmlFor="inputPassword">Confirm password</label>
               </div>
-              {obj.passwordError && (
-                <div className="error-container">{obj.passwordError}</div>
-              )}
+              {obj.passwordError && <div className="error-container">{obj.passwordError}</div>}
             </div>
 
             {obj.submitRequest && <div className="loader"></div>}
