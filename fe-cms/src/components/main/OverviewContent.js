@@ -74,7 +74,6 @@ function OverviewContent() {
     return (
       <div className="main-wrapper">
         <div className="row">
-          <h2></h2>
         </div>
         <span>Image name:</span>
         <div className="row">
@@ -102,9 +101,7 @@ function OverviewContent() {
             value={content.image.description}
             rows="20"
             cols="40"
-            className="ui-autocomplete-input"
             autoComplete="off"
-            role="textbox"
             onChange={e => {
               setState({
                 ...content,
@@ -117,7 +114,7 @@ function OverviewContent() {
           ></textarea>
         </div>
         <span>Current image:</span>
-        <img width="170" src={content.image.src} className="d-block" />
+        <img src={content.image.src} alt={content.image.name} width="170" className="d-block" />
         <div className="row">
           <input
             name="image-file"
@@ -143,7 +140,7 @@ function OverviewContent() {
   };
 
   const qrCodeContent = () => {
-    return <img width="400" height="400" src={content.qrCodePath} />;
+    return <img src={content.qrCodePath} alt={content.image.name} width="400" height="400" />;
   };
 
   // HTML CONTENT END
@@ -345,13 +342,14 @@ function OverviewContent() {
             <article key={j} className="col-sm-12 col-md-6 overview-item">
               <h2 className="text-wrapper">{obj.imageName}</h2>
               <div className="articleImgWrapper">
-                <img width="50%" src={obj.path} />
+                <img alt={obj.imageName} width="50%" src={obj.path} />
               </div>
               <p className="text-wrapper">{obj.imageDescription}</p>
               <div className="buttonWrapper">
                 <a
                   className="visitorPageButton"
                   href={'/view-image/' + obj.qrCodeUniqueId}
+                  rel="noopener noreferrer" 
                   target="_blank"
                 >
                   <i className="fas fa-eye"></i>

@@ -87,7 +87,6 @@ function CreateContent() {
 
   return (
     <>
-      <h2></h2>
       <input
         id="image-name"
         type="text"
@@ -112,9 +111,7 @@ function CreateContent() {
         placeholder="Image description"
         rows="20"
         cols="40"
-        className="ui-autocomplete-input"
         autoComplete="off"
-        role="textbox"
         className={
           obj.imageDescriptionError ? 'error-input-container createTextArea' : 'createTextArea'
         }
@@ -166,7 +163,7 @@ function CreateContent() {
       {obj.qrCode && (
         <div id="preview-mode">
           <h3 className="qr-code-message">Your QR code was successfully stored to the database!</h3>
-          <img id="qr-code" src={obj.qrCode} className="mx-auto d-block" />
+          <img id="qr-code" src={obj.qrCode} alt={obj.imageName} className="mx-auto d-block" />
         </div>
       )}
     </>
