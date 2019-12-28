@@ -6,8 +6,9 @@ import { userAccessEndpoint } from '../../config';
 import { useTranslation } from 'react-i18next';
 
 function Navbar(route) {
-  const [toggleHeader, setToggleHeader] = useState(false);
   const { t } = useTranslation();
+  
+  const [toggleHeader, setToggleHeader] = useState(false);
 
   const logout = () => {
     fetch(userAccessEndpoint.LOGOUT, {

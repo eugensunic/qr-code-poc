@@ -5,8 +5,9 @@ import { useTranslation } from 'react-i18next';
 
 function CreateContent() {
   const { t } = useTranslation();
-  const UPLOAD_LABEL_NAME = t('Choose file');
   const errorContext = useContext(GlobalErrorContext);
+  const UPLOAD_LABEL_NAME = t('Choose file');
+  
   const [obj, setData] = useState({
     imageName: '',
     imageNameError: false,

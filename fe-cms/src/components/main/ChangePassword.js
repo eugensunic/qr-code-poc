@@ -12,6 +12,7 @@ import { isEmpty, isPasswordLessThan5, passwordsMatch } from '../../services/log
 function ChangePassword({ history }) {
   const { t } = useTranslation();
   const errorContext = useContext(GlobalErrorContext);
+  
   const [obj, setCredential] = useState({
     currentPassword: '',
     userId: null,

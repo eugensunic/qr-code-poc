@@ -36,6 +36,7 @@ function VisitorPage(props) {
 
       .catch(_ => {});
   }, [obj, props.match.params.qrCodeId]);
+
   return (
     <div className="visitorArticle">
       <div id="client-content">

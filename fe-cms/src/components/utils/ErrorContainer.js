@@ -5,6 +5,7 @@ let timeId = null;
 
 function ErrorContainer(obj) {
   const errorContext = useContext(GlobalErrorContext);
+  
   if (!!obj.message) {
     clearInterval(timeId);
     timeId = setTimeout(

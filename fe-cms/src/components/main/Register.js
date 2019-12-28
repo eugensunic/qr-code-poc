@@ -16,6 +16,7 @@ import {
 function Register({ history }) {
   const { t } = useTranslation();
   const errorContext = useContext(GlobalErrorContext);
+  
   const [obj, setCredential] = useState({
     firstName: '',
     lastName: '',

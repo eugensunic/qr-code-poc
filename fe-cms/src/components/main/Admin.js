@@ -4,8 +4,9 @@ import Register from './Register';
 import { useTranslation } from 'react-i18next';
 
 function AdminPage() {
-  const [openTab, setOpenTab] = useState(0);
   const { t } = useTranslation();
+  
+  const [openTab, setOpenTab] = useState(0);
 
   return (
     <>

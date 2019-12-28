@@ -10,6 +10,7 @@ import { useTranslation } from 'react-i18next';
 function ForgotPassword() {
   const { t } = useTranslation();
   const errorContext = useContext(GlobalErrorContext);
+  
   const [obj, setCredential] = useState({
     email: '',
     emailError: '',

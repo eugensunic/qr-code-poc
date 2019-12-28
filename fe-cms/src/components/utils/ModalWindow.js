@@ -3,9 +3,10 @@ import { Button, Modal } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 
 function ModalWindow(props) {
+  const { t } = useTranslation();
+  
   const { html, handleClose, handleAction } = props;
   const { modal, actionButton, showSubmitButton } = props.content;
-  const { t } = useTranslation();
 
   return (
     <Modal show={modal.show} onHide={handleClose}>

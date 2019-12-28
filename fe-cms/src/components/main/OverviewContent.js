@@ -7,8 +7,8 @@ import { useTranslation } from 'react-i18next';
 
 function OverviewContent() {
   const { t } = useTranslation();
-
   const errorContext = useContext(GlobalErrorContext);
+  
   const [content, setState] = useState({
     overviewArr: [],
     overviewArrCopy: [],
