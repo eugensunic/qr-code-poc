@@ -1,19 +1,23 @@
-const PREFIX = '';
+const HOST_PREFIX = process.env.HOST_PREFIX || '';
 
-module.exports.contentEndpoint = {
-  CREATE_CONTENT: PREFIX + '/create-content',
-  OVERVIEW_CONTENT: PREFIX + '/overview-content',
-  OVERVIEW_CONTENT_EDIT: PREFIX + '/overview-content/edit',
-  OVERVIEW_CONTENT_DELETE: PREFIX + '/overview-content/delete',
-  VISITOR_PAGE: PREFIX + '/visitor'
+const contentEndpoint = {
+  CREATE_CONTENT: HOST_PREFIX + '/create-content',
+  OVERVIEW_CONTENT: HOST_PREFIX + '/overview-content',
+  OVERVIEW_CONTENT_EDIT: HOST_PREFIX + '/overview-content/edit',
+  OVERVIEW_CONTENT_DELETE: HOST_PREFIX + '/overview-content/delete',
+  VISITOR_PAGE: HOST_PREFIX + '/visitor'
 };
 
-module.exports.userAccessEndpoint = {
-  REGISTER: PREFIX + '/user-registration',
-  LOGIN: PREFIX + '/auth',
-  LOGOUT: PREFIX + '/logout',
-  CHANGE_PASSWORD: PREFIX + '/change-password',
-  FORGOT_PASSWORD: PREFIX + '/forgot-password'
+const userAccessEndpoint = {
+  REGISTER: HOST_PREFIX + '/user-registration',
+  LOGIN: HOST_PREFIX + '/auth',
+  LOGOUT: HOST_PREFIX + '/logout',
+  CHANGE_PASSWORD: HOST_PREFIX + '/change-password',
+  FORGOT_PASSWORD: HOST_PREFIX + '/forgot-password'
 };
 
-module.exports.DOMAIN_NAME = 'http://localhost:3000/';
+module.exports = {
+  HOST_PREFIX: HOST_PREFIX,
+  contentEndpoint: contentEndpoint,
+  userAccessEndpoint: userAccessEndpoint
+};
