@@ -42,14 +42,16 @@ i18n
           'Visit page': 'Posjeti stranicu',
           Delete: 'Obrisi',
           Edit: 'Izmjeni',
-          'QR Kod': 'QR Code',
+          'QR code': 'QR kod',
+          'QR code for:': 'QR kod za sliku:',
           'First name': 'Ime',
           'Last name': 'Prezime',
           'Email address': 'Email adresa',
           Password: 'Lozinka',
           'Confirm password': 'Potvrdi lozinku',
           'Confirm registration': 'Potvrdi registraciju',
-          'Choose file': 'Odaberi sliku'
+          'Choose file': 'Odaberi sliku',
+          'search...': 'trazi...'
         }
       }
     },

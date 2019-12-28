@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 
 function OverviewContent() {
   const { t } = useTranslation();
+
   const errorContext = useContext(GlobalErrorContext);
   const [content, setState] = useState({
     overviewArr: [],
@@ -48,6 +49,14 @@ function OverviewContent() {
     }, []);
   };
 
+  const removeItemFromList = list => {
+    adjustForLayout(
+      list
+        .map(array => array.filter(x => x.id !== content.image.id))
+        .reduce((acc, arr) => [...acc, ...arr], [])
+    );
+  };
+
   const htmlContent = mode => {
     switch (mode) {
       case 'EDIT':
@@ -83,7 +92,7 @@ function OverviewContent() {
             name="image-name"
             type="text"
             value={content.image.name}
-            placeholder="Image name"
+            placeholder={t('Image name')}
             onChange={e =>
               setState({
                 ...content,
@@ -99,7 +108,7 @@ function OverviewContent() {
         <div className="row">
           <textarea
             name="image-description"
-            placeholder="Image description"
+            placeholder={t('Image description')}
             value={content.image.description}
             rows="20"
             cols="40"
@@ -156,12 +165,12 @@ function OverviewContent() {
       modal: {
         ...content.modal,
         show: true,
-        heading: `Delete ${imageName}`
+        heading: `${t('Delete')} ${imageName}`
       },
       image: { ...content.image, id: itemId },
       actionButton: {
         ...content.actionButton,
-        name: 'Delete',
+        name: t('Delete'),
         color: '#dc3545',
         borderColor: '#dc3545'
       }
@@ -176,7 +185,7 @@ function OverviewContent() {
       modal: {
         ...content.modal,
         show: true,
-        heading: `Edit ${imageName}`
+        heading: `${t('Edit')} ${imageName}`
       },
       image: {
         ...content.image,
@@ -187,7 +196,7 @@ function OverviewContent() {
       },
       actionButton: {
         ...content.actionButton,
-        name: 'Submit',
+        name: t('Submit'),
         color: '#007bff',
         borderColor: '#007bff'
       }
@@ -202,7 +211,7 @@ function OverviewContent() {
       modal: {
         ...content.modal,
         show: true,
-        heading: `QR code for ${imageName}`
+        heading: `${t('QR code for:')} ${imageName}`
       },
       qrCodePath: path
     });
@@ -234,16 +243,8 @@ function OverviewContent() {
             ...content.modal,
             show: false
           },
-          overviewArr: adjustForLayout(
-            content.overviewArr
-              .map(array => array.filter(x => x.id !== content.image.id))
-              .reduce((acc, arr) => [...acc, ...arr], [])
-          ),
-          overviewArrCopy: adjustForLayout(
-            content.overviewArr
-              .map(array => array.filter(x => x.id !== content.image.id))
-              .reduce((acc, arr) => [...acc, ...arr], [])
-          )
+          overviewArr: removeItemFromList(content.overviewArr),
+          overviewArrCopy: removeItemFromList(content.overviewArr)
         })
       )
       .catch(err => console.log(err));
@@ -334,7 +335,7 @@ function OverviewContent() {
         <input
           id="searchImageName"
           type="text"
-          placeholder="search..."
+          placeholder={t('search...')}
           className="form-control searchInput"
           value={searchValue}
           onChange={e => search(e.target.value)}
@@ -386,7 +387,7 @@ function OverviewContent() {
                   onClick={() => invokeQrCodeModal(obj.qrCode, obj.imageName)}
                 >
                   <i className="fas fa-qrcode"></i>
-                  {t('QR Kod')}
+                  {t('QR code')}
                 </button>
               </div>
             </article>
