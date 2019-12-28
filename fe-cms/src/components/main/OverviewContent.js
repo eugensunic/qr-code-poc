@@ -290,7 +290,7 @@ function OverviewContent() {
         });
         errorContext.dispatchError({
           type: 'global',
-          payload: 'Server error ocurred'
+          payload: t('Server error ocurred')
         });
       });
   };

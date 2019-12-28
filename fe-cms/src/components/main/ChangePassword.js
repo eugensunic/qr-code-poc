@@ -75,7 +75,7 @@ function ChangePassword({ history }) {
             })
           : setCredential({
               ...obj,
-              changePasswordError: 'Your current password is wrong, try again',
+              changePasswordError: t('Your current password is wrong, try again'),
               submitRequest: false,
               changePasswordSuccess: false
             });
@@ -88,7 +88,7 @@ function ChangePassword({ history }) {
         });
         errorContext.dispatchError({
           type: 'global',
-          payload: 'Server error ocurred 1'
+          payload: t('Server error ocurred')
         });
       });
   }, [obj, obj.submitRequest, errorContext]);
@@ -108,16 +108,16 @@ function ChangePassword({ history }) {
 
     if (!isFrontendValid()) {
       if (isEmpty(obj.currentPassword)) {
-        currentPasswordErr = 'Please provide a password';
+        currentPasswordErr = t('Please provide a password');
       } else if (isPasswordLessThan5(obj.currentPassword)) {
-        currentPasswordErr = 'Password too short';
+        currentPasswordErr = t('Password too short');
       }
       if (isEmpty(obj.newPassword || obj.repeatPassword)) {
-        changePasswordErr = 'Please provide a password';
+        changePasswordErr = t('Please provide a password');
       } else if (isPasswordLessThan5(obj.newPassword || obj.repeatPassword)) {
-        changePasswordErr = 'Password too short';
+        changePasswordErr = t('Password too short');
       } else if (!passwordsMatch(obj.newPassword, obj.repeatPassword)) {
-        changePasswordErr = 'Passwords do not match';
+        changePasswordErr = t('Passwords do not match');
       }
 
       setCredential({

@@ -67,7 +67,7 @@ function Login({ history }) {
             })
           : setCredential({
               ...obj,
-              passwordError: 'Wrong credentials, Try again',
+              passwordError: t('Wrong credentials, try again'),
               submitRequest: false
             });
       })
@@ -79,7 +79,7 @@ function Login({ history }) {
         });
         errorContext.dispatchError({
           type: 'global',
-          payload: 'Server error ocurred'
+          payload: t('Server error ocurred')
         });
       });
   }, [obj, obj.submitRequest, errorContext]);
@@ -95,14 +95,14 @@ function Login({ history }) {
 
     if (!isFrontendValid(obj.email, obj.password)) {
       if (isEmpty(obj.email)) {
-        emailErr = 'Please provide email';
+        emailErr = t('Please provide email');
       } else if (!isEmailValid(obj.email)) {
-        emailErr = 'Please provide valid mail';
+        emailErr = t('Please provide valid mail');
       }
       if (isEmpty(obj.password)) {
-        passwordErr = 'Please provide password';
+        passwordErr = t('Please provide a password');
       } else if (isPasswordLessThan5(obj.password)) {
-        passwordErr = 'Password too short';
+        passwordErr = t('Password too short');
       }
 
       setCredential({

@@ -5,6 +5,7 @@ import { GlobalErrorContext } from '../../App';
 import { userAccessEndpoint } from '../../config';
 import { handleEnterKeyPress } from '../../helpers';
 import { useTranslation } from 'react-i18next';
+import { ROUTES } from '../../navigation';
 
 import {
   isEmailValid,
@@ -16,7 +17,7 @@ import {
 function Register({ history }) {
   const { t } = useTranslation();
   const errorContext = useContext(GlobalErrorContext);
-  
+
   const [obj, setCredential] = useState({
     firstName: '',
     lastName: '',
@@ -48,7 +49,7 @@ function Register({ history }) {
     };
     if (!obj.registrationSuccess) return;
     resetState();
-    history.push('/login');
+    history.push(ROUTES.LOGIN);
   }, [obj, obj.registrationSuccess, history]);
 
   // BE validation hook
@@ -73,7 +74,7 @@ function Register({ history }) {
         if (res.hasOwnProperty('isAlreadyRegistered')) {
           setCredential({
             ...obj,
-            passwordError: 'User with given mail already exists',
+            passwordError: t('User with given mail already exists'),
             submitRequest: false
           });
           return;
@@ -93,7 +94,7 @@ function Register({ history }) {
         });
         errorContext.dispatchError({
           type: 'global',
-          payload: 'Server error ocurred'
+          payload: t('Server error ocurred')
         });
       });
   }, [obj, obj.submitRequest, errorContext]);
@@ -116,22 +117,22 @@ function Register({ history }) {
 
     if (!isFrontendValid()) {
       if (isEmpty(obj.firstName)) {
-        firstNameErr = 'Please provide first name';
+        firstNameErr = t('Please provide first name');
       }
       if (isEmpty(obj.lastName)) {
-        lastNameErr = 'Please provide last name';
+        lastNameErr = t('Please provide last name');
       }
       if (isEmpty(obj.email)) {
-        emailErr = 'Please provide an email address';
+        emailErr = t('Please provide email');
       } else if (!isEmailValid(obj.email)) {
-        emailErr = 'Please provide valid mail address';
+        emailErr = t('Please provide valid mail');
       }
       if (isEmpty(obj.password)) {
-        passwordErr = 'Please provide a password';
+        passwordErr = t('Please provide a password');
       } else if (isPasswordLessThan5(obj.password)) {
-        passwordErr = 'Password too short';
+        passwordErr = t('Password too short');
       } else if (!passwordsMatch(obj.password, obj.repeatPassword)) {
-        passwordErr = 'Passwords do not match';
+        passwordErr = t('Passwords do not match');
       }
       setCredential({
         ...obj,

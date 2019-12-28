@@ -34,9 +34,9 @@ i18n
           'Your QR code was successfully stored to the database!':
             'Vaš QR kod je uspješno pohranjen u bazu podataka',
           'Image name:': 'Ime slike:',
-          'Image name':'Ime slike',
+          'Image name': 'Ime slike',
           'Image description:': 'Opis slike:',
-          'Image description':'Opis slike',
+          'Image description': 'Opis slike',
           'Current image:': 'Trenutna slika:',
           'Are you sure you want to delete the selected item?':
             'Jeste li sigurni da želite obrisati sliku?',
@@ -53,7 +53,19 @@ i18n
           'Confirm password': 'Potvrdi lozinku',
           'Confirm registration': 'Potvrdi registraciju',
           'Choose file': 'Odaberi sliku',
-          'search...': 'traži...'
+          'search...': 'traži...',
+          'Your current password is wrong, try again': 'Kriva lozinka, pokušajte ponovo',
+          'Server error ocurred': 'Greška na serveru',
+          'Please provide a password': 'Unesite lozinku',
+          'Password too short': 'Lozinka prekratka',
+          'Passwords do not match': 'Lozinke se ne poklapaju',
+          'Please provide email': 'Unesite email',
+          'Please provide valid mail': 'Unesite validnu mail adresu',
+          'Email doesnt exist in the database': 'Email ne postoji u bazi',
+          'Wrong credentials, try again': 'Pogrešna lozinka, pokušajte ponovo',
+          'User with given mail already exists': 'Korisnik već postoji u bazi',
+          'Please provide first name': 'Unesite ime',
+          'Please provide last name': 'Unesite prezime'
         }
       }
     },

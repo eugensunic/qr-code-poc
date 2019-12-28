@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next';
 function ForgotPassword() {
   const { t } = useTranslation();
   const errorContext = useContext(GlobalErrorContext);
-  
+
   const [obj, setCredential] = useState({
     email: '',
     emailError: '',
@@ -28,9 +28,9 @@ function ForgotPassword() {
 
     if (!isFrontendValid()) {
       if (isEmpty(obj.email)) {
-        emailErr = 'Please provide email';
+        emailErr = t('Please provide email');
       } else if (!isEmailValid(obj.email)) {
-        emailErr = 'Please provide valid mail';
+        emailErr = t('Please provide valid mail');
       }
 
       setCredential({
@@ -90,7 +90,7 @@ function ForgotPassword() {
           : setCredential({
               ...obj,
               submitRequest: false,
-              emailError: `Email doesn't exist in the database`
+              emailError: t('Email doesnt exist in the database')
             });
       })
 
@@ -101,7 +101,7 @@ function ForgotPassword() {
         });
         errorContext.dispatchError({
           type: 'global',
-          payload: 'Server error ocurred'
+          payload: t('Server error ocurred')
         });
       });
   }, [obj, obj.submitRequest, errorContext]);
