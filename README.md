@@ -51,5 +51,12 @@ Webpack will output the following chunks:
    ```
 
 
+## Configure host prefix path for both Backend and Frontend
+
+To start the app with a prefix path run:
+`HOST_PREFIX='prefix_path' npm run start`
+the HOST_PREFIX variable will be filled and all the endpoints will contain the prefix (check config.js in src)
+
+
 
 
