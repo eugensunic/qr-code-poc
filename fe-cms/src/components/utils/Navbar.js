@@ -3,9 +3,11 @@ import { Link, withRouter } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import { ROUTES } from '../../navigation';
 import { userAccessEndpoint } from '../../config';
+import { useTranslation } from 'react-i18next';
 
 function Navbar(route) {
   const [toggleHeader, setToggleHeader] = useState(false);
+  const { t } = useTranslation();
 
   const logout = () => {
     fetch(userAccessEndpoint.LOGOUT, {
@@ -20,20 +22,20 @@ function Navbar(route) {
       </Button>
       <ul className="hero-nav-ul" onClick={_ => setToggleHeader(!toggleHeader)}>
         <li>
-          <Link to={ROUTES.OVERVIEW}>Overview</Link>
+          <Link to={ROUTES.OVERVIEW}>{t('Overview')}</Link>
         </li>
         <li>
-          <Link to={ROUTES.CREATE}>New content</Link>
+          <Link to={ROUTES.CREATE}>{t('New content')}</Link>
         </li>
         <li className="dropdownList">
-          <Link to={ROUTES.ADMIN}>Admin</Link>
+          <Link to={ROUTES.ADMIN}>{t('Admin')}</Link>
         </li>
         <li>
-          <Link to={ROUTES.ABOUT}>About</Link>
+          <Link to={ROUTES.ABOUT}>{t('About')}</Link>
         </li>
         <li className="logoutLi">
           <button className="logoutButton" onClick={logout}>
-            Logout
+            {t('Logout')}
           </button>
         </li>
       </ul>

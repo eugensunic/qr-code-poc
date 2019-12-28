@@ -4,6 +4,7 @@ import { getCurrentDateTimeString } from '../../helpers';
 import { GlobalErrorContext } from '../../App';
 import { userAccessEndpoint } from '../../config';
 import { handleEnterKeyPress } from '../../helpers';
+import { useTranslation } from 'react-i18next';
 
 import {
   isEmailValid,
@@ -13,6 +14,7 @@ import {
 } from '../../services/login.service';
 
 function Register({ history }) {
+  const { t } = useTranslation();
   const errorContext = useContext(GlobalErrorContext);
   const [obj, setCredential] = useState({
     firstName: '',
@@ -149,9 +151,9 @@ function Register({ history }) {
     <>
       <div className="registerFromWrapper card card-signin my-5 ">
         <div className="card-body">
-          <h5 className="card-title text-center">Register</h5>
+          <h5 className="card-title text-center">{t('Register')}</h5>
           {obj.registrationSuccess && (
-            <h4 className="success-container">Successful registration!</h4>
+            <h4 className="success-container">{t('Successful registration!')}</h4>
           )}
           <div className="form-signin">
             <div className="form-label-group">
@@ -171,7 +173,7 @@ function Register({ history }) {
                   })
                 }
               />
-              <label htmlFor="inputEmail">First name</label>
+              <label htmlFor="inputEmail">{t('First name')}</label>
             </div>
             {obj.firstNameError && <div className="error-container">{obj.firstNameError}</div>}
             <div className="form-label-group">
@@ -191,7 +193,7 @@ function Register({ history }) {
                   })
                 }
               />
-              <label htmlFor="inputEmail">Last name</label>
+              <label htmlFor="inputEmail">{t('Last name')}</label>
             </div>
             {obj.lastNameError && <div className="error-container">{obj.lastNameError}</div>}
             <div className="form-label-group">
@@ -211,7 +213,7 @@ function Register({ history }) {
                   })
                 }
               />
-              <label htmlFor="inputEmail">Email address</label>
+              <label htmlFor="inputEmail">{t('Email address')}</label>
             </div>
 
             {obj.emailError && <div className="error-container">{obj.emailError}</div>}
@@ -233,7 +235,7 @@ function Register({ history }) {
                   }
                   required
                 />
-                <label htmlFor="inputPassword">Password</label>
+                <label htmlFor="inputPassword">{t('Password')}</label>
               </div>
               <div className="form-label-group">
                 <input
@@ -252,7 +254,7 @@ function Register({ history }) {
                   }
                   required
                 />
-                <label htmlFor="inputPassword">Confirm password</label>
+                <label htmlFor="inputPassword">{t('Confirm password')}</label>
               </div>
               {obj.passwordError && <div className="error-container">{obj.passwordError}</div>}
             </div>
@@ -264,7 +266,7 @@ function Register({ history }) {
               disabled={obj.submitRequest}
               onClick={() => validateUser()}
             >
-              Confirm registration
+              {t('Confirm registration')}
             </button>
             <hr className="my-4" />
           </div>

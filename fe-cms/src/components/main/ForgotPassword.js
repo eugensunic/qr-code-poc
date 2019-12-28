@@ -5,8 +5,10 @@ import { GlobalErrorContext } from '../../App';
 import { userAccessEndpoint } from '../../config';
 import { handleEnterKeyPress } from '../../helpers';
 import { ROUTES } from '../../navigation';
+import { useTranslation } from 'react-i18next';
 
 function ForgotPassword() {
+  const { t } = useTranslation();
   const errorContext = useContext(GlobalErrorContext);
   const [obj, setCredential] = useState({
     email: '',
@@ -55,7 +57,7 @@ function ForgotPassword() {
     };
     if (!obj.forgotPasswordSuccess) return;
     resetState();
-  }, [obj, obj.forgotPasswordSuccess]);
+  }, [obj.forgotPasswordSuccess]);
 
   // BE validation hook
   useEffect(() => {
@@ -110,9 +112,9 @@ function ForgotPassword() {
         style={{ opacity: obj.submitRequest ? 0.4 : 1 }}
       >
         <div className="card-body">
-          <h5 className="card-title text-center">Forgot Password</h5>
+          <h5 className="card-title text-center">{t('Forgot password')}</h5>
           {obj.forgotPasswordSuccess && (
-            <h4 className="success-container">Password successfully sent!</h4>
+            <h4 className="success-container">{t('Password successfully sent!')}</h4>
           )}
           <div className="form-signin">
             <div className="form-label-group">
@@ -143,12 +145,12 @@ function ForgotPassword() {
               disabled={obj.submitRequest}
               onClick={() => onSubmitHandler()}
             >
-              Send Password to email
+              {t('Send password to email')}
             </button>
 
             <Link to={ROUTES.LOGIN} className="btn btn-block backToLogin">
               <i className="fas fa-chevron-left fa-2x"></i>
-              <span>Back to login</span>
+              <span>{t('Back to login')}</span>
             </Link>
           </div>
         </div>

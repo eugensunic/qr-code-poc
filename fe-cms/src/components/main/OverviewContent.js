@@ -3,8 +3,10 @@ import ModalWindow from '../utils/ModalWindow';
 import { GlobalErrorContext } from '../../App';
 import { contentEndpoint } from '../../config';
 import { ROUTES } from '../../navigation';
+import { useTranslation } from 'react-i18next';
 
 function OverviewContent() {
+  const { t } = useTranslation();
   const errorContext = useContext(GlobalErrorContext);
   const [content, setState] = useState({
     overviewArr: [],
@@ -75,7 +77,7 @@ function OverviewContent() {
     return (
       <div className="main-wrapper">
         <div className="row"></div>
-        <span>Image name:</span>
+        <span>{t('Image name:')}</span>
         <div className="row">
           <input
             name="image-name"
@@ -93,7 +95,7 @@ function OverviewContent() {
             }
           />
         </div>
-        <span>Image description:</span>
+        <span>{t('Image description:')}</span>
         <div className="row">
           <textarea
             name="image-description"
@@ -113,7 +115,7 @@ function OverviewContent() {
             }}
           ></textarea>
         </div>
-        <span>Current image:</span>
+        <span>{t('Current image:')}</span>
         <img src={content.image.src} alt={content.image.name} width="170" className="d-block" />
         <div className="row">
           <input
@@ -136,7 +138,7 @@ function OverviewContent() {
   };
 
   const deleteContent = () => {
-    return <p>Are you sure you want to delete the selected item?</p>;
+    return <p>{t('Are you sure you want to delete the selected item?')}</p>;
   };
 
   const qrCodeContent = () => {
@@ -339,7 +341,7 @@ function OverviewContent() {
         />
       </div>
       {!content.overviewArr.length && searchValue && (
-        <div className="empty-content mt-5">No content found</div>
+        <div className="empty-content mt-5">{t('No content found')}</div>
       )}
       {content.overviewArr.map((arr, i) => (
         <div key={i} className="row">
@@ -358,7 +360,7 @@ function OverviewContent() {
                   target="_blank"
                 >
                   <i className="fas fa-eye"></i>
-                  Visit page
+                  {t('Visit page')}
                 </a>
                 <button
                   type="button"
@@ -366,7 +368,7 @@ function OverviewContent() {
                   onClick={() => invokeDeleteModal(obj.id, obj.imageName)}
                 >
                   <i className="fas fa-trash"></i>
-                  Delete
+                  {t('Delete')}
                 </button>
                 <button
                   type="button"
@@ -376,7 +378,7 @@ function OverviewContent() {
                   }
                 >
                   <i className="far fa-edit"></i>
-                  Edit
+                  {t('Edit')}
                 </button>
                 <button
                   type="button"
@@ -384,7 +386,7 @@ function OverviewContent() {
                   onClick={() => invokeQrCodeModal(obj.qrCode, obj.imageName)}
                 >
                   <i className="fas fa-qrcode"></i>
-                  QR Kod
+                  {t('QR Kod')}
                 </button>
               </div>
             </article>

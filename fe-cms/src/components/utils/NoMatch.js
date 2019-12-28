@@ -1,7 +1,11 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
+
 
 function NoMatch() {
-  return <div>Could not find route!</div>;
+  const { t } = useTranslation();
+
+  return <div>{t('Page does not exist')}</div>;
 }
 
 export default NoMatch;

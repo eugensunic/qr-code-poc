@@ -4,10 +4,12 @@ import { isLoggedIn, handleEnterKeyPress } from '../../helpers';
 import { GlobalErrorContext } from '../../App';
 import { userAccessEndpoint } from '../../config';
 import { ROUTES } from '../../navigation';
+import { useTranslation } from 'react-i18next';
 
 import { isEmailValid, isEmpty, isPasswordLessThan5 } from '../../services/login.service';
 
 function Login({ history }) {
+  const { t } = useTranslation();
   const errorContext = useContext(GlobalErrorContext);
   const [obj, setCredential] = useState({
     email: '',
@@ -123,7 +125,7 @@ function Login({ history }) {
         style={{ opacity: isLoggedIn() ? 0.4 : 1 }}
       >
         <div className="card-body">
-          <h5 className="card-title text-center">Login</h5>
+          <h5 className="card-title text-center">{t('Login')}</h5>
           <div className="form-signin">
             <div className="form-label-group">
               <input
@@ -171,11 +173,11 @@ function Login({ history }) {
               type="submit"
               onClick={() => validateUser()}
             >
-              Log in
+              {t('Login')}
             </button>
 
             <Link className="userFormLink" to={ROUTES.FORGOT_PASSWORD}>
-              Forgot password?
+              {t('Forgot password') + '?'}
             </Link>
 
             <hr className="my-4" />

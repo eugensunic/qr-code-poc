@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useEffect } from 'react';
 import Footer from './components/utils/Footer';
 import PrivateRoute from './components/utils/PrivateRoute';
 import Register from './components/main/Register';
@@ -16,6 +16,7 @@ import { history, isLoggedIn } from './helpers';
 import ForgotPassword from './components/main/ForgotPassword';
 import ChangePassword from './components/main/ChangePassword';
 import { ROUTES } from './navigation';
+import { useTranslation } from 'react-i18next';
 
 // global error reducer
 const reducer = (state = { message: '' }, action) => {
@@ -35,14 +36,31 @@ const isVisitorPage = path => path.indexOf(ROUTES.VISITOR_PAGE) > -1;
 const shouldDisplayHeader = () =>
   (isVisitorPage(history.location.pathname) && isLoggedIn()) ||
   !isVisitorPage(history.location.pathname);
-  
+
 function App() {
+  const { t, i18n } = useTranslation();
+
+  const changeLanguage = lng => {
+    localStorage.setItem('app-language', lng);
+    i18n.changeLanguage(lng);
+  };
+
   const [error, dispatch] = useReducer(reducer, { message: '' });
+
+  useEffect(() => {
+    changeLanguage(localStorage.getItem('app-language') || 'cro');
+  }, []);
+
   return (
     <GlobalErrorContext.Provider value={{ dispatchError: dispatch }}>
       <Router history={history}>
+        <div className="float-right cursor-pointer">
+          <img src="language/uk.png" alt="english" onClick={() => changeLanguage('en')} />
+          <img src="language/cro.png" alt="croatian" onClick={() => changeLanguage('cro')} />
+        </div>
         {shouldDisplayHeader() && <Header />}
         <ErrorContainer message={error.message} />
+
         <div className="container">
           <Switch>
             <PrivateRoute path={ROUTES.ADMIN} component={AdminPage} />

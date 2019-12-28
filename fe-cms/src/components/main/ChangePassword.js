@@ -5,10 +5,12 @@ import { parseCookie, parseJwt } from '../../helpers';
 import { userAccessEndpoint } from '../../config';
 import { handleEnterKeyPress } from '../../helpers';
 import { ROUTES } from '../../navigation';
+import { useTranslation } from 'react-i18next';
 
 import { isEmpty, isPasswordLessThan5, passwordsMatch } from '../../services/login.service';
 
 function ChangePassword({ history }) {
+  const { t } = useTranslation();
   const errorContext = useContext(GlobalErrorContext);
   const [obj, setCredential] = useState({
     currentPassword: '',
@@ -139,11 +141,13 @@ function ChangePassword({ history }) {
         style={{ opacity: obj.changePasswordSuccess ? 0.4 : 1 }}
       >
         <div className="card-body">
-          <h5 className="card-title text-center">Change password</h5>
-          {obj.changePasswordSuccess && <h4 className="success-container">Successful Change!</h4>}
+          <h5 className="card-title text-center">{t('Change password')}</h5>
+          {obj.changePasswordSuccess && (
+            <h4 className="success-container">{t('Successful change')}</h4>
+          )}
           <div className="form-signin">
             <div className="form-label-group">
-              <label htmlFor="inputPassword">Current password:</label>
+              <label htmlFor="inputPassword">{t('Current password')}</label>
               <input
                 type="password"
                 placeholder="Password"
@@ -166,7 +170,7 @@ function ChangePassword({ history }) {
             )}
             <div id="change-password-container">
               <div className="form-label-group">
-                <label htmlFor="inputPassword">New password</label>
+                <label htmlFor="inputPassword">{t('New password')}</label>
                 <input
                   type="password"
                   placeholder="Password"
@@ -185,7 +189,7 @@ function ChangePassword({ history }) {
                 />
               </div>
               <div className="form-label-group">
-                <label htmlFor="inputPassword">Repeat password</label>
+                <label htmlFor="inputPassword">{t('Repeat password')}</label>
                 <input
                   type="password"
                   placeholder="Password"
@@ -215,7 +219,7 @@ function ChangePassword({ history }) {
               disabled={obj.submitRequest}
               onClick={() => validateUser()}
             >
-              Confirm change
+              {t('Confirm change')}
             </button>
             <hr className="my-4" />
           </div>

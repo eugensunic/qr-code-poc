@@ -1,9 +1,11 @@
 import React, { useContext, useState } from 'react';
 import { GlobalErrorContext } from '../../App';
 import { contentEndpoint } from '../../config';
+import { useTranslation } from 'react-i18next';
 
 function CreateContent() {
-  const UPLOAD_LABEL_NAME = 'Choose file';
+  const { t } = useTranslation();
+  const UPLOAD_LABEL_NAME = t('Choose file');
   const errorContext = useContext(GlobalErrorContext);
   const [obj, setData] = useState({
     imageName: '',
@@ -92,7 +94,7 @@ function CreateContent() {
         type="text"
         value={obj.imageName}
         name="image-name"
-        placeholder="Image name"
+        placeholder={t('Image name')}
         className={
           obj.imageNameError ? 'error-input-container createInputLabel' : 'createInputLabel'
         }
@@ -108,7 +110,7 @@ function CreateContent() {
         id="image-description"
         name="image-description"
         value={obj.imageDescription}
-        placeholder="Image description"
+        placeholder={t('Image description')}
         rows="20"
         cols="40"
         autoComplete="off"
@@ -157,11 +159,13 @@ function CreateContent() {
         className="btn btn-lg btn-primary btn-block text-uppercase mt-2 imgUploadButton"
         onClick={uploadContent}
       >
-        Submit
+        {t('Submit')}
       </button>
       {obj.qrCode && (
         <div id="preview-mode">
-          <h3 className="qr-code-message">Your QR code was successfully stored to the database!</h3>
+          <h3 className="qr-code-message">
+            {t('Your QR code was successfully stored to the database!')}
+          </h3>
           <img id="qr-code" src={obj.qrCode} alt={obj.imageName} className="mx-auto d-block" />
         </div>
       )}
