@@ -34,7 +34,9 @@ i18n
           'Your QR code was successfully stored to the database!':
             'Vaš QR kod je uspješno pohranjen u bazu podataka',
           'Image name:': 'Ime slike:',
+          'Image name':'Ime slike',
           'Image description:': 'Opis slike:',
+          'Image description':'Opis slike',
           'Current image:': 'Trenutna slika:',
           'Are you sure you want to delete the selected item?':
             'Jeste li sigurni da želite obrisati sliku?',
