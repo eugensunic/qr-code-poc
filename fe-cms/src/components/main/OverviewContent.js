@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 function OverviewContent() {
   const { t } = useTranslation();
   const errorContext = useContext(GlobalErrorContext);
-  
+
   const [content, setState] = useState({
     overviewArr: [],
     overviewArrCopy: [],
@@ -49,13 +49,12 @@ function OverviewContent() {
     }, []);
   };
 
-  const removeItemFromList = list => {
+  const removeItemFromList = list =>
     adjustForLayout(
       list
-        .map(array => array.filter(x => x.id !== content.image.id))
+        .map(arr => arr.filter(x => x.id !== content.image.id))
         .reduce((acc, arr) => [...acc, ...arr], [])
     );
-  };
 
   const htmlContent = mode => {
     switch (mode) {

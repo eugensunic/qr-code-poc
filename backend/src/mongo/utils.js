@@ -15,7 +15,6 @@ const mongoFunctions = {
   mongoDisconnect: () => {
     mongoose.disconnect();
     process.exit(0);
-    console.log('Ive disconnected mongo');
   },
 
   configureMongoDeprecation: () => {

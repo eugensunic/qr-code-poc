@@ -12,7 +12,7 @@ module.exports.init = app => {
         next(err);
       }
       if (!data.length) {
-        return res.json({});
+        return res.json([]);
       }
       data = data.map(x => ({
         id: x._id,
@@ -103,7 +103,6 @@ module.exports.init = app => {
   app
     .route('/overview-content/delete')
     .post(utils.tokenValid, (req, res, next) => {
-      console.log('Route HAS BEEN HIT');
       ImageMuseum.findByIdAndRemove(req.body.itemId, function(
         err,
         deleteResponse

@@ -5,7 +5,10 @@
 
 
 BUGS
--wrong link when scanning QR code
+- wrong link when scanning QR code
+- find a way on how to fix warnings including objects into dependency array causes constant re-rendering
+- fix doubling of contentArray and contentArrayCopy
+- see why placeholders Image name and Image description do not work for i18n
 
 
 TODO

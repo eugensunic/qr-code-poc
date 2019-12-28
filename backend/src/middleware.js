@@ -35,7 +35,6 @@ module.exports.initPreMiddleware = (app, passport) => {
 
 module.exports.initErrorRoutingMiddleware = (app, passport) => {
   app.use(function(err, req, res, next) {
-    console.log('WENT TO MIDDLEWARE AFTER DONE!!!');
     if (err) {
       res.status(500).end();
     }
