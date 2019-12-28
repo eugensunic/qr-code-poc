@@ -15,6 +15,7 @@ import { Router, Route, Switch } from 'react-router-dom';
 import { history, isLoggedIn } from './helpers';
 import ForgotPassword from './components/main/ForgotPassword';
 import ChangePassword from './components/main/ChangePassword';
+import { ROUTES } from './navigation';
 
 // global error reducer
 const reducer = (state = { message: '' }, action) => {
@@ -30,28 +31,30 @@ const reducer = (state = { message: '' }, action) => {
 };
 export const GlobalErrorContext = React.createContext({});
 
-const isVisitorPage = path => path.indexOf('view-image') > -1;
-
+const isVisitorPage = path => path.indexOf(ROUTES.VISITOR_PAGE) > -1;
+const shouldDisplayHeader = () =>
+  (isVisitorPage(history.location.pathname) && isLoggedIn()) ||
+  !isVisitorPage(history.location.pathname);
+  
 function App() {
   const [error, dispatch] = useReducer(reducer, { message: '' });
   return (
     <GlobalErrorContext.Provider value={{ dispatchError: dispatch }}>
       <Router history={history}>
-        {((isVisitorPage(history.location.pathname) && isLoggedIn()) ||
-          !isVisitorPage(history.location.pathname)) && <Header />}
+        {shouldDisplayHeader() && <Header />}
         <ErrorContainer message={error.message} />
         <div className="container">
           <Switch>
-            <PrivateRoute path="/admin" component={AdminPage} />
-            <Route path="/view-image/:qrCodeId" component={VisitorPage} />
-            <PrivateRoute path="/changepassword" component={ChangePassword} />
-            <Route path="/forgotpassword" component={ForgotPassword} />
-            <Route exact path="/" component={Login} />
-            <Route path="/login" component={Login} />
-            <PrivateRoute path="/register" component={Register} />
-            <PrivateRoute path="/create" component={CreateContent} />
-            <PrivateRoute path="/overview" component={OverviewContent} />
-            <Route path="/about" component={About} />
+            <PrivateRoute path={ROUTES.ADMIN} component={AdminPage} />
+            <Route path={ROUTES.VISITOR_PAGE + '/:qrCodeId'} component={VisitorPage} />
+            <PrivateRoute path={ROUTES.CHANGE_PASSWORD} component={ChangePassword} />
+            <Route path={ROUTES.FORGOT_PASSWORD} component={ForgotPassword} />
+            <Route exact path={ROUTES.HOME} component={Login} />
+            <Route path={ROUTES.LOGIN} component={Login} />
+            <PrivateRoute path={ROUTES.REGISTER} component={Register} />
+            <PrivateRoute path={ROUTES.CREATE} component={CreateContent} />
+            <PrivateRoute path={ROUTES.OVERVIEW} component={OverviewContent} />
+            <Route path={ROUTES.ABOUT} component={About} />
             <Route component={NoMatch} />
           </Switch>
         </div>

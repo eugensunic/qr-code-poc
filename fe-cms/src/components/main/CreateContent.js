@@ -3,8 +3,8 @@ import { GlobalErrorContext } from '../../App';
 import { contentEndpoint } from '../../config';
 
 function CreateContent() {
-  const errorContext = useContext(GlobalErrorContext);
   const UPLOAD_LABEL_NAME = 'Choose file';
+  const errorContext = useContext(GlobalErrorContext);
   const [obj, setData] = useState({
     imageName: '',
     imageNameError: false,
@@ -135,14 +135,13 @@ function CreateContent() {
               id="inputGroupFile01"
               type="file"
               name="image-file"
-              aria-describedby="inputGroupFileAddon01"
               accept="image/x-png,image/png,image/gif,image/jpeg,image/jpg"
               onChange={e =>
                 setData({
                   ...obj,
                   imageFiles: e.target.files,
                   imageFilesError: false,
-                  imageLabelName: !!e.target.files.length ? e.target.files[0].name : ''
+                  imageLabelName: e.target.files[0].name || ''
                 })
               }
             />

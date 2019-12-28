@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { GlobalErrorContext } from '../../App';
 
 let timeId = null;
+
 function ErrorContainer(obj) {
   const errorContext = useContext(GlobalErrorContext);
   if (!!obj.message) {

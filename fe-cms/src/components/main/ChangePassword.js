@@ -4,6 +4,7 @@ import { GlobalErrorContext } from '../../App';
 import { parseCookie, parseJwt } from '../../helpers';
 import { userAccessEndpoint } from '../../config';
 import { handleEnterKeyPress } from '../../helpers';
+import { ROUTES } from '../../navigation';
 
 import { isEmpty, isPasswordLessThan5, passwordsMatch } from '../../services/login.service';
 
@@ -34,7 +35,7 @@ function ChangePassword({ history }) {
     };
     if (!obj.changePasswordSuccess) return;
     resetState();
-    history.push('/login');
+    history.push(ROUTES.LOGIN);
   }, [history, obj, obj.changePasswordSuccess]);
 
   // BE validation hook

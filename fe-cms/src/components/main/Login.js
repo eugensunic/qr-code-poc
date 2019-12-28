@@ -3,6 +3,7 @@ import { Link, withRouter } from 'react-router-dom';
 import { isLoggedIn, handleEnterKeyPress } from '../../helpers';
 import { GlobalErrorContext } from '../../App';
 import { userAccessEndpoint } from '../../config';
+import { ROUTES } from '../../navigation';
 
 import { isEmailValid, isEmpty, isPasswordLessThan5 } from '../../services/login.service';
 
@@ -16,7 +17,7 @@ function Login({ history }) {
     submitRequest: false,
     loginSuccess: false
   });
-  
+
   const isUserLoggedIn = isLoggedIn();
 
   // if logged in don't show the login page
@@ -173,7 +174,7 @@ function Login({ history }) {
               Log in
             </button>
 
-            <Link className="userFormLink" to={'/forgotpassword'}>
+            <Link className="userFormLink" to={ROUTES.FORGOT_PASSWORD}>
               Forgot password?
             </Link>
 

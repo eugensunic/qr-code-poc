@@ -1,33 +1,35 @@
 import React, { useState } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
+import { ROUTES } from '../../navigation';
+import { userAccessEndpoint } from '../../config';
 
 function Navbar(route) {
   const [toggleHeader, setToggleHeader] = useState(false);
+
   const logout = () => {
-    fetch('/logout', {
+    fetch(userAccessEndpoint.LOGOUT, {
       method: 'POST'
-    }).then(_ => route.history.push('/'));
+    }).then(_ => route.history.push(ROUTES.HOME));
   };
-  // const[navclass,setNavclass] = "hero-nav";
 
   return (
     <nav className={`hero-nav ${!toggleHeader && 'hidden-header'}`}>
-      <Button className="hamburger" onClick={() => setToggleHeader(!toggleHeader)}>
+      <Button className="hamburger" onClick={_ => setToggleHeader(!toggleHeader)}>
         <i className="fa fa-bars"></i>
       </Button>
-      <ul className="hero-nav-ul" onClick={e => setToggleHeader(!toggleHeader)}>
+      <ul className="hero-nav-ul" onClick={_ => setToggleHeader(!toggleHeader)}>
         <li>
-          <Link to={'/overview'}> Overview</Link>
+          <Link to={ROUTES.OVERVIEW}>Overview</Link>
         </li>
         <li>
-          <Link to={'/create'}>New content</Link>
+          <Link to={ROUTES.CREATE}>New content</Link>
         </li>
         <li className="dropdownList">
-          <Link to={'/admin'}>Admin</Link>
+          <Link to={ROUTES.ADMIN}>Admin</Link>
         </li>
         <li>
-          <Link to={'/about'}> About</Link>
+          <Link to={ROUTES.ABOUT}>About</Link>
         </li>
         <li className="logoutLi">
           <button className="logoutButton" onClick={logout}>

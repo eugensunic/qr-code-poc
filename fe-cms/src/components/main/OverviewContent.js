@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import ModalWindow from '../utils/ModalWindow';
 import { GlobalErrorContext } from '../../App';
 import { contentEndpoint } from '../../config';
+import { ROUTES } from '../../navigation';
 
 function OverviewContent() {
   const errorContext = useContext(GlobalErrorContext);
@@ -73,8 +74,7 @@ function OverviewContent() {
   const editContent = () => {
     return (
       <div className="main-wrapper">
-        <div className="row">
-        </div>
+        <div className="row"></div>
         <span>Image name:</span>
         <div className="row">
           <input
@@ -321,9 +321,6 @@ function OverviewContent() {
       .catch(err => console.log(err));
   }, []);
 
-  // if (!content.overviewArr.length) {
-  //   return <div className="empty-content">No content added yet!</div>;
-  // }
   return (
     <>
       <div className="searchWrapper">
@@ -336,6 +333,7 @@ function OverviewContent() {
           onChange={e => search(e.target.value)}
         />
       </div>
+      {!content.overviewArr.length && !!searchValue && <div className="empty-content mt-5">No content found</div>}
       {content.overviewArr.map((arr, i) => (
         <div key={i} className="row">
           {arr.map((obj, j) => (
@@ -348,8 +346,8 @@ function OverviewContent() {
               <div className="buttonWrapper">
                 <a
                   className="visitorPageButton"
-                  href={'/view-image/' + obj.qrCodeUniqueId}
-                  rel="noopener noreferrer" 
+                  href={ROUTES.VISITOR_PAGE + '/' + obj.qrCodeUniqueId}
+                  rel="noopener noreferrer"
                   target="_blank"
                 >
                   <i className="fas fa-eye"></i>

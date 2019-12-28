@@ -4,6 +4,7 @@ import { isEmailValid, isEmpty } from '../../services/login.service';
 import { GlobalErrorContext } from '../../App';
 import { userAccessEndpoint } from '../../config';
 import { handleEnterKeyPress } from '../../helpers';
+import { ROUTES } from '../../navigation';
 
 function ForgotPassword() {
   const errorContext = useContext(GlobalErrorContext);
@@ -145,7 +146,7 @@ function ForgotPassword() {
               Send Password to email
             </button>
 
-            <Link to={'/login'} className="btn btn-block backToLogin">
+            <Link to={ROUTES.LOGIN} className="btn btn-block backToLogin">
               <i className="fas fa-chevron-left fa-2x"></i>
               <span>Back to login</span>
             </Link>

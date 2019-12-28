@@ -2,7 +2,8 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { isLoggedIn } from '../../helpers';
 import Navbar from './Navbar';
-function Header(route) {
+
+function Header() {
   return <header>{isLoggedIn() && <Navbar />}</header>;
 }
 

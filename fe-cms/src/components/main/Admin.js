@@ -7,12 +7,12 @@ function AdminPage() {
   return (
     <>
       <div className="tabWrapper">
-        <button onClick={() => setOpenTab(0)}>Change password</button>
-        <button onClick={() => setOpenTab(1)}>Register new user</button>
+        <button onClick={_ => setOpenTab(0)}>Change password</button>
+        <button onClick={_ => setOpenTab(1)}>Register new user</button>
         {openTab === 0 ? <ChangePassword /> : <Register />}
       </div>
     </>
   );
 }
-// change password,add user
+// change password, add user
 export default AdminPage;
