@@ -236,6 +236,11 @@ function OverviewContent() {
             content.overviewArr
               .map(array => array.filter(x => x.id !== content.image.id))
               .reduce((acc, arr) => [...acc, ...arr], [])
+          ),
+          overviewArrCopy: adjustForLayout(
+            content.overviewArr
+              .map(array => array.filter(x => x.id !== content.image.id))
+              .reduce((acc, arr) => [...acc, ...arr], [])
           )
         })
       )
@@ -333,7 +338,9 @@ function OverviewContent() {
           onChange={e => search(e.target.value)}
         />
       </div>
-      {!content.overviewArr.length && !!searchValue && <div className="empty-content mt-5">No content found</div>}
+      {!content.overviewArr.length && searchValue && (
+        <div className="empty-content mt-5">No content found</div>
+      )}
       {content.overviewArr.map((arr, i) => (
         <div key={i} className="row">
           {arr.map((obj, j) => (
