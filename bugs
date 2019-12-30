@@ -10,6 +10,7 @@ BUGS
 - footer positioning still not working good
 - find better icons for languages (instead of cro.png & uk.png)
 - visitor page not fetching image
+- putting new image on edit results in wrong path when scanning the qr code
 
 
 TODO

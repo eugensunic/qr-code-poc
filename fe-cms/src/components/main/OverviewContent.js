@@ -176,9 +176,10 @@ function OverviewContent() {
     });
   };
 
-  const invokeEditModal = (itemId, imageName, imageDescription, imageSrc) => {
+  const invokeEditModal = (itemId, imageName, imageDescription, imageSrc, qrCodeId) => {
     setState({
       ...content,
+      qrCodeUniqueId: qrCodeId,
       modeType: 'EDIT',
       showSubmitButton: true,
       modal: {
@@ -256,6 +257,8 @@ function OverviewContent() {
     form.append('file', content.image.name);
     form.append('file', content.image.description);
     form.append('file', content.image.files[0]);
+    form.append('file', content.qrCodeUniqueId);
+    console.log('content', content);
 
     fetch(contentEndpoint.OVERVIEW_CONTENT_EDIT, {
       method: 'POST',
@@ -349,7 +352,7 @@ function OverviewContent() {
             <article key={j} className="col-sm-12 col-md-6 overview-item">
               <h2 className="text-wrapper">{obj.imageName}</h2>
               <div className="articleImgWrapper">
-                <img alt={obj.imageName} width="50%" src={obj.path} />
+                <img alt={obj.imageName} src={obj.path} width="50%" />
               </div>
               <p className="text-wrapper">{obj.imageDescription}</p>
               <div className="buttonWrapper">
@@ -374,7 +377,13 @@ function OverviewContent() {
                   type="button"
                   className="editButton"
                   onClick={() =>
-                    invokeEditModal(obj.id, obj.imageName, obj.imageDescription, obj.path)
+                    invokeEditModal(
+                      obj.id,
+                      obj.imageName,
+                      obj.imageDescription,
+                      obj.path,
+                      obj.qrCodeUniqueId
+                    )
                   }
                 >
                   <i className="far fa-edit"></i>

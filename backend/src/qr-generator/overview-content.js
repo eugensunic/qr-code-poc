@@ -33,8 +33,9 @@ module.exports.init = app => {
       const imageId = req.body.file[0];
       const imageName = req.body.file[1];
       const imageDescription = req.body.file[2];
+      const qrCodeId = req.body.file[3];
 
-      QRCode.toDataURL(config.HOST_PREFIX + imageName, (err, qrCodeStream) => {
+      QRCode.toDataURL(config.HOST_PREFIX + '/view-image/' + qrCodeId, (err, qrCodeStream) => {
         if (err) {
           return;
         }

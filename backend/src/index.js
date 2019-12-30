@@ -22,10 +22,10 @@ mongo
       // configure host
       config.HOST_PREFIX = !!process.env.HOST_PREFIX
         ? process.env.HOST_PREFIX
-        : 'http://localhost:' + listener.address().port + '/';
+        : 'http://localhost:' + listener.address().port;
 
       console.log('app running on port:', listener.address().port);
-      console.log('config host prefix is:',  config.HOST_PREFIX);
+      console.log('config host prefix is:', config.HOST_PREFIX);
 
       middleware.initPreMiddleware(app, passport);
 

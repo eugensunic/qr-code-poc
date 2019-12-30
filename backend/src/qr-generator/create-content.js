@@ -13,7 +13,7 @@ module.exports.init = app => {
     const imageDescription = req.body.file[1];
     const uniqueId = uuidv4();
 
-    QRCode.toDataURL(config.HOST_PREFIX + uniqueId, (err, qrCodeStream) => {
+    QRCode.toDataURL(config.HOST_PREFIX + '/view-image/' + uniqueId, (err, qrCodeStream) => {
       if (err) {
         return next(err);
       }
