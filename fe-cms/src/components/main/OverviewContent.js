@@ -258,6 +258,7 @@ function OverviewContent() {
     form.append('file', content.image.description);
     form.append('file', content.image.files[0]);
     form.append('file', content.qrCodeUniqueId);
+    form.append('file', content.image.src);
     console.log('content', content);
 
     fetch(contentEndpoint.OVERVIEW_CONTENT_EDIT, {

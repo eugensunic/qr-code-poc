@@ -34,6 +34,7 @@ module.exports.init = app => {
       const imageName = req.body.file[1];
       const imageDescription = req.body.file[2];
       const qrCodeId = req.body.file[3];
+      const imagePath = req.body.file[4];
 
       QRCode.toDataURL(config.HOST_PREFIX + '/view-image/' + qrCodeId, (err, qrCodeStream) => {
         if (err) {
@@ -92,6 +93,11 @@ module.exports.init = app => {
               qrCode: doc.qrCode,
               path: utils.getImagePath(doc.image.path, 'museum-images')
             };
+            // async deletion because we don't to break here, if it doesn't delete we don't care
+            utils
+              .deleteImageFile('uploads/' + imagePath)
+              .then(_ => {})
+              .catch(_ => console.log('error occurred while deleting'));
 
             res.json(updatedObject);
           }
@@ -107,6 +113,7 @@ module.exports.init = app => {
       if (!deleteResponse) {
         return res.status(404).end();
       }
+
       utils
         .deleteImageFile(deleteResponse.image.path)
         .then(_ => res.json({ delete_successful: true }))
