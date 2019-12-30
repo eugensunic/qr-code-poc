@@ -64,6 +64,11 @@ module.exports.init = app => {
               mimeType: req.file.mimetype
             }
           };
+
+          utils
+            .deleteImageFile('uploads/' + imagePath)
+            .then(_ => {})
+            .catch(_ => console.log('error occurred while deleting'));
         }
         const updateData = {
           $set: objUpdate
@@ -94,11 +99,6 @@ module.exports.init = app => {
               path: utils.getImagePath(doc.image.path, 'museum-images')
             };
             // async deletion because we don't to break here, if it doesn't delete we don't care
-            utils
-              .deleteImageFile('uploads/' + imagePath)
-              .then(_ => {})
-              .catch(_ => console.log('error occurred while deleting'));
-
             res.json(updatedObject);
           }
         );
