@@ -6,6 +6,5 @@ BUGS
 - find a way on how to fix warnings including objects into dependency array causes constant re-rendering
 - footer positioning still not working good
 - find better icons for languages (instead of cro.png & uk.png)
-- edit image should delete previous stream on backend, edit an image and you will see the stream appending
 - remove logger.js logs  on frontend
 
