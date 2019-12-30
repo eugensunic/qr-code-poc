@@ -24,6 +24,7 @@ module.exports = function(app) {
     CHANGE_PASSWORD,
     FORGOT_PASSWORD,
     '/museum-images/*'
+    
   ];
   app.use(
     proxyRoutes,

@@ -3,6 +3,7 @@ const localMiddleware = require('./user-access/login/middleware');
 
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const path = require('path');
 
 module.exports.initPreMiddleware = (app, passport) => {
   // cookie parser
@@ -18,6 +19,8 @@ module.exports.initPreMiddleware = (app, passport) => {
 
   // file upload
   app.use(express.static('uploads'));
+  // serve images
+  app.use(express.static('public'));
 
   // passport.js middleware
   app.use(passport.initialize());

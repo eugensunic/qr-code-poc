@@ -17,6 +17,7 @@ import ForgotPassword from './components/main/ForgotPassword';
 import ChangePassword from './components/main/ChangePassword';
 import { ROUTES } from './navigation';
 import { useTranslation } from 'react-i18next';
+import { IMAGE_HOST_PREFIX } from './config';
 
 // global error reducer
 const reducer = (state = { message: '' }, action) => {
@@ -38,7 +39,7 @@ const shouldDisplayHeader = () =>
   !isVisitorPage(history.location.pathname);
 
 function App() {
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
 
   const changeLanguage = lng => {
     localStorage.setItem('app-language', lng);
@@ -54,11 +55,23 @@ function App() {
   return (
     <GlobalErrorContext.Provider value={{ dispatchError: dispatch }}>
       <Router history={history}>
-        <div className="float-right cursor-pointer">
-          <img src="language/uk.png" alt="english" onClick={() => changeLanguage('en')} />
-          <img src="language/cro.png" alt="croatian" onClick={() => changeLanguage('cro')} />
-        </div>
-        {shouldDisplayHeader() && <Header />}
+        {shouldDisplayHeader() && (
+          <div>
+            <div className="float-right cursor-pointer">
+              <img
+                src={IMAGE_HOST_PREFIX + 'language/uk.png'}
+                alt="english"
+                onClick={() => changeLanguage('en')}
+              />
+              <img
+                src={IMAGE_HOST_PREFIX + 'language/cro.png'}
+                alt="croatian"
+                onClick={() => changeLanguage('cro')}
+              />
+            </div>
+            <Header />
+          </div>
+        )}
         <ErrorContainer message={error.message} />
 
         <div className="container">

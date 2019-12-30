@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { contentEndpoint, HOST_PREFIX } from '../../config';
+import { contentEndpoint, IMAGE_HOST_PREFIX } from '../../config';
 
 function VisitorPage(props) {
   const [obj, setState] = useState({
@@ -42,7 +42,7 @@ function VisitorPage(props) {
       <div id="client-content">
         <h1 className="text-center h-md">{obj.imageName}</h1>
         <div className="col text-center">
-          <img src={obj.imageSrc} alt={obj.imageName} className="img-fluid" />
+          <img src={IMAGE_HOST_PREFIX + obj.imageSrc} alt={obj.imageName} className="img-fluid" />
         </div>
         <p>{obj.imageDescription}</p>
       </div>

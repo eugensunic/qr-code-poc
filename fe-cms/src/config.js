@@ -1,5 +1,8 @@
 const HOST_PREFIX = process.env.HOST_PREFIX || '';
 
+// serving images from backend
+const IMAGE_HOST_PREFIX = 'http://localhost:5000/';
+
 const contentEndpoint = {
   CREATE_CONTENT: HOST_PREFIX + '/create-content',
   OVERVIEW_CONTENT: HOST_PREFIX + '/overview-content',
@@ -18,6 +21,7 @@ const userAccessEndpoint = {
 
 module.exports = {
   HOST_PREFIX: HOST_PREFIX,
+  IMAGE_HOST_PREFIX: IMAGE_HOST_PREFIX,
   contentEndpoint: contentEndpoint,
   userAccessEndpoint: userAccessEndpoint
 };
