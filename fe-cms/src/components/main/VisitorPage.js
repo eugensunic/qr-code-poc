@@ -42,7 +42,7 @@ function VisitorPage(props) {
       <div id="client-content">
         <h1 className="text-center h-md">{obj.imageName}</h1>
         <div className="col text-center">
-          <img alt={obj.imageName} src={HOST_PREFIX + obj.imageSrc} className="img-fluid" />
+          <img src={obj.imageSrc} alt={obj.imageName} className="img-fluid" />
         </div>
         <p>{obj.imageDescription}</p>
       </div>

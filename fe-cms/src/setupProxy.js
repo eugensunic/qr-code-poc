@@ -9,13 +9,7 @@ const {
   VISITOR_PAGE
 } = contentEndpoint;
 
-const {
-  REGISTER,
-  LOGIN,
-  LOGOUT,
-  CHANGE_PASSWORD,
-  FORGOT_PASSWORD
-} = userAccessEndpoint;
+const { REGISTER, LOGIN, LOGOUT, CHANGE_PASSWORD, FORGOT_PASSWORD } = userAccessEndpoint;
 
 module.exports = function(app) {
   const proxyRoutes = [

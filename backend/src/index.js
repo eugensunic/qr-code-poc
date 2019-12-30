@@ -5,19 +5,27 @@ const userAccess = require('./user-access');
 const qrGenerator = require('./qr-generator');
 const clientVisitPage = require('./visit-page/index');
 const middleware = require('./middleware');
+const config = require('./config');
 
 const mongo = require('./mongo/utils');
 
 const dbName = 'zagreb_museum';
 const connectionString =
   'mongodb+srv://esunic123:mmug2012@cluster0-zknjl.mongodb.net/' + dbName + '?retryWrites=true';
+let listener = null;
 
 mongo
   .mongoConnect(connectionString)
   .then(_ => {
     console.log('Database connection successful');
-    app.listen(5000, () => {
-      console.log('app running on port 5000');
+    listener = app.listen(5000, () => {
+      // configure host
+      config.HOST_PREFIX = !!process.env.HOST_PREFIX
+        ? process.env.HOST_PREFIX
+        : 'http://localhost:' + listener.address().port + '/';
+
+      console.log('app running on port:', listener.address().port);
+      console.log('config host prefix is:',  config.HOST_PREFIX);
 
       middleware.initPreMiddleware(app, passport);
 
