@@ -60,3 +60,4 @@ the HOST_PREFIX variable will be filled and all the endpoints will contain the p
 
 
 
+bum
